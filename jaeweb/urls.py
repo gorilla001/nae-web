@@ -1,0 +1,22 @@
+from django.conf.urls import patterns, include, url
+from django.contrib import admin
+from django.views.generic import RedirectView
+
+import overview.urls
+import containers.urls
+import images.urls
+import codeversion.urls
+
+
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'jaeweb.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', RedirectView.as_view(url='/overview/')),
+    url(r'^overview/$',include(overview.urls)),
+    url(r'^containers/',include(containers.urls)),
+    url(r'^images/',include(images.urls)),
+    url(r'^codeversion/',include(codeversion.urls)),
+)
