@@ -105,9 +105,17 @@ body {
 }
 
 .control-label {
+    margin-top:20px;
     display: inline;
     font-weight:1000;
 }
+
+
+.control-group label {
+    margin-top:12px;
+}
+.control-group {margin-top:16px;}
+.controls select{ margin-top:8px}
  
 
 

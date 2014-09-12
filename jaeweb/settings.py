@@ -99,3 +99,10 @@ TEMPLATE_DIRS = (
 #TIME_ZONE = 'CCT'
 
 LANGUAGE_CODE = 'zh-cn'
+
+LOGIN_URL = "http://auth.jumeird.com/api/login/?camefrom=ops_docker"
+app_key = "&app_key="
+app_name = "&app_name=jmops&key=1"
+auth_url = "http://auth.jumeird.com/"
+auth_key = "481986a634ca11e4ab8c842b2b738d12"
+
