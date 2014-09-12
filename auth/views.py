@@ -8,6 +8,7 @@ import json
 from django.contrib.auth.models import User
 from jaeweb.settings import LOGIN_URL, app_key, app_name, auth_key, auth_url
 from django.contrib.auth import authenticate, login
+import hashlib, time
 
 # Create your views here.
 def auth_login(request):
@@ -29,11 +30,14 @@ def auth_login(request):
     #user_list = User.objects.get(username=auth_username)
     #user_list.backend = 'django.contrib.auth.backends.ModelBackend'
     ## login(request,user_list)
+    #session_id = hashlib.sha1(auth_token_id + "481986a634ca11e4ab8c842b2b738d12" + auth_username).hexdigest()
     request.session["auth_username"] = auth_username
     #user.backend = 'django.contrib.auth.backends.ModelBackend'
     #login(request,user)
-    request.session.set_expiry(0)
+    #request.session.set_expiry(60 * 1 )
+    #request.session["session_id"] = "asdfasdfasdfadsf89089089sadfasd342340"
+    request.session.set_expiry(5)
     #content.update(csrf(request))
-    return HttpResponseRedirect('/home')
+    return HttpResponseRedirect('/projects')
     ## else:
     #     return render_to_response('default/error.html')
