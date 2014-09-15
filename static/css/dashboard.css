@@ -46,6 +46,16 @@ body {
    min-height: 25px;
    height: 15px;
 }
+
+/* Custom Modal Body */
+.modal-body .CustomModalBodyLeft {
+    float:left;
+}
+.modal-body .CustomModalBodyRight {
+    float:right;
+    margin-top:20px;
+    margin-left:20px;
+}
 /* Add Button */
 .panel-heading {
     overflow: hidden;
@@ -66,6 +76,24 @@ body {
     border-color:#bebebe;
 }
 
+/* Add Projects */
+
+.ProjectDescription {
+    display:inline;
+    height:50px;
+    width:250px;
+}
+
+textarea.form-control {
+    height:75px;
+    width:260px;
+}
+/* Add DockerFile */
+
+textarea.content {
+    height:350;
+    width:370;
+}
 /* Create Container Window */
 #CreateModal {
     width: 400px;
