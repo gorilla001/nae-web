@@ -11,6 +11,22 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='DockerFiles',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('Name', models.CharField(max_length=30)),
+                ('Size', models.IntegerField()),
+                ('Created', models.DateTimeField()),
+                ('CreatedBy', models.CharField(max_length=30)),
+                ('Modified', models.DateTimeField()),
+                ('ModifiedBy', models.CharField(max_length=30)),
+                ('Path', models.CharField(max_length=300)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Projects',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

@@ -46,6 +46,12 @@ body {
    min-height: 25px;
    height: 15px;
 }
+.form-control::-moz-placeholder {
+    color: #fff;
+    opacity: 1;
+    font-style:italic;
+    font-size: 13px;
+}
 
 /* Custom Modal Body */
 .modal-body .CustomModalBodyLeft {
@@ -53,8 +59,16 @@ body {
 }
 .modal-body .CustomModalBodyRight {
     float:right;
-    margin-top:20px;
-    margin-left:20px;
+}
+.example {
+    margin-left:450px;
+    margin-top:90px;
+}
+.panel-custom {
+    border-color : #ddd;
+    height:350;
+    width:370;
+    margin-bottom:0px;
 }
 /* Add Button */
 .panel-heading {

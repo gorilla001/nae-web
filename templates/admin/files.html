@@ -64,11 +64,12 @@
                         </div>
                         <div class="modal-body">
                             <div class="CustomModalBodyLeft">
-                                <form class="form-horizontal" action="/containers" method="POST" >
+                                <form id="dockerfile" class="form-horizontal" action="/admin/files/create/" method="POST" >
+                                    {% csrf_token %}
                                    <div class="control-group name">
                                       <label cass="control-label" for="name">文件名称</label>
                                       <div class="controls">
-                                        <input type="text" class="form-control" id="name" placeholder="文件名称">
+                                        <input name="filename" type="text" class="form-control" id="name" placeholder="文件名称">
                                         <span class="help-inline">(镜像文件的名称,必填项)</span>
                                       </div>
                                     </div>
@@ -102,25 +103,64 @@
                                     <div class="control-group filecontent">
                                       <label class="control-label" for="environ">文件内容</label>
                                       <div class="controls">
-                                          <textarea class="form-control content"></textarea></br>
+                                          <textarea name="content" class="form-control content"></textarea></br>
                                         <span class="help-inline">(文件内容,必填项)</span>
                                       </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="CustomModaBodyRight" style="padding-left:20px;margin-left:50px">
-                                <div class="control-group name">
-                                      <label cass="control-label" for="name">示例</label>
-                                      <div class="controls">
+                            <div class="CustomModaBodyRight">
+                                <div class="example">
+                                     <label cass="control-label" for="name">镜像文件示例</label>
+                                     <div class="panel panel-custom">
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">FROM</label>
+                                             <label>centos/base</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">MAINTAINER</label>
+                                             <label>minguon@jumei.com</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">RUN</label>
+                                             <label>yum install -y httpd</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">EXPOSE</label>
+                                             <label>80</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">USER</label>
+                                             <label>root</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">ADD</label>
+                                             <label>httpd.conf /etc/httpd/httpd.conf</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">VOLUME</label>
+                                             <label>["/var/www"]</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">ENV</label>
+                                             <label>/usr/local/sbin:/usr/local/bin:/usr/sbin</label>
+                                         </span>
+                                         <span style="display:block;padding-left:10px;"> 
+                                             <label style="width:90px;">CMD</label>
+                                             <label>httpd -DFOREGROUND</label>
+                                         </span>
+                                     </div>
+                                     <a href="https://docs.docker.com/reference/builder/" style="text-decoration:underline;" target="_blank">在线文档</a>
+                                     <!-- <div class="controls">
                                           <textarea class="form-control content"></textarea></br>
-                                      </div>
+                                      </div>-->
                                  </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal">确定</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="test()">确定</button>
                         </div>
                     </div>
                 </div>
@@ -136,22 +176,29 @@
                             <th>创建者</th>
                             <th>修改时间</th>
                             <th>修改者</th>
+                            <th>存储路径</th>
                         </thead>
                         <tbody>
                             {% for item in file_list %}
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ item.Name }}</td>
+                                    <td>{{ item.Size }}</td>
+                                    <td>{{ item.Created }}</td>
+                                    <td>{{ item.CreatedBy }}</td>
+                                    <td>{{ item.Modified }}</td>
+                                    <td>{{ item.ModifiedBy }}</td>
+                                    <td>{{ item.Path }}</td>
                                 </tr>
                             {% endfor %} 
                         </tbody>
                     </table>
              </div>
         </div>
+<script>
+    function test()
+    {
+        document.getElementById("dockerfile").submit();    
+    }
+</script>
 </body>
 </html>

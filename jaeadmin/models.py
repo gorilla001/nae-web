@@ -9,3 +9,12 @@ class Projects(models.Model):
     Image=models.CharField(max_length=30) 
     Admin=models.CharField(max_length=30)
     Member=models.CharField(max_length=200)
+
+class DockerFiles(models.Model):
+    Name=models.CharField(max_length=30)
+    Size=models.IntegerField()
+    Created=models.DateTimeField()
+    CreatedBy=models.CharField(max_length=30)
+    Modified=models.DateTimeField()
+    ModifiedBy=models.CharField(max_length=30)
+    Path=models.CharField(max_length=300)
