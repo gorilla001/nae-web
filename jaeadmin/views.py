@@ -8,6 +8,7 @@ from models import Projects
 from models import DockerFiles 
 import utils
 from django.shortcuts import HttpResponseRedirect
+import os
 
 @require_auth
 def index(request):
@@ -57,6 +58,15 @@ def showFile(request):
         data=f.read()
     return HttpResponse(data)
 
+@require_auth
+def deleteFile(request):
+    filepath=request.GET['filepath']
+    if os.path.isfile(filepath):
+        os.remove(filepath)
+    data=DockerFiles.objects.get(Path=filepath)
+    data.delete()
+    print 'herehere'
+    return HttpResponseRedirect('/admin/files')
 
 @require_auth
 def users(request):
