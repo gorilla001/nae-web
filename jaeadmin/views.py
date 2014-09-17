@@ -50,6 +50,13 @@ def createFile(request):
         data.save()
     return HttpResponseRedirect('/admin/files')
 
+@require_auth
+def showFile(request):
+    filepath=request.GET['filepath']
+    with open(filepath,"r") as f:
+        data=f.read()
+    return HttpResponse(data)
+
 
 @require_auth
 def users(request):
