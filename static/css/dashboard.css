@@ -108,6 +108,53 @@ textarea.content {
     height:350;
     width:370;
 }
+
+.btn-custom {
+    width:20px;
+    height:25px;
+}
+.custom-li {
+    width:30px
+}
+.pull-right > .custom-menu {
+    min-width:70px;
+}
+
+.custom-tr {
+    line-height: 30px;
+    min-height: 30px;
+    height: 30px;
+}
+.panel > .table-bordered > tbody > tr > .custom-td {
+    height:20px;
+    text-align: center !important;
+}
+
+.btn-group > .btn-mini {
+    opacity: 0.93;
+    padding: 0 6px;
+    font-size: 12px;
+    width:50px;
+    height:25px;
+}
+
+.table > thead > tr> th {
+    border-bottom: 2px solid #ddd;
+    background-color:#bebebe;
+   
+}
+
+.table > tbody > tr > td {
+    min-height:25px;
+}
+
+.text-right {
+    text-align: right !important;
+}
+.text-center {
+    text-align: center !important;
+}
+
 /* Create Container Window */
 #CreateModal {
     width: 400px;

@@ -15,6 +15,10 @@ def byte_to_gb(byte):
     _y = eval('1577283853/1000/1000/1000')
     print _y
     return "%.2fGB" % _x 
+def human_readable_size(size):
+    import humanize
+
+    return humanize.naturalsize(size)
 
 def create_file(name):
     file_path="{}/{}.dockerfile".format(DOCKERFILE_PATH,name)
@@ -32,7 +36,9 @@ def write_file(fd,content):
 def get_file_size(file_path):
     import os
 
-    return os.path.getsize(file_path)
+    size=os.path.getsize(file_path)
+
+    return human_readable_size(size)
 
 def get_current_datatime():
     import time

@@ -28,8 +28,6 @@ def images(request):
 @require_auth
 def files(request):
     file_list=DockerFiles.objects.all()
-    for i  in file_list:
-        print i.Name
     return render_to_response('admin/files.html',{'file_list':file_list},context_instance=RequestContext(request))
 
 @require_auth

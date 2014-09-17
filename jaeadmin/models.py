@@ -12,9 +12,9 @@ class Projects(models.Model):
 
 class DockerFiles(models.Model):
     Name=models.CharField(max_length=30)
-    Size=models.IntegerField()
-    Created=models.DateTimeField()
+    Size=models.CharField(max_length=30)
+    Created=models.CharField(max_length=100)
     CreatedBy=models.CharField(max_length=30)
-    Modified=models.DateTimeField()
+    Modified=models.CharField(max_length=100)
     ModifiedBy=models.CharField(max_length=30)
     Path=models.CharField(max_length=300)
