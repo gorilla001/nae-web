@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^projects/$',include(projects.urls)),
     url(r'^login/$',include(auth.urls)),
 
+    url(r'^projects/admin/',include(jaeadmin.urls)),
     url(r'^admin/',include(jaeadmin.urls)),
     
 )

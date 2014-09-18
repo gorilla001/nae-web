@@ -1,4 +1,5 @@
-FROM       centos/base
-RUN          yum install -y httpd
-EXPOSE    80
-CMD          httpd  -D
+FROM    centos/base
+RUN       yum install -y memcached
+EXPOSE 11211
+USER      memcached
+CMD        memcached

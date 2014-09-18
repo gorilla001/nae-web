@@ -7,3 +7,7 @@ from auth.decorators import require_auth
 @require_auth
 def index(request):
     return render_to_response('projects.html')
+
+@require_auth
+def admin(request):
+    return render_to_response('projects/admin.html')

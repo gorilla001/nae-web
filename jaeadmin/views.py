@@ -13,7 +13,7 @@ import os
 @require_auth
 def index(request):
     print 'index'
-    return render_to_response('admin/home.html')
+    return render_to_response('admin/preview.html')
 
 @require_auth
 def projects(request):
@@ -23,7 +23,17 @@ def projects(request):
 @require_auth
 def images(request):
     print 'images'
-    return render_to_response('admin/images.html')
+    image_list=[]
+    file_list = DockerFiles.objects.values('Name')
+    return render_to_response('admin/images.html',{'file_list':file_list,'image_list':image_list},context_instance=RequestContext(request))
+
+@require_auth
+def createImage(request):
+    if request.method == 'POST':
+        print request.POST.get('imagename')
+        print request.POST.get('description')
+        print request.POST.get('dockerfile')
+    return HttpResponseRedirect('/admin/images')
 
 
 @require_auth
@@ -31,6 +41,11 @@ def files(request):
     file_list=DockerFiles.objects.all()
     return render_to_response('admin/files.html',{'file_list':file_list},context_instance=RequestContext(request))
 
+@require_auth
+def getFiles(request):
+    _file_list=DockerFiles.objects.all()
+    file_list = _file_list.Name.all()
+    return HttpResponse(file_list)
 @require_auth
 def createFile(request):
     if request.method == 'POST':
@@ -66,7 +81,10 @@ def deleteFile(request):
     data=DockerFiles.objects.get(Path=filepath)
     data.delete()
     print 'herehere'
-    return HttpResponseRedirect('/admin/files')
+    #return HttpResponseRedirect('/admin/files')
+    return HttpResponse("succeed")
+
+
 
 @require_auth
 def users(request):
