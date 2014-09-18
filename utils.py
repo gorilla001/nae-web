@@ -21,14 +21,21 @@ def human_readable_size(size):
     return humanize.naturalsize(size)
 
 def create_file(name):
-    file_path="{}/{}.dockerfile".format(DOCKERFILE_PATH,name)
+    #_path=os.path.join(DOCKERFILE_PATH,name)
+    _path="{}/{}".format(DOCKERFILE_PATH,name)
+    print _path
+    if not os.path.exists(_path):
+        os.mkdir(_path)
+    file_path=os.path.join(_path,"Dockerfile")
+    print file_path
     _file=open(file_path,'w') 
 
     return _file
 def get_file_path(file_name):
     import os
-    real_name=file_name + '.dockerfile'
-    return os.path.join(DOCKERFILE_PATH,real_name)
+    real_name='Dockerfile'
+    _path="{}/{}".format(DOCKERFILE_PATH,file_name)
+    return os.path.join(_path,real_name)
 
 def write_file(fd,content):
     fd.write(content)

@@ -9,6 +9,8 @@ from models import DockerFiles
 import utils
 from django.shortcuts import HttpResponseRedirect
 import os
+import requests
+import json
 
 @require_auth
 def index(request):
@@ -30,9 +32,20 @@ def images(request):
 @require_auth
 def createImage(request):
     if request.method == 'POST':
-        print request.POST.get('imagename')
-        print request.POST.get('description')
-        print request.POST.get('dockerfile')
+        image_name=request.POST.get('imagename')
+        image_desc=request.POST.get('description')
+        docker_file=request.POST.get('dockerfile')
+        user_name=request.session['auth_username']
+
+        url='http://localhost:8383/v1/images'
+        data={
+                'image_name':image_name,
+                'image_desc':image_desc,
+                'docker_file':docker_file,
+                'user_name':user_name,
+         }
+        headers={'Content-Type':'applicaton/json'}
+        requests.post(url,data=json.dumps(data),headers=headers)
     return HttpResponseRedirect('/admin/images')
 
 
@@ -49,12 +62,11 @@ def getFiles(request):
 @require_auth
 def createFile(request):
     if request.method == 'POST':
-        print request.POST.get("filename","test")
-        print request.POST.get("content","")
         file_name=request.POST.get("filename","test")
+        #save file to localhost
         dockerfile=utils.create_file(file_name)
         utils.write_file(dockerfile,request.POST.get("content",""))
-
+        #save file to db
         file_path=utils.get_file_path(file_name)
         file_size=utils.get_file_size(file_path)
         created=utils.get_current_datatime()
