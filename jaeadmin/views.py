@@ -25,7 +25,11 @@ def projects(request):
 @require_auth
 def images(request):
     print 'images'
-    image_list=[]
+    url='http://localhost:8383/v1/images'
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    print rs.json()
+    image_list=rs.json()
     file_list = DockerFiles.objects.values('Name')
     return render_to_response('admin/images.html',{'file_list':file_list,'image_list':image_list},context_instance=RequestContext(request))
 
@@ -46,7 +50,8 @@ def createImage(request):
                 'user_name':user_name,
          }
         headers={'Content-Type':'applicaton/json'}
-        requests.post(url,data=json.dumps(data),headers=headers)
+        rs=requests.post(url,data=json.dumps(data),headers=headers)
+        print rs.json()
     return HttpResponseRedirect('/admin/images')
 
 

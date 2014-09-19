@@ -117,17 +117,17 @@
                             <th>镜像大小</th>
                             <th>镜像描述</th>
                             <th>创建时间</th>
+                            <th>创建者</th>
                         </thead>
                         <tbody>
                             {% for item in image_list %}
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ item.ImageId }}</td>
+                                    <td>{{ item.ImageName }}</td>
+                                    <td>{{ item.ImageSize }}</td>
+                                    <td>{{ item.ImageDesc }}</td>
+                                    <td>{{ item.CreatedTime }}</td>
+                                    <td>{{ item.CreatedBy }}</td>
                                 </tr>
                             {% endfor %} 
                         </tbody>
