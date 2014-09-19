@@ -37,11 +37,12 @@ def createImage(request):
         docker_file=request.POST.get('dockerfile')
         user_name=request.session['auth_username']
 
+        repo_path=utils.get_repo_path(docker_file)
         url='http://localhost:8383/v1/images'
         data={
                 'image_name':image_name,
                 'image_desc':image_desc,
-                'docker_file':docker_file,
+                'repo_path': repo_path,
                 'user_name':user_name,
          }
         headers={'Content-Type':'applicaton/json'}
@@ -63,9 +64,22 @@ def getFiles(request):
 def createFile(request):
     if request.method == 'POST':
         file_name=request.POST.get("filename","test")
-        #save file to localhost
-        dockerfile=utils.create_file(file_name)
-        utils.write_file(dockerfile,request.POST.get("content",""))
+        #save file to localhost repo
+        repo_path=utils.get_repo_path(file_name)
+        rev_control=utils.MercurialRevisionControl()
+        rev_control.create_repo(repo_path)
+
+        auth_user=request.session['auth_username']
+        rev_control.hg_rc(repo_path,'ui','username',auth_user)
+
+        file_content=request.POST.get("content","")
+        utils.create_file(repo_path,file_content)
+
+        rev_control.add(repo_path)
+        rev_control.commit(repo_path)
+        #utils.write_file(dockerfile,request.POST.get("content",""))
+        #revision_control=utils.MercurialRevisionControl()
+        #revision_control.create_repo(
         #save file to db
         file_path=utils.get_file_path(file_name)
         file_size=utils.get_file_size(file_path)
