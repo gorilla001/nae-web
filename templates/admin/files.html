@@ -184,6 +184,9 @@
             <div class="panel panel-default">
                     <table class="table table-striped table-bordered table-hover table-condensed">
                         <thead>
+                            <th style="text-align:center;vertical-align: middle;width:25px;">
+                                <input type="checkbox" name="myTextEditBox" value="checked" />
+                            </th>
                             <th>文件名称</th>
                             <!--<th>所属环境</th>
                             <th>所属项目</th>-->
@@ -194,11 +197,14 @@
                             <th >修改者</th>
                             <th >存储路径</th>
                             <th >版本号</th>
-                            <th class="text-center">操作</th>
+                            <th class="text-center" style="width:70px">操作</th>
                         </thead>
                         <tbody>
                             {% for item in file_list %}
                                 <tr class="custom-tr">
+                                    <td align="center" style="width:25px;">
+                                        <input type="checkbox" name="myTextEditBox" value="checked" />
+                                    </td>
                                     <td>{{ item.Name }}</td>
                                     <td>{{ item.Size }}</td>
                                     <td>{{ item.Created }}</td>

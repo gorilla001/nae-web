@@ -55,6 +55,9 @@
                         <div class="btn-group btn-group-sm pull-right">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#largeModal">创建</button>
                        </div>
+                        <div class="btn-group btn-group-sm pull-left">
+                            <button class="btn btn-primary" onclick="deleteUser()">删除</button>
+                       </div>
                     </div>
                 </div>
 
@@ -112,17 +115,23 @@
             <div class="panel panel-default">
                     <table class="table table-striped table-bordered table-hover table-condensed">
                         <thead>
+                            <th style="text-align:center;vertical-align: middle;width:25px;">
+                                <input type="checkbox" name="myTextEditBox" value="checked" />
+                            </th>
                             <th>ID</th>
                             <th>姓名</th>
                             <th>中文名</th>
                             <th>部门</th>
                             <th>邮件</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
+                            <th style="width:150px">创建时间</th>
+                            <th class="text-center" style="width:70px">操作</th>
                         </thead>
                         <tbody>
                             {% for item in user_list %}
                                 <tr>
+                                    <td align="center" style="width:25px;">
+                                        <input type="checkbox" name="myTextEditBox" value="checked" />
+                                    </td>
                                     <td>{{ item.UserId }}</td>
                                     <td>{{ item.UserName }}</td>
                                     <td>{{ item.CNName }}</td>
@@ -141,6 +150,10 @@
             {
                 document.getElementById('user').submit();
             }
+            function deleteUser()
+            {
+               ; 
+                }
         </script>
 </body>
 </html>
