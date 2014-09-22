@@ -1,1 +1,2 @@
-python manage.py runserver 192.168.1.100:8000
+IP=$(ifconfig enp0s3 | grep -w inet | awk '{print $2}')
+python manage.py runserver ${IP}:8000

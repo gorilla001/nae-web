@@ -119,5 +119,27 @@ def deleteFile(request):
 
 @require_auth
 def users(request):
-    print 'users'
-    return render_to_response('admin/users.html')
+    url='http://localhost:8383/v1'
+    headers={'Content-Type':'application/json'}
+    r=requests.get("{}/users".format(url),headers=headers)
+    user_list=r.json()
+    return render_to_response('admin/users.html',{'user_list':user_list},context_instance=RequestContext(request))
+def createUser(request):
+    if request.method == 'POST':
+        user_name = request.POST.get('username')  
+        cn_name = request.POST.get('cnname')
+        department = request.POST.get('department')
+        email = request.POST.get('email')
+
+        print user_name,cn_name,department,email
+        url = 'http://localhost:8383/v1/users'
+        data = {
+                'user_name':user_name,
+                'cn_name':cn_name,
+                'department':department,
+                'email':email,
+        }
+        headers={'Content-Type':'application/json'}
+        r=requests.post("{}".format(url),headers=headers,data=json.dumps(data))
+        print 'create user:',r.json()
+    return HttpResponseRedirect('/admin/users')
