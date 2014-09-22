@@ -5,6 +5,7 @@ import views
 urlpatterns = patterns('',
     url(r'^$',views.index,name='index'),
     url(r'projects/$',views.projects,name='projects'),
+    url(r'projects/create/$',views.createProject,name='create'),
     url(r'images/$',views.images,name='images'),
     url(r'images/create/$',views.createImage,name='create'),
     url(r'files/$',views.files,name='files'),
