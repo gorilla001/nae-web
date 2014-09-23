@@ -31,17 +31,20 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="/overview"><i class="fa fa-fw fa-dashboard"></i> 概览</a>
+                        <a href="/overview"><i class="fa fa-fw fa-dashboard"></i> 总体概览</a>
                     </li>
-                    <li class="active">
-                        <a href="/containers"><i class="fa fa-fw fa-bar-chart-o"></i> 容器列表</a>
+                    <li>
+                        <a href="/projects"><i class="fa fa-fw fa-bar-chart-o"></i> 项目列表</a>
                     </li>
                     <li>
                         <a href="/images"><i class="fa fa-fw fa-table"></i> 镜像列表</a>
                     </li>
-                    <li>
-                        <a href="/codeversion"><i class="fa fa-fw fa-edit"></i> 代码版本库</a>
+                    <li class="active">
+                        <a href="/containers"><i class="fa fa-fw fa-bar-chart-o"></i> 容器列表</a>
                     </li>
+                    <!--<li>
+                        <a href="/codeversion"><i class="fa fa-fw fa-edit"></i> 代码版本库</a>
+                    </li>-->
                 </ul>
             </div>
         </nav>
@@ -98,9 +101,22 @@
                                         <span class="help-inline">(容器所属的项目，比如optool项目)</span>
                                       </div>
                                     </div>
+                                    <div class="control-group version">
+                                      <label class="control-label" for="version">镜像</label>
+                                      <div class="controls">
+                                          <select class="form-control">  
+                                            <option>代码版本库</option>  
+                                            <option>分支一</option>  
+                                            <option>分支二</option>  
+                                            <option>分支三</option>  
+                                            <option>分支四</option>  
+                                          </select>  
+                                        <span class="help-inline">(需要测试的代码分支)</span>
+                                      </div>
+                                    </div>
 
                                     <div class="control-group version">
-                                      <label class="control-label" for="version">代码版本库</label>
+                                      <label class="control-label" for="version">代码分支</label>
                                       <div class="controls">
                                           <select class="form-control">  
                                             <option>代码版本库</option>  

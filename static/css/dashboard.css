@@ -100,13 +100,18 @@ body {
 
 textarea.form-control {
     height:75px;
-    width:260px;
+    max-height:75px;
+    width:350px;
+}
+
+.controls input {
+    width:350px;
 }
 /* Add DockerFile */
 
 textarea.content {
     height:350;
-    width:370;
+    width:600;
 }
 
 .btn-custom {
@@ -581,4 +586,35 @@ input[type="checkbox"] {
                                                                     .roundedTwo input[type=checkbox]:checked + label:after {
                                                                           filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
                                                                             opacity: 1;
-                                                                        }
+                                                                        }*/
+.input-group {
+    width:350px;
+}
+.input-group input {
+    height:25px;
+}
+.input-group button {
+    height:25px;
+    width:50px;
+}
+
+.w1{
+    width:200px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.w2{
+    width:200px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.w3{
+    width:200px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}

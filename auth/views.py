@@ -25,8 +25,10 @@ def auth_login(request):
     request.session["auth_username"] = auth_username
     request.session.set_expiry(600)
     if 'admin' in auth_data['groups']:
-        return HttpResponseRedirect('/admin/projects')    
-    return HttpResponseRedirect('/projects')
+        #return HttpResponseRedirect('/admin/projects')    
+        request.session['role']='admin'
+    #return HttpResponseRedirect('/projects')
+    return HttpResponseRedirect('/overview')
     #if len(auth_data["groups"]) > 0:
     #content["Role"] = auth_data["groups"]
     #memberurl = "%s%s%s%s%s" % (auth_url, "api/member/?uid=", auth_username, app_key, app_name)
