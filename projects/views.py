@@ -7,6 +7,7 @@ import requests
 import json
 from django.http import HttpResponseRedirect
 from django.template  import RequestContext
+import os
 
 @require_auth
 def index(request):
@@ -17,6 +18,15 @@ def index(request):
     role=request.session.get('role',None)
     auth_username=request.session.get('auth_username','test')
     return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
+
+@require_auth
+def show(request):
+    project_id=os.path.basename(request.path)
+    url='http://localhost:8383/v1/projects/%s' % project_id
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    print rs.json()
+    return HttpResponse(json.dumps(rs.json()))
 
 @require_auth
 def create(request):

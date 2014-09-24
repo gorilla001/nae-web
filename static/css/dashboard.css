@@ -618,3 +618,7 @@ input[type="checkbox"] {
     white-space:nowrap;
     text-overflow:ellipsis;
 }
+.text-muted {
+    height:50px;
+    color: #999;
+}

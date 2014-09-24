@@ -26,8 +26,17 @@
             <div class="navbar-header">
                 <span class="navbar-brand">聚美优品JAE平台</span>
             </div>
-            <ul class="nav navbar-right top-nav">
+            <ul id="nav" class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ auth_username }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a href="/admin/" target="_sh_admin">administration</a></li>-->
+                        <li class="divider"></li>
+                        <li><a href="/accounts/logout/">退出</a></li>
+                    </ul>
+                </li>
             </ul>
+
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li >
@@ -48,15 +57,26 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="btn-group btn-group-sm pull-right">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#largeModal">创建</button>
-                       </div>
-                        <div class="btn-group btn-group-sm pull-left">
-                            <button class="btn btn-primary" onclick="deleteImages()">删除</button>
-                       </div>
+                    <div class="panel-heading heading-large">
+                        <span class="panel-title section-title">镜像</span>
+                        <span class="section-toolbar">
+                            {% ifequal role 'admin' %}
+                            <a href="/images/">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                            {% endifequal %}
+                        </span>
+                        <span class="pull-right">
+                            {% ifequal role 'admin' %}
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#largeModal">创建</button>
+                            {% else %}
+                                <a href="/images/">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </a>
+                            {% endifequal %}
+                        </span>
                     </div>
-                </div>
+                    <div class="panel-body">
 
             <div id="largeModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -66,24 +86,23 @@
                             <h4 class="modal-title">创建镜像</h4>
                         </div>
                         <div class="modal-body">
-                            <form id="image" class="form-horizontal" action="/admin/images/create/" method="POST" >
+                            <form id="image" class="form-horizontal" action="/images/create/" method="POST" >
                                    {% csrf_token %}
                                    <div class="control-group name">
                                       <label cass="control-label" for="name">镜像名称</label>
                                       <div class="controls">
-                                        <input type="text" class="form-control" id="name" name='imagename' placeholder="镜像名称">
+                                        <input type="text" class="form-control" id="name" name='image_name' placeholder="镜像名称" style="width:152px">
                                         <span class="help-inline">(镜像的名称,必填项)</span>
                                       </div>
                                     </div>
                                     <div class="control-group project">
                                       <label class="control-label" for="project">所属项目</label>
                                       <div class="controls">
-                                          <select class="form-control">  
-                                            <option>项目名称</option>  
-                                            <option>项目一</option>  
-                                            <option>项目二</option>  
-                                            <option>项目三</option>  
-                                            <option>项目四</option>  
+                                          <select id='project_list' class="form-control" name="image_proj">  
+                                            <option value="-1">请选择</option>
+                                            {% for item in projects_list %}
+                                            <option id="{{ item.ProjectId }}" value="{{ item.ProjectName }}">{{ item.ProjectName }}</option>  
+                                            {% endfor %}
                                           </select>  
                                         <span class="help-inline">(镜像所属的项目，比如optool项目)</span>
                                       </div>
@@ -91,10 +110,8 @@
                                     <div class="control-group environ">
                                       <label class="control-label" for="environ">镜像文件地址</label>
                                       <div class="controls">
-                                          <select  class="form-control" id="dockerfile" name="dockerfile">  
-                                            {% for item in file_list %}
-                                            <option>{{ item.Name }}</option>  
-                                            {% endfor %}
+                                          <select  id="hg_list" class="form-control" id="dockerfile" name="repo_path" style="width:350px">  
+                                            <option value="-1">请选择</option>
                                           </select>
                                           <!--<input type="text" class="form-control" id="file" name='dockerfile' placeholder="HG地址">-->
                                           <span class="help-inline">(dockerfile的HG地址，必填项)</span>
@@ -103,7 +120,7 @@
                                    <div class="control-group description">
                                       <label cass="control-label" for="description">功能描述</label>
                                       <div class="controls">
-                                          <textarea class="form-control" id="description" name="description" placeholder="功能描述"></textarea>
+                                          <textarea class="form-control" id="description" name="image_desc" placeholder="功能描述"></textarea>
                                         <span class="help-inline">(可选项)</span>
                                       </div>
                                     </div>
@@ -148,7 +165,7 @@
                             <th class="text-center" style="width:70px">操作</th>
                         </thead>
                         <tbody>
-                            {% for item in image_list %}
+                            {% for item in images_list %}
                                 <tr>
                                     <td align="center" style="width:25px;">
                                         <input type="checkbox" name="myTextEditBox" value="checked" />
@@ -157,6 +174,7 @@
                                     <td>{{ item.ImageName }}</td>
                                     <td>{{ item.ImageSize }}</td>
                                     <td>{{ item.ImageDesc }}</td>
+                                    <td>{{ item.ImageProject }}</td>
                                     <td>{{ item.CreatedTime }}</td>
                                     <td>{{ item.CreatedBy }}</td>
                                     <td></td>
@@ -164,9 +182,62 @@
                             {% endfor %} 
                         </tbody>
                     </table>
-             </div>
+                </div>
+            </div>
+            </div>
         </div>
         <script>
+        function createXmlHttpRequest(){
+            if(window.ActiveXObject){ //如果是IE浏览器  
+                return new ActiveXObject("Microsoft.XMLHTTP");  
+            }
+            else if(window.XMLHttpRequest){ //非IE浏览器  
+                return new XMLHttpRequest();  
+            }  
+        }
+
+        $("#project_list").change(function(){
+            //var checkValue=$("#project_list").find("option:selected").val(); 
+            var checkValue=$("#project_list").find("option:selected").attr("id"); 
+            //var checkText=$("#project_list").find("option:selected").text(); 
+            //$("#hg_list").remove();
+            //$("#hg_list").append("<option value='-1'>请选择</option>");
+            //$("#hg_list option[value !='-1']").remove();
+            //$("#hg_list").append("<option>Text</option>");
+            //alert('step 1');
+            var $href= "/projects";
+            //alert('step 2');
+            var xmlHttpRequest;
+            xmlHttpRequest = createXmlHttpRequest();
+            //alert('step 3');
+            xmlHttpRequest.onreadystatechange = getResult;
+            //alert('step 4');
+            var $url = $href + "/" + checkValue;
+
+            //alert($url);
+            xmlHttpRequest.responseType = 'json';
+            xmlHttpRequest.open("GET",$url,true);
+            xmlHttpRequest.send(null);
+
+            function getResult(){
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                    var content = xmlHttpRequest.response;
+                    //alert(content);
+                    //data=JSON.parse(content);
+                    //alert(content['hgs']);
+                    var data=content.hgs.split(" ");
+                    $("#hg_list option[value !='-1']").remove();
+                    for (var i in data)
+                    {
+                        $("#hg_list").append("<option value=" + data[i] + ">" + data[i] + "</option>");
+                    }
+                    if ($content == 'succeed'){
+                        window.location.reload();
+                    }
+                }
+            }
+
+         }); 
             function createImage()
             {
                 document.getElementById("image").submit();
