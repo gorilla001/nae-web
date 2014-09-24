@@ -14,7 +14,9 @@ def index(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     projects_list=rs.json()
-    return render_to_response('projects.html',{'projects_list':projects_list},context_instance=RequestContext(request))
+    role=request.session.get('role',None)
+    auth_username=request.session.get('auth_username','test')
+    return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
 
 @require_auth
 def create(request):

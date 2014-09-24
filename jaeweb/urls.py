@@ -7,6 +7,7 @@ import containers.urls
 import images.urls
 #import codeversion.urls
 #import home.urls
+import accounts.urls
 import projects.urls
 import auth.urls
 import jaeadmin.urls
@@ -29,6 +30,8 @@ urlpatterns = patterns('',
     url(r'^projects/',include(projects.urls)),
     url(r'^containers/',include(containers.urls)),
     url(r'^images/',include(images.urls)),
+
+    url(r'^accounts/',include(accounts.urls)),
 
     url(r'^admin/',include(jaeadmin.urls)),
 
