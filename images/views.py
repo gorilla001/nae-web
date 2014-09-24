@@ -75,7 +75,8 @@ def create(request):
 @require_auth
 def delete(request):
     image_id=request.GET['id']
-    url = 'http://localhost:8383/v1/images/%s' % image_id
+    f_id=request.GET['f']
+    url = 'http://localhost:8383/v1/images/%s?force=%s' % (image_id,f_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
     print image_id 
