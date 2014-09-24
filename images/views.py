@@ -72,3 +72,13 @@ def create(request):
             print 'form is invalid'
     return HttpResponseRedirect('/images')
 
+@require_auth
+def delete(request):
+    image_id=request.GET['id']
+    url = 'http://localhost:8383/v1/images/%s' % image_id
+    headers={'Content-Type':'application/json'}
+    rs = requests.delete(url,headers=headers)
+    print image_id 
+    print rs.json()
+    #return HttpResponseRedirect('/admin/files')
+    return HttpResponse("succeed")

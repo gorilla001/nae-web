@@ -151,14 +151,14 @@
                                                 <label for="roundedTwo"></label>
                                                     </div>
                                                 </th>-->
-                            <th style="text-align:center;vertical-align: middle;width:25px;">
+                            <!--<th style="text-align:center;vertical-align: middle;width:25px;">
                                 <input type="checkbox" name="myTextEditBox" id="c1" value="checked" />
-                                <!--<label for="c1"><span></span></label>-->
-                            </th>
-                            <th style="width:150px">镜像ID</th>
-                            <th style="width:150px">镜像名称</th>
-                            <th style="width:100px">镜像大小</th>
-                            <th>镜像描述</th>
+                                <label for="c1"><span></span></label>
+                            </th>-->
+                            <th style="width:50px">ID</th>
+                            <th style="width:150px">名称</th>
+                            <th style="width:100px">大小</th>
+                            <th>描述</th>
                             <th style="width:150px">所属项目</th>
                             <th style="width:150px">创建时间</th>
                             <th style="width:100px">创建者</th>
@@ -167,17 +167,30 @@
                         <tbody>
                             {% for item in images_list %}
                                 <tr>
-                                    <td align="center" style="width:25px;">
+                                    <!--<td align="center" style="width:25px;">
                                         <input type="checkbox" name="myTextEditBox" value="checked" />
-                                    </td>
-                                    <td>{{ item.ImageId }}</td>
+                                    </td>-->
+                                    <td class="fp">{{ item.ImageId }}</td>
                                     <td>{{ item.ImageName }}</td>
                                     <td>{{ item.ImageSize }}</td>
                                     <td>{{ item.ImageDesc }}</td>
                                     <td>{{ item.ImageProject }}</td>
                                     <td>{{ item.CreatedTime }}</td>
                                     <td>{{ item.CreatedBy }}</td>
-                                    <td></td>
+                                    <td>
+                                         <div class="btn-group btn-group-sm pull-right">
+                                            <button id="preview" href="/admin/files/show" class="btn btn-mini project-info">详情
+                                            </button>
+                                            <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu custom-menu">
+                                                <!--<li ><a href="#" onclick="modifyFile()" data-stopPropagation="true">修改</a></li>-->
+                                                <li><a class="delete-image">删除</a></li>
+                                                <li><a class="delete-image-force">强制删除</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             {% endfor %} 
                         </tbody>
@@ -238,6 +251,53 @@
             }
 
          }); 
+$(".delete-image").click(function() {
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        /*$('#filecontent').text($text);*/
+        /*var $href = $(this).attr("href");*/
+        var $href= "/images/delete" 
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = getResult;
+        var $url = $href + "?id=" + $text;
+
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function getResult(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.responseText;
+                if ($content == 'succeed'){
+                    window.location.reload();
+                }
+            }
+        }
+    });
+$(".delete-image-force").click(function() {
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        /*$('#filecontent').text($text);*/
+        /*var $href = $(this).attr("href");*/
+        var $href= "/images/delete" 
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = getResult;
+        var $url = $href + "?id=" + $text;
+
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function getResult(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.responseText;
+                if ($content == 'succeed'){
+                    window.location.reload();
+                }
+            }
+        }
+    });
+
             function createImage()
             {
                 document.getElementById("image").submit();
