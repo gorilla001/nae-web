@@ -8,6 +8,7 @@ from django.template  import RequestContext
 from forms import CreateImageForm
 import json
 from auth.decorators import require_auth
+import os
 
 # Create your views here.
 @require_auth
@@ -34,7 +35,7 @@ def index(request):
     rs = requests.get(url,headers=headers)
     images_list=rs.json()
 
-    auth_username=request.session.get('auth_username','nobody')
+    auth_username=request.session.get('realname')
     role=request.session.get('role',None)
     return render_to_response('images.html',
                             {'auth_username':auth_username,
@@ -44,6 +45,14 @@ def index(request):
                              },
                              context_instance=RequestContext(request)
                             )
+@require_auth
+def show(request):
+    project_id=os.path.basename(request.path)
+    url='http://localhost:8383/v1/projects/%s' % project_id
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    print rs.json()
+    return HttpResponse(json.dumps(rs.json()))
 
 @require_auth
 def create(request):
@@ -55,7 +64,7 @@ def create(request):
             image_proj=cleaned_data.get('image_proj')
             repo_path=cleaned_data.get('repo_path')
             image_desc=cleaned_data.get('image_desc')
-            user_name=request.session.get('auth_username')
+            user_name=request.session.get('nickname')
             print image_name,image_proj,repo_path,image_desc,user_name
             url="http://localhost:8383/v1/images"
             headers={'Content-Type':'application/json'}

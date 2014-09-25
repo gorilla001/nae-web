@@ -124,6 +124,13 @@ textarea.content {
 .pull-right > .custom-menu {
     min-width:70px;
 }
+.navbar-right > .custom-menu {
+    min-width:70px;
+}
+.navbar-right .dropdown-menu {
+    min-width:70px;
+        }
+
 
 .custom-tr {
     line-height: 30px;

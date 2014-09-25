@@ -101,7 +101,8 @@
                                           <select id='project_list' class="form-control" name="image_proj">  
                                             <option value="-1">请选择</option>
                                             {% for item in projects_list %}
-                                            <option id="{{ item.ProjectId }}" value="{{ item.ProjectName }}">{{ item.ProjectName }}</option>  
+                                            <!--<option id="{{ item.ProjectId }}" value="{{ item.ProjectName }}">{{ item.ProjectName }}</option>  -->
+                                            <option value="{{ item.ProjectId }}">{{ item.ProjectName }}</option>  
                                             {% endfor %}
                                           </select>  
                                         <span class="help-inline">(镜像所属的项目，比如optool项目)</span>
@@ -210,8 +211,8 @@
         }
 
         $("#project_list").change(function(){
-            //var checkValue=$("#project_list").find("option:selected").val(); 
-            var checkValue=$("#project_list").find("option:selected").attr("id"); 
+            var checkValue=$("#project_list").find("option:selected").val(); 
+            //var checkValue=$("#project_list").find("option:selected").attr("id"); 
             //var checkText=$("#project_list").find("option:selected").text(); 
             //$("#hg_list").remove();
             //$("#hg_list").append("<option value='-1'>请选择</option>");

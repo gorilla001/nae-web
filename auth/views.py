@@ -13,20 +13,26 @@ import hashlib, time
 # Create your views here.
 def auth_login(request):
     auth_username = request.GET['username']
-    if User.objects.filter(username=auth_username).count() == 0:
-        data=User(username=auth_username)
-        data.save()
-    print app_key
+    request.session['is_authed'] = True;
+    url = "{}{}{}{}{}{}".format(auth_url,"/api/member/?uid=",auth_username,app_key,auth_key,app_name)
+    headers={'Content-Type':'application/json'}
+    auth_result = requests.get(url, headers=headers)
+    resp_data = auth_result.json()
+    if 'success' in resp_data:
+        nickname = resp_data['username'] 
+        realname = resp_data['fullname']
+
+        request.session['nickname'] = nickname
+        request.session['realname'] = realname
     url = "%s%s%s%s%s%s" % (auth_url, "/api/grouprole/?uid=", auth_username, app_key, auth_key, app_name)
-    print url
     headers = {'content-type': 'application/json'}
     auth_result = requests.get(url, headers=headers,)
     auth_data = auth_result.json()
-    request.session["auth_username"] = auth_username
-    request.session.set_expiry(600)
+
     if 'admin' in auth_data['groups']:
         request.session['role']='admin'
-    print request.session.get('role')
+
+    request.session.set_expiry(600)
     return HttpResponseRedirect('/overview')
     #if len(auth_data["groups"]) > 0:
     #content["Role"] = auth_data["groups"]

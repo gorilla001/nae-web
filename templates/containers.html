@@ -26,8 +26,17 @@
             <div class="navbar-header">
                 <span class="navbar-brand">聚美优品JAE平台</span>
             </div>
-            <ul class="nav navbar-right top-nav">
+            <ul id="nav" class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ auth_username }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a href="/admin/" target="_sh_admin">administration</a></li>-->
+                        <li class="divider"></li>
+                        <li><a href="/accounts/logout/">退出</a></li>
+                    </ul>
+                </li>
             </ul>
+
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
@@ -51,12 +60,27 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="btn-group btn-group-sm pull-right">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#largeModal">创建</button>
-                       </div>
+                <div class="panel-heading heading-large">
+                        <span class="panel-title section-title">容器</span>
+                        <span class="section-toolbar">
+                            {% ifequal role 'admin' %}
+                            <a href="/containers/" style="margin-left:5px;">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                            {% endifequal %}
+                        </span>
+                        <span class="pull-right">
+                            {% ifequal role 'admin' %}
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#largeModal">创建</button>
+                            {% else %}
+                                <a href="/containers/">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </a>
+                            {% endifequal %}
+                        </span>
                     </div>
-                </div>
+                    <div class="panel-body">
+
 
             <div id="largeModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -66,24 +90,25 @@
                             <h4 class="modal-title">创建容器</h4>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" action="/containers" method="POST" >
-                                   <div class="control-group name">
+                            <form id="container" class="form-horizontal" action="/containers/create/" method="POST" >
+                                {% csrf_token %}
+                                   <!--<div class="control-group name">
                                       <label cass="control-label" for="name">容器名称</label>
                                       <div class="controls">
                                         <input type="text" class="form-control" id="name" placeholder="容器名称">
                                         <span class="help-inline">(容器的名称，如果留空，系统会随机分配一个名字)</span>
                                       </div>
-                                    </div>
+                                    </div>-->
                                     <div class="control-group environ">
                                       <label class="control-label" for="environ">所属环境</label>
                                       <div class="controls">
-                                          <select  class="form-control" id="environ">  
-                                            <option>容器环境</option>  
-                                            <option>开发环境</option>  
-                                            <option>测试环境</option>  
-                                            <option>Staging环境</option>  
-                                            <option>Publish环境</option>  
-                                            <option>生产环境</option>  
+                                          <select  class="form-control" id="environ" name="container_environ">  
+                                            <option value="-1">请选择</option>  
+                                            <option value="0">开发环境</option>  
+                                            <option value="1">测试环境</option>  
+                                            <option value="2">Staging环境</option>  
+                                            <option value="3">Publish环境</option>  
+                                            <option value="4">生产环境</option>  
                                           </select>
                                           <span class="help-inline">(容器的环境，比如开发、测试等)</span>
                                       </div>  
@@ -91,12 +116,11 @@
                                     <div class="control-group project">
                                       <label class="control-label" for="project">所属项目</label>
                                       <div class="controls">
-                                          <select class="form-control">  
-                                            <option>项目名称</option>  
-                                            <option>项目一</option>  
-                                            <option>项目二</option>  
-                                            <option>项目三</option>  
-                                            <option>项目四</option>  
+                                          <select id="project_list" class="form-control" name="container_project">  
+                                              <option value="-1">请选择</option>  
+                                              {% for item in projects_list %}
+                                              <option value="{{ item.ProjectId }}">{{ item.ProjectName }}</option>  
+                                              {% endfor %}
                                           </select>  
                                         <span class="help-inline">(容器所属的项目，比如optool项目)</span>
                                       </div>
@@ -104,12 +128,8 @@
                                     <div class="control-group version">
                                       <label class="control-label" for="version">镜像</label>
                                       <div class="controls">
-                                          <select class="form-control">  
-                                            <option>代码版本库</option>  
-                                            <option>分支一</option>  
-                                            <option>分支二</option>  
-                                            <option>分支三</option>  
-                                            <option>分支四</option>  
+                                          <select id="image_list" class="form-control" name="container_image">  
+                                            <option value="-1">请选择</option>  
                                           </select>  
                                         <span class="help-inline">(需要测试的代码分支)</span>
                                       </div>
@@ -118,7 +138,7 @@
                                     <div class="control-group version">
                                       <label class="control-label" for="version">代码分支</label>
                                       <div class="controls">
-                                          <select class="form-control">  
+                                          <select class="form-control" name="container_code">  
                                             <option>代码版本库</option>  
                                             <option>分支一</option>  
                                             <option>分支二</option>  
@@ -132,7 +152,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal">确定</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createContainer();">确定</button>
                         </div>
                     </div>
                 </div>
@@ -149,24 +169,125 @@
                             <th>所属项目</th>
                             <th>在线时间</th>
                             <th>状态</th>
+                            <th>操作</th>
                         </thead>
                         <tbody>
-                            {% for item in container_list %}
+                            {% for item in containers_list %}
                                 <tr>
+                                    <td class="fp">{{ item.Id }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{ item.Ports }}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm pull-right">
+                                            <button id="preview" href="/admin/files/show" class="btn btn-mini project-info">详情
+                                            </button>
+                                            <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu custom-menu">
+                                                <!--<li ><a href="#" onclick="modifyFile()" data-stopPropagation="true">修改</a></li>-->
+                                                <li><a class="delete-container">删除</a></li>
+                                                <li><a class="delete-image-force">强制删除</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             {% endfor %} 
                         </tbody>
                     </table>
-             </div>
+                </div>
+            </div>
+            </div>
         </div>
+<script>
+function createXmlHttpRequest(){
+            if(window.ActiveXObject){ //如果是IE浏览器  
+                return new ActiveXObject("Microsoft.XMLHTTP");  
+            }
+            else if(window.XMLHttpRequest){ //非IE浏览器  
+                return new XMLHttpRequest();  
+            }  
+        }
+
+$("#project_list").change(function(){
+            var checkValue=$("#project_list").find("option:selected").val(); 
+            //var checkValue=$("#project_list").find("option:selected").attr("id"); 
+            //var checkText=$("#project_list").find("option:selected").text(); 
+            //$("#hg_list").remove();
+            //$("#hg_list").append("<option value='-1'>请选择</option>");
+            //$("#hg_list option[value !='-1']").remove();
+            //$("#hg_list").append("<option>Text</option>");
+            //alert('step 1');
+            //alert(checkValue); 
+            var $href= "/projects";
+            //alert('step 2');
+            var xmlHttpRequest;
+            xmlHttpRequest = createXmlHttpRequest();
+            //alert('step 3');
+            xmlHttpRequest.onreadystatechange = getResult;
+            //alert('step 4');
+            var $url = $href + "/" + checkValue;
+
+            //alert($url);
+            xmlHttpRequest.responseType = 'json';
+            xmlHttpRequest.open("GET",$url,true);
+            xmlHttpRequest.send(null);
+
+            function getResult(){
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                    var content = xmlHttpRequest.response;
+                    //alert(content);
+                    //data=JSON.parse(content);
+                    //alert(content['hgs']);
+                    //var data=content.imgs.split(" ");
+                    var data=content.imgs;
+                    $("#image_list option[value !='-1']").remove();
+                    for (var i in data)
+                    {
+                        $("#image_list").append("<option value=" + data[i] + ">" + data[i] + "</option>");
+                    }
+                    if ($content == 'succeed'){
+                        window.location.reload();
+                    }
+                }
+            }
+
+         }); 
+$(".delete-container").click(function() {
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        /*$('#filecontent').text($text);*/
+        /*var $href = $(this).attr("href");*/
+        var $href= "/containers/delete" 
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = getResult;
+        var $url = $href + "?id=" + $text;
+
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function getResult(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.responseText;
+                if ($content == 'succeed'){
+                    window.location.reload();
+                }
+            }
+        }
+    });
+
+function createContainer()
+{
+    document.getElementById("container").submit();
+}
+</script>
+
 </body>
 </html>

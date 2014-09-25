@@ -16,7 +16,7 @@ def index(request):
     rs = requests.get(url,headers=headers)
     projects_list=rs.json()
     role=request.session.get('role',None)
-    auth_username=request.session.get('auth_username','test')
+    auth_username=request.session.get('realname')
     return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
 
 @require_auth
@@ -35,7 +35,9 @@ def create(request):
         project_hgs=request.POST.get('hgaddrs').splitlines()
         project_members=request.POST.get('members').splitlines()
         project_desc=request.POST.get('desc').strip()
-        project_admin=request.session['auth_username']
+        project_admin=request.session['nickname']
+        print request.POST.get('members')
+        print project_members
         data = {
                 'project_name' : project_name, 
                 'project_hgs' :  project_hgs, 
@@ -43,6 +45,7 @@ def create(request):
                 'project_desc' : project_desc,
                 'project_admin':project_admin,
         }
+        print data
         url='http://localhost:8383/v1/projects'
         headers={'Content-Type':'application/json'}
         rs = requests.post(url,headers=headers,data=json.dumps(data))
