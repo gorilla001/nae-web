@@ -30,7 +30,16 @@ def index(request):
     projects_list = rs.json() 
     print rs.json()
     images_list=[]
-    return render_to_response('containers.html',{'auth_username':auth_username,'role':role,'containers_list':containers_list,'projects_list':projects_list,'image_list':images_list},context_instance=RequestContext(request))
+    total_containers = len(containers_list) 
+    print 'total_containers',total_containers
+    return render_to_response('containers.html',
+                            {'auth_username':auth_username,
+                             'role':role,
+                             'containers_list':containers_list,
+                             'projects_list':projects_list,
+                             'image_list':images_list
+                             },
+                            context_instance=RequestContext(request))
     
 @require_auth
 def create(request):

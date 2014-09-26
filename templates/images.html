@@ -88,13 +88,13 @@
                         <div class="modal-body">
                             <form id="image" class="form-horizontal" action="/images/create/" method="POST" >
                                    {% csrf_token %}
-                                   <div class="control-group name">
+                                   <!--<div class="control-group name">
                                       <label cass="control-label" for="name">镜像名称</label>
                                       <div class="controls">
                                         <input type="text" class="form-control" id="name" name='image_name' placeholder="镜像名称" style="width:152px">
                                         <span class="help-inline">(镜像的名称,必填项)</span>
                                       </div>
-                                    </div>
+                                    </div>-->
                                     <div class="control-group project">
                                       <label class="control-label" for="project">所属项目</label>
                                       <div class="controls">
@@ -157,6 +157,7 @@
                                 <label for="c1"><span></span></label>
                             </th>-->
                             <th style="width:50px">ID</th>
+                            <th style="width:100px">镜像ID</th>
                             <th style="width:150px">名称</th>
                             <th style="width:100px">大小</th>
                             <th>描述</th>
@@ -171,8 +172,9 @@
                                     <!--<td align="center" style="width:25px;">
                                         <input type="checkbox" name="myTextEditBox" value="checked" />
                                     </td>-->
-                                    <td class="fp">{{ item.ImageId }}</td>
-                                    <td>{{ item.ImageName }}</td>
+                                    <td >{{ item.ID }}</td>
+                                    <td >{{ item.ImageId }}</td>
+                                    <td class="fp">{{ item.ImageName }}</td>
                                     <td>{{ item.ImageSize }}</td>
                                     <td>{{ item.ImageDesc }}</td>
                                     <td>{{ item.ImageProject }}</td>

@@ -104,11 +104,11 @@
                                       <div class="controls">
                                           <select  class="form-control" id="environ" name="container_environ">  
                                             <option value="-1">请选择</option>  
-                                            <option value="0">开发环境</option>  
-                                            <option value="1">测试环境</option>  
-                                            <option value="2">Staging环境</option>  
-                                            <option value="3">Publish环境</option>  
-                                            <option value="4">生产环境</option>  
+                                            <option value="config-dev">开发环境</option>  
+                                            <option value="config-qa">测试环境</option>  
+                                            <option value="config-st">Staging环境</option>  
+                                            <option value="config-pub">Publish环境</option>  
+                                            <option value="config-prod">生产环境</option>  
                                           </select>
                                           <span class="help-inline">(容器的环境，比如开发、测试等)</span>
                                       </div>  
@@ -138,13 +138,14 @@
                                     <div class="control-group version">
                                       <label class="control-label" for="version">代码分支</label>
                                       <div class="controls">
-                                          <select class="form-control" name="container_code">  
+                                            <input type="text" class="form-control" id="version" name='container_code' placeholder="请填写代码分支" style="width:152px">
+                                          <!--<select class="form-control" name="container_code">  
                                             <option>代码版本库</option>  
                                             <option>分支一</option>  
                                             <option>分支二</option>  
                                             <option>分支三</option>  
                                             <option>分支四</option>  
-                                          </select>  
+                                          </select>-->  
                                         <span class="help-inline">(需要测试的代码分支)</span>
                                       </div>
                                     </div>
@@ -169,19 +170,19 @@
                             <th>所属项目</th>
                             <th>在线时间</th>
                             <th>状态</th>
-                            <th>操作</th>
+                            <th style="width:70px;" class="text-center">操作</th>
                         </thead>
                         <tbody>
                             {% for item in containers_list %}
                                 <tr>
                                     <td class="fp">{{ item.Id }}</td>
-                                    <td></td>
+                                    <td>{{ item.Name }}</td>
                                     <td></td>
                                     <td></td>
                                     <td>{{ item.Ports }}</td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <td>{{ item.Status }}</td>
                                     <td></td>
                                     <td>
                                         <div class="btn-group btn-group-sm pull-right">
@@ -203,7 +204,20 @@
                     </table>
                 </div>
             </div>
+
             </div>
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                {% for item in page_nums %}
+                <li><a href="#">2</a></li>
+                {% endfor %}
+                <!--<li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>-->
+                <li><a href="#">&raquo;</a></li>
+            </ul>
         </div>
 <script>
 function createXmlHttpRequest(){

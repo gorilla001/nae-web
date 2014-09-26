@@ -31,7 +31,8 @@ def human_readable_size(size):
     return humanize.naturalsize(size)
 def random_str(randomlength=8):
     str = ''
-    chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    #chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
     length = len(chars) - 1
     random = Random()
     for i in range(randomlength):
