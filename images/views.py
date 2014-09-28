@@ -9,6 +9,7 @@ from forms import CreateImageForm
 import json
 from auth.decorators import require_auth
 import os
+from django.template.loader import render_to_string
 
 # Create your views here.
 @require_auth
@@ -92,3 +93,16 @@ def delete(request):
     print rs.json()
     #return HttpResponseRedirect('/admin/files')
     return HttpResponse("succeed")
+
+def update(request):
+    url='http://localhost:8383/v1/images'
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    print rs.text
+    images_list=rs.json()
+    #return render_to_response(
+    #        'images_content.html',
+    #        {'images_list':images_list}
+    #        )
+    return render_to_response('images_content.html',{'images_list':images_list})
+

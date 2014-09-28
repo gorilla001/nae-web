@@ -1,0 +1,37 @@
+<div id="images_content">
+    {% for item in images_list %}
+        <tr>
+            <!--<td align="center" style="width:25px;">
+                <input type="checkbox" name="myTextEditBox" value="checked" />
+            </td>-->
+            <td >{{ item.ID }}</td>
+            <!--<td >{{ item.ImageId }}</td>-->
+            <td class="fp">{{ item.ImageName }}</td>
+            <td>{{ item.ImageSize }}</td>
+            <td>{{ item.ImageDesc }}</td>
+            <td>{{ item.ImageProject }}</td>
+            <td>{{ item.CreatedTime }}</td>
+            <td>{{ item.CreatedBy }}</td>
+            <td>
+                <div id="progressbar">
+                    <div class="progress-label">building</div>
+            </div>
+        </td>
+            <td>
+                 <div class="btn-group btn-group-sm pull-right">
+                    <button id="preview" href="/admin/files/show" class="btn btn-mini project-info">详情
+                    </button>
+                    <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu custom-menu">
+                        <!--<li ><a href="#" onclick="modifyFile()" data-stopPropagation="true">修改</a></li>-->
+                        <li><a class="delete-image">删除</a></li>
+                        <li><a class="delete-image-force">强制删除</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    {% endfor %} 
+</div>
+

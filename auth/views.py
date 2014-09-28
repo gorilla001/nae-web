@@ -32,7 +32,7 @@ def auth_login(request):
     if 'admin' in auth_data['groups']:
         request.session['role']='admin'
 
-    request.session.set_expiry(600)
+    request.session.set_expiry(6000)
     return HttpResponseRedirect('/overview')
     #if len(auth_data["groups"]) > 0:
     #content["Role"] = auth_data["groups"]
