@@ -6,34 +6,37 @@
         <th style="width:100px">大小</th>
         <th>描述</th>
         <th style="width:150px">所属项目</th>
-        <th style="width:150px">创建时间</th>
+        <th style="width:200px">创建时间</th>
         <th style="width:100px">创建者</th>
         <th style="width:50px">状态</th>
-        <th class="text-center" style="width:70px">操作</th>
+        <th class="text-center" style="width:80px">操作</th>
     </thead>
         <tbody>
             {% for item in images_list %}
                 <tr>
                     <td >{{ item.ID }}</td>
                     <td class="fp">{{ item.ImageName }}</td>
-                    <td>{{ item.ImageSize }}</td>
+                    <td style="width:100px">{{ item.ImageSize }}</td>
                     <td>{{ item.ImageDesc }}</td>
                     <td>{{ item.ImageProject }}</td>
-                    <td>{{ item.CreatedTime }}</td>
+                    <td style="width:200px">{{ item.CreatedTime }}</td>
                     <td>{{ item.CreatedBy }}</td>
                     {% ifequal item.Status  'building' %}
                     <td style="width:50px">
                     <div class="progress" style="width:60px;height:20px;margin-bottom:0px;margin-top:2px">
                           <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                               <!--<span class="sr-only">building</span>-->
+                              <span class="show">building</span>
                           </div>
                           </div>
                           </td>
                     {% else %}
-                    <td>ok</td>
+                    <td style="width:50px">
+                        ok
+                    </td>
                     {% endifequal %}
                     
-                    <td>
+                    <td style="width:80px">
                          <div class="btn-group btn-group-sm pull-right">
                             <button id="preview" href="/admin/files/show" class="btn btn-mini project-info">详情
                             </button>
