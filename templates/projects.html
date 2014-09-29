@@ -200,91 +200,8 @@
                         </div>
 
                         <div id="projectInfo" class="modal-body">
-                            <!--<pre>项目名称    {{ ProjectName }}</pre>
-                            <pre>项目成员    {{ ProjectName }}</pre>
-                            <pre>管理员    {{ ProjectName }}</pre>
-                            <pre>项目描述    {{ ProjectName }}</pre>
-                            <pre>创建时间    {{ ProjectName }}</pre>
-                            <pre>HG地址    {{ ProjectName }}</pre>
-                            <pre>镜像    {{ ProjectName }}</pre>-->
 
                         </div>
-                        <!--<div class="modal-body">
-                            <form id="project" class="form-horizontal" action="/projects/create/" method="POST" >
-                                  {% csrf_token %}
-                                   <div class="control-group name">
-                                      <label cass="control-label" for="name">项目名称</label>
-                                      <div class="controls">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="项目名称">
-                                        <span class="help-inline">(项目的名称,必填项)</span>
-                                      </div>
-                                    </div>
-                                   <div class="control-group name">
-                                      <label cass="control-label" for="name">HG地址</label>
-                                      <div class="controls">
-                                        <textarea class="form-control" rows="3" id="hgaddrs" name="hgaddrs" style="resize:none;"></textarea>
-                                        <span class="help-inline">(项目的HG地址,必填项)</span>
-                                      </div>
-                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="hgaddr">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" onclick="addHg();">
-                                              <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                        </span>
-                                      </div>
-                                    </div>
-                                   <div class="control-group name">
-                                      <label cass="control-label" for="name">项目成员</label>
-                                      <div class="controls">
-                                        <textarea class="form-control" rows="3" id="members" name="members" style="resize:none;"></textarea>
-                                        <span class="help-inline">(项目的成员,必填项)</span>
-                                      </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="member">
-                                        <span class="input-group-btn">
-                                          <button class="btn btn-default" type="button" onclick="addMember();">
-                                              <span class="glyphicon glyphicon-plus"></span>
-                                          </button>
-                                        </span>
-                                      </div>
-                                    <!--<div class="control-group environ">
-                                      <label class="control-label" for="environ">基础镜像</label>
-                                      <div class="controls">
-                                          <select  class="form-control" id="environ" name="image">  
-                                              {% for item in image_list %}
-                                              <option>{{ item.ImageName }}</option>  
-                                              {% endfor %}
-                                          </select>
-                                          <span class="help-inline">(项目关联的镜像，必填项)</span>
-                                      </div>  
-                                    </div>
-                                    <div class="control-group project">
-                                      <label class="control-label" for="project">管理员</label>
-                                      <div class="controls">
-                                          <select class="form-control" name='admin'>  
-                                              {% for item in user_list %}
-                                                <option>{{ item.CNName }}</option>  
-                                              {% endfor %}
-                                          </select>  
-                                        <span class="help-inline">(项目的管理员，必填项)</span>
-                                      </div>
-                                    </div>
-
-                                    <div class="control-group version">
-                                      <label class="control-label" for="version">项目描述</label>
-                                      <div class="controls">
-                                        <textarea class="form-control" rows="3" name="desc"></textarea>
-                                        <span class="help-inline">(项目简单描述,可选项)</span>
-                                      </div>
-                                    </div>
-                                </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createProject()">确定</button>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -322,19 +239,42 @@
                                     <td>{{ item.ProjectAdmin }}</td>
                                     <td>{{ item.CreatedTime }}</td>
                                     <td style="width:80px">
+        
                                         <div class="btn-group btn-group-sm pull-right">
-                                            <button id="preview" href="/admin/files/show" class="btn btn-mini project-info">详情
+                                            <button id="preview" class="btn btn-mini project-info">详情
                                             </button>
                                             <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                                 <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu custom-menu">
-                                                <li ><a href="#" onclick="modifyFile()" data-stopPropagation="true">修改</a></li>
-                                                <li><a class="delete-project">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
+                                                <li><a href="#">删除</a></li>
+                                                <li class="dropdown-submenu"> <a tabindex="-1" href="#">修改</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li ><a tabindex="-1" href="#">名称</a>
+                                                        </li>
+                                                        <li ><a tabindex="-1" href="#">描述</a>
+                                                        </li>
+                                                        <li ><a tabindex="-1" href="#">成员</a>
+                                                        </li>
+                                                        <li ><a tabindex="-1" href="#">HG</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                             </ul>
+                                                                                  <!--<ul class="dropdown-menu custom-menu">
+                                                <li class="dropdown-submenu">
+                                                    <a >修改</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="delete-project">名称</a></li>
+                                                        <li><a class="delete-project">描述</a></li>
+                                                        <li><a class="delete-project">成员</a></li>
+                                                        <li><a class="delete-project">HG地址</a></li>
+                                                    </ul>
+                                                </li>
 
+                                                <li><a class="delete-project">删除</a></li>
+                                            </ul>-->
+                                    </td>
                                 </tr>
                             {% endfor %} 
                         </tbody>
