@@ -61,11 +61,12 @@ def create(request):
         form = CreateImageForm(request.POST)
         if form.is_valid():
             cleaned_data=form.cleaned_data
-            image_name=cleaned_data.get('image_name',utils.random_str())
+            #image_name=cleaned_data.get('image_name',utils.random_str())
             image_proj=cleaned_data.get('image_proj')
             repo_path=cleaned_data.get('repo_path')
             image_desc=cleaned_data.get('image_desc')
             user_name=request.session.get('nickname')
+            image_name=os.path.basename(repo_path)
             print image_name,image_proj,repo_path,image_desc,user_name
             url="http://localhost:8383/v1/images"
             headers={'Content-Type':'application/json'}

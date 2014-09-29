@@ -594,9 +594,10 @@ input[type="checkbox"] {
     width: 100%;
     //color: black;
 }
-.btn-success {
+.btn-success,.btn-success:hover,.btn-success:focus {
     background-color: #5cb85c;
-    border-color: #4cae4c;
+    /*border-color: #4cae4c;*/
+    border-color: #5cb85c;
     color: #fff;
 }
 .btn-sm, .btn-xs {

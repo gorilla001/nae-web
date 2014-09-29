@@ -46,17 +46,20 @@ def create(request):
     if request.method == 'POST':
         container_environ = request.POST.get('container_environ') 
         container_project = request.POST.get('container_project')
-        container_image = request.POST.get('container_image')
+        #container_image = request.POST.get('container_image')
+        container_hgs = request.POST.get('container_image')
         container_code = request.POST.get('container_code')
+        user_name = request.session.get('nickname')
 
-        print container_environ,container_project,container_image,container_code
+        print container_environ,container_project,container_hgs,container_code
         url='http://localhost:8383/v1/containers'
         headers={'Content-Type':'application/json'}
         data = {
                 'container_environ':container_environ,
                 'container_project':container_project,
-                'container_image':container_image,
+                'container_image':container_hgs,
                 'container_code':container_code,
+                'user_name':user_name,
         }
         print json.dumps(data)
         rs = requests.post(url,headers=headers,data=json.dumps(data))

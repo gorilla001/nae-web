@@ -174,9 +174,9 @@
                                     <!--<td align="center" style="width:25px;">
                                         <input type="checkbox" name="myTextEditBox" value="checked" />
                                     </td>-->
-                                        <td >{{ item.ID }}</td>
+                                        <td class="fp">{{ item.ID }}</td>
                                         <!--<td >{{ item.ImageId }}</td>-->
-                                        <td class="fp">{{ item.ImageName }}</td>
+                                        <td >{{ item.ImageName }}</td>
                                         <td style="width:100px">{{ item.ImageSize }}</td>
                                         <td>{{ item.ImageDesc }}</td>
                                         <td>{{ item.ImageProject }}</td>
@@ -322,16 +322,16 @@ function createImage()
     document.getElementById("image").submit();
     setInterval("refresh()",3000);
 }
-$(document).ready(
-        function () {
-            setInterval(function() {
-                $.ajax({
-                    type: "GET",
-                    url: '/images/update' }).done(function( data ) {
-                    $("#images_content").html(data);
-                });
-            },5000);
-            return false;
+//$(document).ready(
+ //       function () {
+  //          setInterval(function() {
+   //             $.ajax({
+    //                type: "GET",
+     //               url: '/images/update' }).done(function( data ) {
+      //              $("#images_content").html(data);
+       //         });
+        //    },5000);
+         //   return false;
                 //var xmlHttpRequest;
                 //xmlHttpRequest = createXmlHttpRequest();
                 //xmlHttpRequest.onreadystatechange = getResult;
@@ -347,7 +347,7 @@ $(document).ready(
                 //        $('#images_content').html($content);
                 //    }
                 //}
-});
+//});
         </script>
 </body>
 </html>
