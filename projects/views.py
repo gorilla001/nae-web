@@ -22,11 +22,25 @@ def index(request):
 @require_auth
 def show(request):
     project_id=os.path.basename(request.path)
+    #project_id=request.GET['id']
     url='http://localhost:8383/v1/projects/%s' % project_id
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     print rs.json()
-    return HttpResponse(json.dumps(rs.json()))
+    return  HttpResponse(json.dumps(rs.json()))
+
+@require_auth
+def detail(request):
+    #project_id=os.path.basename(request.path)
+    project_id=request.GET['id']
+    url='http://localhost:8383/v1/projects/%s' % project_id
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    project_info = rs.json()
+    return render_to_response('project_info.html',{'project_info':project_info})
+
+
+
 
 @require_auth
 def create(request):

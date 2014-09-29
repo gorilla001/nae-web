@@ -48,12 +48,14 @@ def index(request):
                             )
 @require_auth
 def show(request):
-    project_id=os.path.basename(request.path)
-    url='http://localhost:8383/v1/projects/%s' % project_id
+    image_id=request.GET['id']
+    url='http://localhost:8383/v1/images/%s' % image_id
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     print rs.json()
-    return HttpResponse(json.dumps(rs.json()))
+    image_info=rs.json()
+    return render_to_response('image_info.html',{'image_info':image_info})
+
 
 @require_auth
 def create(request):

@@ -92,6 +92,18 @@
                         </span>
                     </div>
                     <div class="panel-body">
+                <div id="infoModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">容器详情</h4>
+                        </div>
+                        <div id="containerInfo" class="modal-body">
+                        </div>
+                    </div>
+                </div>
+                </div>
 
 
             <div id="largeModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
@@ -191,8 +203,8 @@
                         <tbody>
                             {% for item in containers_list %}
                                 <tr>
-                                    <td style="width:50px">{{ item.ID }}</td>
-                                    <td  class="fp" style="width:50px">{{ item.Name }}</td>
+                                    <td class="fp" style="width:50px">{{ item.ID }}</td>
+                                    <td style="width:50px">{{ item.Name }}</td>
                                     <!--<td style="width:50px"></td>
                                     <td style="width:50px"></td>
                                     <td style="width:50px"></td>
@@ -203,7 +215,7 @@
                                     <td style="width:50px">{{ item.Status }}</td>
                                     <td style="width:80px">
                                         <div class="btn-group btn-group-sm pull-right">
-                                            <button id="preview" href="/admin/files/show" class="btn btn-mini project-info">详情
+                                            <button id="preview" href="/admin/files/show" class="btn btn-mini container-info">详情
                                             </button>
                                             <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                                 <span class="caret"></span>
@@ -223,18 +235,18 @@
             </div>
 
             </div>
-            <ul class="pagination">
+            <!--<ul class="pagination">
                 <li><a href="#">&laquo;</a></li>
                 {% for item in page_nums %}
                 <li><a href="#">2</a></li>
-                {% endfor %}
+                {% endfor %}-->
                 <!--<li><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>-->
-                <li><a href="#">&raquo;</a></li>
-            </ul>
+                <!--<li><a href="#">&raquo;</a></li>
+            </ul>-->
         </div>
 <script>
 function createXmlHttpRequest(){
@@ -290,6 +302,19 @@ $("#project_list").change(function(){
             }
 
          }); 
+$(".container-info").click(function() {
+        $('#infoModal').modal('show')
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/containers/detail';
+        var $url = $href + "?id=" + $text;
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                $("#containerInfo").html(data);
+        });
+    });
+
 $(".delete-container").click(function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();

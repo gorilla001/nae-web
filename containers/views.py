@@ -40,7 +40,19 @@ def index(request):
                              'image_list':images_list
                              },
                             context_instance=RequestContext(request))
-    
+@require_auth
+def detail(request):
+    #project_id=os.path.basename(request.path)
+    container_id=request.GET['id']
+    print container_id
+    url='http://localhost:8383/v1/containers/%s' % container_id
+    headers={'Content-Type':'application/json'}
+    print url,headers
+    rs = requests.get(url,headers=headers)
+    container_info = rs.json()
+    return render_to_response('container_info.html',{'container_info':container_info})
+
+
 @require_auth
 def create(request):
     if request.method == 'POST':
