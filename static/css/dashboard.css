@@ -560,14 +560,14 @@ input[type="checkbox"] {
 }
 
 .w1{
-    width:200px;
+    width:300px;
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
 }
 
 .w2{
-    width:200px;
+    width:300px;
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;

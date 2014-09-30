@@ -28,6 +28,19 @@ def show(request):
     rs = requests.get(url,headers=headers)
     print rs.json()
     return  HttpResponse(json.dumps(rs.json()))
+@require_auth
+def update(request):
+    project_id=os.path.basename(request.path)
+    project_name = request.GET['name']
+    project_desc =  request.GET['desc']
+    project_members = request.GET['members']
+    project_hgs = request.GET['hgs']
+    url='http://localhost:8383/v1/projects/%s?name=%s&desc=%s&members=%s&hgs=%s' % (project_id,project_name,project_desc,project_members,project_hgs)
+    headers={'Content-Type':'application/json'}
+    rs = requests.put(url,headers=headers)
+    print rs.json()
+    return  HttpResponse(json.dumps(rs.json()))
+
 
 @require_auth
 def detail(request):

@@ -127,14 +127,14 @@
                                         <textarea class="form-control" rows="3" id="hgaddrs" name="hgaddrs" style="resize:none;"></textarea>
                                         <span class="help-inline">(项目的HG地址,必填项)</span>
                                       </div>
-                                     <div class="input-group">
+                                     <!--<div class="input-group">
                                         <input type="text" class="form-control" id="hgaddr">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button" onclick="addHg();">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </span>
-                                      </div>
+                                      </div>-->
                                     </div>
                                    <div class="control-group name">
                                       <label cass="control-label" for="name">项目成员</label>
@@ -143,14 +143,14 @@
                                         <span class="help-inline">(项目的成员,必填项)</span>
                                       </div>
                                     </div>
-                                    <div class="input-group">
+                                    <!--<div class="input-group">
                                         <input type="text" class="form-control" id="member">
                                         <span class="input-group-btn">
                                           <button class="btn btn-default" type="button" onclick="addMember();">
                                               <span class="glyphicon glyphicon-plus"></span>
                                           </button>
                                         </span>
-                                      </div>
+                                      </div>-->
                                     <!--<div class="control-group environ">
                                       <label class="control-label" for="environ">基础镜像</label>
                                       <div class="controls">
@@ -190,6 +190,51 @@
                     </div>
                 </div>
             </div>
+            <!--        Modify Project Modal    -->
+            <div id="modifyModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">修改项目</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="project" class="form-horizontal" action="/projects/create/" method="POST" >
+                                  {% csrf_token %}
+                                   <div class="control-group name">
+                                      <label cass="control-label" for="name">项目名称</label>
+                                      <div class="controls">
+                                        <input type="text" class="form-control" id="project_name" name="name">
+                                      </div>
+                                    </div>
+                                   <div class="control-group name">
+                                      <label cass="control-label" for="name">HG地址</label>
+                                      <div class="controls">
+                                        <textarea class="form-control" rows="3" id="project_hgs" name="hgaddrs" style="resize:none;"></textarea>
+                                      </div>
+                                    </div>
+                                   <div class="control-group name">
+                                      <label cass="control-label" for="name">项目成员</label>
+                                      <div class="controls">
+                                        <textarea class="form-control" rows="3" id="project_members" name="members" style="resize:none;"></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="control-group version">
+                                      <label class="control-label" for="version">项目描述</label>
+                                      <div class="controls">
+                                        <textarea class="form-control" rows="3" id="project_desc" name="desc"></textarea>
+                                      </div>
+                                    </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button id="save_modify" type="submit" class="btn btn-primary save-modify" data-dismiss="modal"> 保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!--        Show Project info     -->
             <div id="infoModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -205,6 +250,82 @@
                     </div>
                 </div>
             </div>
+            <!--    Modify Project Name -->
+            <!--<div id="nameModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">项目名称</h4>
+                        </div>
+
+                        <div id="projectName" class="modal-body">
+                            <input type="text" class="form-control" id="file_name" name="name" value=""  placeholder="" style="width:100%">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary save-name" data-dismiss="modal" id="save_name">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- Modify Project Desc -->
+            <!--<div id="descModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">项目描述</h4>
+                        </div>
+
+                        <div id="projectDesc" class="modal-body">
+                            <input type="text" class="form-control" id="project_desc" name="name" value=""  placeholder="" style="width:100%">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary save-desc" data-dismiss="modal" id="save_desc">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- Modify Project Members -->
+            <!--<div id="membersModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">项目成员</h4>
+                        </div>
+
+                        <div id="projectDesc" class="modal-body">
+                            <input type="text" class="form-control" id="project_members" name="name" value=""  placeholder="" style="width:100%">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary save-members" data-dismiss="modal" id="save_members">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- Modify Project Hgs -->
+            <!--<div id="hgsModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">项目HG地址</h4>
+                        </div>
+
+                        <div id="projectHgs" class="modal-body">
+                            <input type="text" class="form-control" id="project_hgs" name="name" value=""  placeholder="" style="width:100%">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary save-hgs" data-dismiss="modal" id="save_hgs">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
 
             <div class="panel panel-default">
                     <table class="table table-striped table-bordered table-hover table-condensed">
@@ -248,18 +369,19 @@
                                             </button>
                                             <ul class="dropdown-menu custom-menu">
                                                 <li><a href="#">删除</a></li>
-                                                <li class="dropdown-submenu"> <a tabindex="-1" href="#">修改</a>
+                                                <li><a href="#" class="modify-project">修改</a></li>
+                                                <!--<li class="dropdown-submenu"> <a tabindex="-1" href="#">修改</a>
                                                     <ul class="dropdown-menu">
-                                                        <li ><a tabindex="-1" href="#">名称</a>
+                                                        <li ><a tabindex="-1" class="modify-name" href="#">名称</a>
                                                         </li>
-                                                        <li ><a tabindex="-1" href="#">描述</a>
+                                                        <li ><a tabindex="-1" class="modify-desc" href="#">描述</a>
                                                         </li>
-                                                        <li ><a tabindex="-1" href="#">成员</a>
+                                                        <li ><a tabindex="-1" class="modify-members" href="#">成员</a>
                                                         </li>
-                                                        <li ><a tabindex="-1" href="#">HG</a>
+                                                        <li ><a tabindex="-1" class="modify-hgs" href="#">H G</a>
                                                         </li>
                                                     </ul>
-                                                </li>
+                                                </li>-->
                                              </ul>
                                                                                   <!--<ul class="dropdown-menu custom-menu">
                                                 <li class="dropdown-submenu">
@@ -347,6 +469,213 @@ $(".project-info").click(function() {
             }
         }*/
     });
+$(".modify-project").click(function() {
+        $('#modifyModal').modal('show');
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/projects/show';
+        var $url = $href + "/" + $text;
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = showFile;
+        xmlHttpRequest.responseType = 'json';
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function showFile(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.response;
+                document.getElementById('project_name').value = $content.name;
+                document.getElementById('project_desc').value = $content.desc;
+                document.getElementById('project_hgs').value = $content.hgs;
+                document.getElementById('project_members').value = $content.members;
+                document.getElementById('save_modify').value = $text;
+            }
+        }
+});
+ 
+$(".save-modify").click(function() {
+        //alert('here');
+        var $id = document.getElementById('save_modify').value;
+        //var $id = $("#save_button").var();
+        //alert($id);
+        var $href = "/projects/update";
+        var $name = document.getElementById('project_name').value;
+        var $desc = document.getElementById('project_desc').value;
+        var $members = document.getElementById('project_members').value;
+        var $hgs = document.getElementById('project_hgs').value;
+        //alert($name);
+        var $url = $href + "/" + $id +"?name=" + $name + "&desc=" + $desc  + "&members=" + $members + "&hgs=" + $hgs;
+        //alert($url);
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                window.location.reload();
+        });
+
+});
+// modify project name 
+
+$(".modify-name").click(function() {
+        $('#nameModal').modal('show')
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/projects/show';
+        var $url = $href + "/" + $text;
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = showFile;
+        xmlHttpRequest.responseType = 'json';
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function showFile(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.response;
+                //$('#filecontent').text($content);
+                document.getElementById('file_name').value = $content.name;
+                document.getElementById('save_name').value = $text;
+                //$('#file_name').val = 'name';
+            }
+        }
+});        
+
+$(".save-name").click(function() {
+        alert('here');
+        var $id = document.getElementById('save_name').value;
+        //var $id = $("#save_button").var();
+        alert($id);
+        var $href = "/projects/update";
+        var $name = document.getElementById('file_name').value;
+        alert($name);
+        var $url = $href + "/" + $id +"?name=" + $name + "&desc="  + "&members=" + "&hgs=";
+        alert($url);
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                window.location.reload();
+        });
+});
+// modify project desc 
+$(".modify-desc").click(function() {
+        $('#descModal').modal('show')
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/projects/show';
+        var $url = $href + "/" + $text;
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = showFile;
+        xmlHttpRequest.responseType = 'json';
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function showFile(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.response;
+                document.getElementById('project_desc').value = $content.desc;
+                document.getElementById('save_desc').value = $text;
+            }
+        }
+});        
+
+$(".save-desc").click(function() {
+        alert('here');
+        var $id = document.getElementById('save_desc').value;
+        alert($id);
+        var $href = "/projects/update";
+        var $desc = document.getElementById('project_desc').value;
+        alert($desc);
+        var $url = $href + "/" + $id +"?name=" + "&desc=" + $desc + "&members=" + "&hgs=";
+        alert($url);
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                window.location.reload();
+        });
+});
+
+//modify project members 
+$(".modify-members").click(function() {
+        $('#membersModal').modal('show')
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/projects/show';
+        var $url = $href + "/" + $text;
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = showFile;
+        xmlHttpRequest.responseType = 'json';
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function showFile(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.response;
+                document.getElementById('project_members').value = $content.members;
+                document.getElementById('save_members').value = $text;
+            }
+        }
+});        
+
+$(".save-members").click(function() {
+        alert('here');
+        var $id = document.getElementById('save_members').value;
+        alert($id);
+        var $href = "/projects/update";
+        var $members = document.getElementById('project_members').value;
+        alert($members);
+        var $url = $href + "/" + $id +"?name=" + "&desc=" + "&members=" + $members + "&hgs=";
+        alert($url);
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                window.location.reload();
+        });
+});
+
+//modify project hgs
+$(".modify-hgs").click(function() {
+        $('#hgsModal').modal('show')
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/projects/show';
+        var $url = $href + "/" + $text;
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = showFile;
+        xmlHttpRequest.responseType = 'json';
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function showFile(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.response;
+                document.getElementById('project_hgs').value = $content.hgs;
+                document.getElementById('save_hgs').value = $text;
+            }
+        }
+});        
+
+$(".save-hgs").click(function() {
+        alert('here');
+        var $id = document.getElementById('save_hgs').value;
+        alert($id);
+        var $href = "/projects/update";
+        var $hgs = document.getElementById('project_hgs').value;
+        alert($members);
+        var $url = $href + "/" + $id +"?name=" + "&desc=" + "&members=" + "&hgs=" + $hgs;
+        alert($url);
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                window.location.reload();
+        });
+});
+
+
+
+
 $(".delete-project").click(function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
