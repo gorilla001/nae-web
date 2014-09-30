@@ -77,7 +77,8 @@ def create(request):
         headers={'Content-Type':'application/json'}
         rs = requests.post(url,headers=headers,data=json.dumps(data))
         print rs.json()
-    return HttpResponseRedirect('/projects')
+    #return HttpResponseRedirect('/projects')
+    return HttpResponse(json.dumps(rs.json()))
 
 
 @require_auth

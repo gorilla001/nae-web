@@ -284,7 +284,22 @@
             }
 
          }); 
-$(".image-info").click(function() {
+/*$("#images_content").delegate(".image-info","click",function(){
+        $('#infoModal').modal('show')
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href = '/images/show';
+        var $url = $href + "?id=" + $text;
+        $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                $("#imageInfo").html(data);
+        });
+    });
+*/
+
+
+$('#images_content').on('click','.image-info',function() {
         $('#infoModal').modal('show')
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
@@ -297,7 +312,7 @@ $(".image-info").click(function() {
         });
     });
 
-$(".delete-image").click(function() {
+$('#images_content').on("click",".delete-image",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
         /*$('#filecontent').text($text);*/
@@ -320,7 +335,7 @@ $(".delete-image").click(function() {
             }
         }
     });
-$(".delete-image-force").click(function() {
+$("#images_content").on("click",".delete-image-force",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
         /*$('#filecontent').text($text);*/
@@ -349,15 +364,15 @@ function createImage()
     document.getElementById("image").submit();
     setInterval("refresh()",3000);
 }
-//$(document).ready(
-//       function () {
-//          setInterval(function() {
-//             $.ajax({
-//                type: "GET",
-//               url: '/images/update' }).done(function( data ) {
-//                  $("#images_content").html(data);
-//               });
-//          },5000);
+$(document).ready(
+       function () {
+          setInterval(function() {
+             $.ajax({
+                type: "GET",
+               url: '/images/update' }).done(function( data ) {
+                  $("#images_content").html(data);
+               });
+         },5000);
          //   return false;
                 //var xmlHttpRequest;
                 //xmlHttpRequest = createXmlHttpRequest();
@@ -374,7 +389,7 @@ function createImage()
                 //        $('#images_content').html($content);
                 //    }
                 //}
-//});
+});
         </script>
 </body>
 </html>
