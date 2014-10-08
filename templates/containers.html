@@ -12,8 +12,8 @@
     <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">-->
    <!--<script src="/static/js/bootstrap.min.js"></script>
    <script src="/static/js/jquery.min.js"></script>-->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   <script src="/static/js/jquery.min.js"></script>
+   <script src="/static/js/bootstrap.min.js"></script>
    <!--<script src="/static/js/jquery.easydropdown.min.js"></script>-->
    <!--<script src="/static/js/selectordie.js"></script>
    <script src="/static/js/selectordie.min.js"></script>
@@ -173,6 +173,14 @@
                                         <span class="help-inline">(代码分支)</span>
                                       </div>
                                     </div>
+                                    <div class="control-group version">
+                                      <label class="control-label" for="version">应用根目录</label>
+                                      <div class="controls">
+                                            <input type="text" class="form-control" id="path" name='root_path' placeholder="请填写根目录" style="width:200px">
+                                        <span class="help-inline">(例如，java应用的根目录是:/opt/jm/tomcat/wwwroot)</span>
+                                      </div>
+                                    </div>
+
                                 </form>
                         </div>
                         <div class="modal-footer">

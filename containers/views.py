@@ -61,7 +61,9 @@ def create(request):
         #container_image = request.POST.get('container_image')
         container_hgs = request.POST.get('container_image')
         container_code = request.POST.get('container_code')
+        root_path = request.POST.get('root_path')
         user_name = request.session.get('nickname')
+        user_key = request.session.get('user_key')
 
         print container_environ,container_project,container_hgs,container_code
         url='http://localhost:8383/v1/containers'
@@ -71,7 +73,9 @@ def create(request):
                 'container_project':container_project,
                 'container_image':container_hgs,
                 'container_code':container_code,
+                'root_path':root_path,
                 'user_name':user_name,
+                'user_key':user_key,
         }
         print json.dumps(data)
         rs = requests.post(url,headers=headers,data=json.dumps(data))
