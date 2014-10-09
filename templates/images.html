@@ -135,13 +135,13 @@
                                       </div>
                                     </div>
                                     <div class="control-group environ">
-                                      <label class="control-label" for="environ">镜像文件地址</label>
+                                      <label class="control-label" for="environ">DockerFile地址</label>
                                       <div class="controls">
                                           <select  id="hg_list" class="form-control" id="dockerfile" name="repo_path" style="width:350px">  
                                             <option value="-1">请选择</option>
                                           </select>
                                           <!--<input type="text" class="form-control" id="file" name='dockerfile' placeholder="HG地址">-->
-                                          <span class="help-inline">(dockerfile的HG地址，必填项)</span>
+                                          <span class="help-inline">(dockerfile的HG地址，必选项)</span>
                                       </div>  
                                     </div>
                                    <div class="control-group description">
@@ -270,7 +270,7 @@
                     //alert(content);
                     //data=JSON.parse(content);
                     //alert(content['hgs']);
-                    alert(content);
+                    //alert(content);
                     var data=content.hgs.split(" ");
                     $("#hg_list option[value !='-1']").remove();
                     for (var i in data)
