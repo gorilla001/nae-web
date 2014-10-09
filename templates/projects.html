@@ -50,13 +50,13 @@
                             总体概览
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="/projects"><i class="fa fa-fw fa-dashboard"></i>
+                    <li class="active vertical-slide">
+                        <a data-toggle="tab" href="#projectList"><i class="fa fa-fw fa-dashboard"></i>
                             <span class="glyphicon glyphicon-th-list"></span>
                             项目列表
                         </a>
                     </li>
-                    <li >
+                    <!--<li >
                         <a href="/images"><i class="fa fa-fw fa-bar-chart-o"></i>
                             <span class="glyphicon glyphicon-tasks"></span>
                             镜像列表
@@ -67,21 +67,61 @@
                             <span class="glyphicon glyphicon-th"></span>
                             容器列表
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </nav>
+            <!--<ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#projectinfoTab">项目详情</a></li>
+                        <li><a data-toggle="tab" href="#projectMembersTab">项目成员</a></li>
+                        <li ><a data-toggle="tab" href="#imagesTab">镜像</a></li>
+                        <li><a data-toggle="tab" href="#containersTab">容器</a></li>
+                </ul>-->
+                
+                <!--<div class="tab-content">
+                    <div id ="imageTab" class="tab-pane fade in active">
+                        <div></div>
+                    </div>
+                    <div id ="projectinfoTab" class="tab-pane fade ">
+                        <div></div>
+                    </div>
+                    <div id ="projectMembersTab" class="tab-pane fade ">
+                        <div></div>
+                    </div>
+                    <div id ="containersTab" class="tab-pane fade ">
+                        <div></div>
+                    </div>
+                </div>-->
+
         <div id="page-wrapper">
             <div class="container-fluid">
-                <!--{% ifequal role 'admin' %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="btn-group btn-group-sm pull-right">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#largeModal">创建</button>
-                       </div>
+                <div class="tab-content">
+
+                <div id ="projectinfo" class="tab-pane fade ">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#projectinfoTab">项目详情</a></li>
+                        <li><a data-toggle="tab" href="#projectMembersTab">项目成员</a></li>
+                        <li ><a data-toggle="tab" href="#imagesTab">镜像</a></li>
+                        <li><a data-toggle="tab" href="#containersTab">容器</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id ="imageTab" class="tab-pane fade in active">
+                            <div></div>
+                        </div>
+                        <div id ="projectinfoTab" class="tab-pane fade ">
+                            <div></div>
+                        </div>
+                        <div id ="projectMembersTab" class="tab-pane fade ">
+                            <div></div>
+                        </div>
+                        <div id ="containersTab" class="tab-pane fade ">
+                            <div></div>
+                        </div>
                     </div>
                 </div>
-                {% endifequal %}-->
+
+                <div id ="projectList" class="tab-pane fade in active ">
                 <div class="panel panel-default">
                     <div class="panel-heading heading-large">
                         <span class="panel-title section-title">项目</span>
@@ -103,8 +143,6 @@
                         </span>
                     </div>
                     <div class="panel-body">
-                    <!--    <div class="text-muted">No containers</div>
-                    </div>-->
 
             <div id="largeModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -129,15 +167,7 @@
                                         <textarea class="form-control" rows="3" id="hgaddrs" name="hgaddrs" style="resize:none;"></textarea>
                                         <span class="help-inline">(项目的HG地址,必填项)</span>
                                       </div>
-                                     <!--<div class="input-group">
-                                        <input type="text" class="form-control" id="hgaddr">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" onclick="addHg();">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                        </span>
-                                      </div>-->
-                                    </div>
+                                                                         </div>
                                    <div class="control-group name">
                                       <label cass="control-label" for="name">项目成员</label>
                                       <div class="controls">
@@ -145,38 +175,7 @@
                                         <span class="help-inline">(项目的成员,必填项)</span>
                                       </div>
                                     </div>
-                                    <!--<div class="input-group">
-                                        <input type="text" class="form-control" id="member">
-                                        <span class="input-group-btn">
-                                          <button class="btn btn-default" type="button" onclick="addMember();">
-                                              <span class="glyphicon glyphicon-plus"></span>
-                                          </button>
-                                        </span>
-                                      </div>-->
-                                    <!--<div class="control-group environ">
-                                      <label class="control-label" for="environ">基础镜像</label>
-                                      <div class="controls">
-                                          <select  class="form-control" id="environ" name="image">  
-                                              {% for item in image_list %}
-                                              <option>{{ item.ImageName }}</option>  
-                                              {% endfor %}
-                                          </select>
-                                          <span class="help-inline">(项目关联的镜像，必填项)</span>
-                                      </div>  
-                                    </div>
-                                    <div class="control-group project">
-                                      <label class="control-label" for="project">管理员</label>
-                                      <div class="controls">
-                                          <select class="form-control" name='admin'>  
-                                              {% for item in user_list %}
-                                                <option>{{ item.CNName }}</option>  
-                                              {% endfor %}
-                                          </select>  
-                                        <span class="help-inline">(项目的管理员，必填项)</span>
-                                      </div>
-                                    </div>-->
-
-                                    <div class="control-group version">
+                                                                        <div class="control-group version">
                                       <label class="control-label" for="version">项目描述</label>
                                       <div class="controls">
                                         <textarea class="form-control" rows="3" id="desc" name="desc"></textarea>
@@ -408,6 +407,8 @@
             </div>
         </div>
         </div>
+    </div>
+</div>
         <script>
 function createXmlHttpRequest(){
         if(window.ActiveXObject){ //如果是IE浏览器  
@@ -458,11 +459,23 @@ function createProject()
     http.send(params);
     //alert('step 7');
     //document.getElementById('project').submit();
-    //var ul = document.getElementById("project-side-list");
+    var ul = document.getElementById("project-side-list");
     //var li = document.createElement("li");
     //li.appendChild(document.createTextNode("Four"));
     //li.setAttribute("id","element4");
     //ul.appendChild(li);
+    $("#project-side-list").append('<li class="vertical-slide">' + '<a data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>' + '<span class="glyphicon glyphicon-stop glyphicon-th-custom"></span>' + project_name + '</a>'+ '</li>');
+    
+    $("a[href='#projectinfo']").click(function(e) {
+      var $href = '/projects/info';
+      var $url = $href;
+      $.ajax({
+            type: "GET",
+            url: $url }).done(function( data ) {
+                //alert(data);
+                $("#projectinfo").html(data);
+        });
+    });
 }
 function addHgDiv()
 {
@@ -742,8 +755,15 @@ $(".delete-project").click(function() {
                 }
             }
         }
-    });
+});
 
+$("a[href='#projectinfo']").on('show.bs.tab', function(e) {
+      alert('show - before the new tab has been shown');
+});
+
+$("a[href='#projectinfo']").on('shown.bs.tab', function(e) {
+      alert('shown - after the tab has been shown');
+ });
         </script>
 </body>
 </html>

@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'show/',views.show,name='show'),
     url(r'update/',views.update,name='update'),
     url(r'admin/$',views.admin,name='admin'),
+    url(r'info/$',views.info,name='info'),
 )

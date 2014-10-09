@@ -10,6 +10,9 @@ from django.template  import RequestContext
 import os
 
 @require_auth
+def info(request):
+    return render_to_response('project.html')
+@require_auth
 def index(request):
     url='http://localhost:8383/v1/projects'
     headers={'Content-Type':'application/json'}
