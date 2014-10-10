@@ -25,7 +25,8 @@ urlpatterns = patterns('',
 
     url(r'^login/$',include(auth.urls)),
 
-    url(r'^$', RedirectView.as_view(url='/overview/')),
+    #url(r'^$', RedirectView.as_view(url='/overview/')),
+    url(r'^$', RedirectView.as_view(url='/projects/')),
     url(r'^overview/$',include(overview.urls)),
     url(r'^projects/',include(projects.urls)),
     url(r'^containers/',include(containers.urls)),

@@ -1,0 +1,42 @@
+<div id="createImageModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">创建镜像</h4>
+            </div>
+            <div class="modal-body">
+                <form id="image" class="form-horizontal" action="/images/create/" method="POST" >
+                {% csrf_token %}
+                    <div class="control-group environ">
+                        <label class="control-label" for="environ">DockerFile地址</label>
+                        <div class="controls">
+                            <select  id="hg_list" class="form-control" id="dockerfile" name="repo_path" style="width:350px">  
+                                <option value="-1">请选择</option>
+                            </select>
+                            <span class="help-inline">(dockerfile的HG地址，必选项)</span>
+                        </div>  
+                    </div>
+                    <div class="control-group description">
+                        <label cass="control-label" for="description">功能描述</label>
+                        <div class="controls">
+                            <textarea class="form-control" id="description" name="image_desc" placeholder="功能描述"></textarea>
+                            <span class="help-inline">(可选项)</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createImage()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function createImage()
+{
+    ;
+}
+</script>
+

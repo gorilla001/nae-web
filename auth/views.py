@@ -44,7 +44,7 @@ def auth_login(request):
     print auth_result.json()
     #url= http://auth.jumeird.com/api/allkey/?app_key=1adcdec244fb11e28dbe7cd1c3eeb629&app_name=optool_jumei
     request.session.set_expiry(6000)
-    return HttpResponseRedirect('/overview')
+    return HttpResponseRedirect('/')
     #if len(auth_data["groups"]) > 0:
     #content["Role"] = auth_data["groups"]
     #memberurl = "%s%s%s%s%s" % (auth_url, "api/member/?uid=", auth_username, app_key, app_name)

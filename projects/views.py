@@ -10,8 +10,14 @@ from django.template  import RequestContext
 import os
 
 @require_auth
-def info(request):
-    return render_to_response('project.html')
+def home(request):
+    url='http://localhost:8383/v1/projects'
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    projects_list=rs.json()
+    auth_username=request.session.get('realname')
+    return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username},context_instance=RequestContext(request))
+
 @require_auth
 def index(request):
     url='http://localhost:8383/v1/projects'
@@ -20,7 +26,28 @@ def index(request):
     projects_list=rs.json()
     role=request.session.get('role',None)
     auth_username=request.session.get('realname')
-    return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
+    return render_to_response('project-list.html',{'auth_username':auth_username,'role':role,'projects_list':projects_list},context_instance=RequestContext(request))
+
+
+
+@require_auth
+def info(request):
+    name=request.GET['name']
+    url='http://localhost:8383/v1/projects/%s' % name 
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    project_info = rs.json()
+    return render_to_response('project.html',{'project_info':project_info})
+
+@require_auth
+def list(request):
+    url='http://localhost:8383/v1/projects'
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    projects_list=rs.json()
+    role=request.session.get('role',None)
+    auth_username=request.session.get('realname')
+    return render_to_response('project-list.html',{'projects_list':projects_list,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
 
 @require_auth
 def show(request):
@@ -47,13 +74,18 @@ def update(request):
 
 @require_auth
 def detail(request):
-    #project_id=os.path.basename(request.path)
-    project_id=request.GET['id']
-    url='http://localhost:8383/v1/projects/%s' % project_id
+    id=request.GET['id']
+    url='http://localhost:8383/v1/projects/%s' % id 
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    project_info = rs.json()
-    return render_to_response('project_info.html',{'project_info':project_info})
+    project_info = rs.json() 
+
+    role=request.session.get('role',None)
+
+    auth_username=request.session.get('realname')
+
+
+    return render_to_response('project.html',{'project_info':project_info,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
 
 
 
