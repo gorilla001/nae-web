@@ -1,4 +1,4 @@
-<div id="largeModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+<div id="createImageModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,48 +6,70 @@
                 <h4 class="modal-title">创建镜像</h4>
             </div>
             <div class="modal-body">
-                <form id="image" class="form-horizontal" action="/images/create/" method="POST" >
-                    {% csrf_token %}
-                    <div class="control-group name">
-                        <label cass="control-label" for="name">镜像名称</label>
-                        <div class="controls">
-                            <input type="text" class="form-control" id="name" name='image_name' placeholder="镜像名称" style="width:152px">
-                            <span class="help-inline">(镜像的名称,必填项)</span>
-                        </div>
-                   </div>
-                   <div class="control-group project">
-                      <label class="control-label" for="project">所属项目</label>
-                      <div class="controls">
-                          <select id='project_list' class="form-control" name="image_proj">  
-                            <option value="-1">请选择</option>
-                            {% for item in projects_list %}
-                            <option value="{{ item.ProjectId }}">{{ item.ProjectName }}</option>  
-                            {% endfor %}
-                          </select>  
-                        <span class="help-inline">(镜像所属的项目，比如optool项目)</span>
-                      </div>
-                    </div>
+                <form id="image" class="form-horizontal" action="/images/create/" method="POST">
+                {% csrf_token %}
                     <div class="control-group environ">
-                      <label class="control-label" for="environ">DockerFile地址</label>
-                      <div class="controls">
-                          <select  id="hg_list" class="form-control" id="dockerfile" name="repo_path" style="width:350px">  
-                            <option value="-1">请选择</option>
-                          </select>
-                          <span class="help-inline">(dockerfile的HG地址，必选项)</span>
-                      </div>  
+                        <label class="control-label" for="environ">DockerFile地址</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="repo_path" name='repo_path' style="width:350px">
+                            <span class="help-inline">(dockerfile的HG地址，必选项)</span>
+                        </div>  
                     </div>
                     <div class="control-group description">
-                      <label cass="control-label" for="description">功能描述</label>
-                      <div class="controls">
-                          <textarea class="form-control" id="description" name="image_desc" placeholder="功能描述"></textarea>
-                        <span class="help-inline">(可选项)</span>
-                      </div>
+                        <label cass="control-label" for="description">功能描述</label>
+                        <div class="controls">
+                            <textarea class="form-control" id="image_desc" name="image_desc" placeholder="功能描述"></textarea>
+                            <span class="help-inline">(可选项)</span>
+                        </div>
                     </div>
                 </form>
             </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createImage()">确定</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createImage()">确定</button>
+            </div>
         </div>
     </div>
-</div> 
+</div>
+<!--<script src="/static/js/create-image.js"></script>-->
+<script>
+function createImage()
+{
+    var project_id = "{{ project_info.id }}"; 
+    var repo_path = document.getElementById('repo_path').value;
+    var image_desc = document.getElementById('image_desc').value;
+
+    alert(project_id);
+    var http = new createXmlHttpRequest();
+    var url ="/images/create/";
+    var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repo_path=" + repo_path ;
+    alert(params);
+    var token = '{{ csrf_token }}'; 
+    
+    http.open("POST",url,true);
+    http.setRequestHeader('X-CSRFToken', token);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    http.setRequestHeader("Content-length",params.length);
+    http.setRequestHeader("Connection", "close");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var content = http.response;
+            alert(content);
+            var status = http.response.status; 
+            var url = '/images/update?project_id=' + project_id;
+            if (status == 200){
+                $.ajax({
+                        type: "GET",
+                        url: url }).done(function( data ) {
+                                alert(data);
+                                $("#images_content").html(data);
+                });
+            }
+        }
+    }
+    http.responseType = 'json';
+    http.send(params);
+}
+
+</script>
+

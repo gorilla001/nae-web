@@ -1,0 +1,54 @@
+<div id="createContainerModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">创建容器</h4>
+            </div>
+            <div class="modal-body">
+                <form id="image" class="form-horizontal" action="/images/create/" method="POST" >
+                    {% csrf_token %}
+                    <div class="control-group project">
+                      <label class="control-label" for="image">选择镜像</label>
+                      <div class="controls">
+                          <select id='image_list' class="form-control" name="image_proj">  
+                            <option value="-1">请选择</option>
+                            <!--{% for item in image_list %}
+                            <option value="{{ item.ProjectId }}">{{ item.ProjectName }}</option>  
+                            {% endfor %}-->
+                          </select>  
+                        <span class="help-inline">(创建容器所使用的镜像)</span>
+                      </div>
+                    </div>
+                    <div class="control-group description">
+                      <label cass="control-label" for="description">功能描述</label>
+                      <div class="controls">
+                          <textarea class="form-control" id="description" name="image_desc" placeholder="功能描述"></textarea>
+                        <span class="help-inline">(可选项)</span>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createContainer()">确定</button>
+        </div>
+    </div>
+</div> 
+</div>
+<script>
+$('#createContainerModal').on('shown.bs.modal', function() {
+        var project_id = {{ project_info.id }};
+        var url = "/images?project_id=" + project_id;
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+              $("#image_list option[value !='-1']").remove();
+              for (var i in data){
+                $("#image_list").append("<option value=" + i + ">" + data[i].ImageName + "</option>");
+              }
+        });
+})
+</script>
+

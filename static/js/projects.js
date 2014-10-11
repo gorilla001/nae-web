@@ -6,65 +6,6 @@ function createXmlHttpRequest(){
             return new XMLHttpRequest();  
         }  
 }
-function createProject()
-{
-    var project_name = document.getElementById('name').value;
-    //alert(project_name);
-    var project_desc = document.getElementById('desc').value;
-    //alert(project_desc);
-    var project_members = document.getElementById('members').value;
-    //alert(project_members);
-    var project_hgs = document.getElementById('hgaddrs').value;
-    //alert(project_hgs);
-
-    //alert('step 1');
-    var http = new createXmlHttpRequest();
-    var url ="/projects/create/";
-    //alert(url);
-    var params = "name=" + project_name + "&desc=" + project_desc + "&members=" + project_members + "&hgaddrs=" + project_hgs;
-    //alert(params);
-    var token = '{{ csrf_token }}'; 
-    http.open("POST",url,true);
-    http.setRequestHeader('X-CSRFToken', token);
-    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    http.setRequestHeader("Content-length",params.length);
-    http.setRequestHeader("Connection", "close");
-    //http.responseType = 'json';
-    //alert('step 5');
-    http.onreadystatechange = function() {//Call a function when the state changes.
-        if(http.readyState == 4 && http.status == 200) {
-            //var status = http.response.status;
-            var content = http.response;
-            var status = http.response.status; 
-            if (status == 200){
-                $.notify("创建成功", "success");
-            }
-            //window.location.reload();
-        }
-    }
-    http.responseType = 'json';
-    //alert('step 6');
-    http.send(params);
-    //alert('step 7');
-    //document.getElementById('project').submit();
-    var ul = document.getElementById("project-side-list");
-    //var li = document.createElement("li");
-    //li.appendChild(document.createTextNode("Four"));
-    //li.setAttribute("id","element4");
-    //ul.appendChild(li);
-    $("#project-side-list").append('<li class="vertical-slide">' + '<a data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>' + '<span class="glyphicon glyphicon-th-list"></span>' + project_name + '</a>'+ '</li>');
-    
-    $("a[href='#projectinfo']").click(function(e) {
-      var $href = '/projects/info';
-      var $url = $href;
-      $.ajax({
-            type: "GET",
-            url: $url }).done(function( data ) {
-                //alert(data);
-                $("#projectinfo").html(data);
-        });
-    });
-}
 function addHgDiv()
 {
     var newNode=document.createElement("div");
@@ -349,11 +290,9 @@ $("a[href='#projectinfo']").click(function(e) {
       var id = $(this).attr('value');
       var $href = '/projects/detail';
       var $url = $href + '?id=' + id.trim();
-      alert($url);
       $.ajax({
             type: "GET",
             url: $url }).done(function( data ) {
-                alert(data);
                 $("#projectinfo").html(data);
         });
     });
@@ -361,17 +300,16 @@ $("a[href='#projectList']").click(function(e) {
       var name = this.text;
       var $href = '/projects/index';
       var $url = $href; 
-      alert($url);
       $.ajax({
             type: "GET",
             url: $url }).done(function( data ) {
-                alert(data);
                 $("#projectList").html(data);
         });
     });
 
 $("a[href='#projectList']").on('show.bs.tab', function(e) {
-    alert('shown - after the tab has been shown');
+    //alert('shown - after the tab has been shown');
+    ;
 });
 
 $(document).ready(

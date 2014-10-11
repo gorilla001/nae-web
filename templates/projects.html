@@ -29,18 +29,18 @@
            <ul class="nav navbar-nav side-nav" id="project-side-list">
                    <li class="active">
                        <a data-toggle="tab" href="#projectList"><i class="fa fa-fw fa-dashboard"></i>
-                            <span class="glyphicon glyphicon-th"></span>
+                           <!--<span class="glyphicon glyphicon-th"></span>-->
                              项目列表
                        </a>
                    </li>
-                   {% for item in projects_list %}
-                   <li>
-                   <a value="{{ item.ProjectId }}" data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>
-                           <span class="glyphicon glyphicon-th-list"></span>
-                           {{ item.ProjectName }} 
-                       </a>
-                   </li>
-                   {% endfor %}
+                        {% for item in projects_list %}
+                        <li>
+                        <a value="{{ item.ProjectId }}" data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>
+                                <span class="glyphicon glyphicon-th-list"></span>
+                                {{ item.ProjectName }} 
+                            </a>
+                        </li>
+                        {% endfor %}
            </ul>
        </div>
    </nav>

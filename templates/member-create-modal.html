@@ -1,0 +1,37 @@
+<div id="createMemberModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">添加用户</h4>
+            </div>
+            <div class="modal-body">
+                <form id="member" class="form-horizontal" action="/members/create/" method="POST" >
+                    {% csrf_token %}
+                    <div class="control-group name">
+                        <label cass="control-label" for="name">名称</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="name" name='user_name' style="width:152px">
+                            <span class="help-inline">(用户的名称,邮箱@前面的部分,必填项)</span>
+                        </div>
+                   </div>
+                    <div class="control-group role">
+                      <label class="control-label" for="environ">角色</label>
+                      <div class="controls">
+                          <select  class="form-control" id="role" name="user_role">  
+                            <option value="-1">请选择</option>
+                            <option value="0">普通用户</option>
+                            <option value="1">管理员</option>
+                          </select>
+                          <span class="help-inline">(用户在项目中的角色，必选项)</span>
+                      </div>  
+                    </div>
+                 </form>
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createMember()">确定</button>
+        </div>
+    </div>
+</div> 
+</div>

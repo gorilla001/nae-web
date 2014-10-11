@@ -37,7 +37,9 @@ def info(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json()
-    return render_to_response('project.html',{'project_info':project_info})
+
+    users_list = []
+    return render_to_response('project.html',{'project_info':project_info,'users_list':users_list})
 
 @require_auth
 def list(request):
@@ -84,8 +86,25 @@ def detail(request):
 
     auth_username=request.session.get('realname')
 
+    url='http://localhost:8383/v1/users?project_id=%s' % id
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    user_list = rs.json() 
 
-    return render_to_response('project.html',{'project_info':project_info,'auth_username':auth_username,'role':role},context_instance=RequestContext(request))
+    url='http://localhost:8383/v1/images?project_id=%s' % id
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    image_list = rs.json() 
+
+    print user_list
+
+    return render_to_response('project.html',
+            {'project_info':project_info,
+             'user_list':user_list,
+             'image_list':image_list,
+             'auth_username':auth_username,
+             'role':role},
+            context_instance=RequestContext(request))
 
 
 
@@ -94,18 +113,14 @@ def detail(request):
 def create(request):
     if request.method == 'POST':
         project_name=request.POST.get('name').strip()
-        project_hgs=request.POST.get('hgaddrs').splitlines()
-        project_members=request.POST.get('members').splitlines()
         project_desc=request.POST.get('desc').strip()
-        project_admin=request.session['nickname']
-        print request.POST.get('members')
-        print project_members
+        project_admin=request.POST.get('admin').strip()
+        admin_email = request.POST.get('email').strip()
         data = {
                 'project_name' : project_name, 
-                'project_hgs' :  project_hgs, 
-                'project_members' : project_members,
                 'project_desc' : project_desc,
                 'project_admin':project_admin,
+                'admin_email':admin_email,
         }
         print data
         url='http://localhost:8383/v1/projects'

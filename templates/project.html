@@ -19,3 +19,9 @@
         {% include 'project-containers.html' %}
     </div>
 </div>
+<script>
+    $("a[href='#containersTab']").on('show.bs.tab', function(e) {
+        alert('shown - after the tab has been shown');
+    });
+</script>
+

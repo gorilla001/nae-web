@@ -1,72 +1,7 @@
 <div class="panel panel-default">
-    <div class="panel-heading heading-large">
-        <span class="panel-title section-title">容器</span>
-        <span class="section-toolbar">
-            {% ifequal role 'admin' %}
-            <a href="/containers/" style="margin-left:5px;">
-                <span class="glyphicon glyphicon-refresh"></span>
-            </a>
-            {% endifequal %}
-        </span>
-        <span class="pull-right">
-            {% ifequal role 'admin' %}
-                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#largeModal">创建</button>
-            {% else %}
-                <a href="/containers/">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                </a>
-            {% endifequal %}
-        </span>
-    </div>
+    {% include 'container-table-panel-header.html' %}
     <div class="panel-body">
-        <div class="panel panel-default">
-            <table class="table table-striped table-bordered table-hover table-condensed">
-                <thead>
-                    <th>ID</th>
-                    <th>容器名称</th>
-                    <!--<th>所属环境</th>
-                    <th>所属项目</th>
-                    <th>版本库</th>
-                    <th>代码分支</th>-->
-                    <!--<th>所有者</th>-->
-                    <th>访问方式</th>
-                    <th>SFTP地址</th>
-                    <th>创建时间</th>
-                    <!--<th>在线时间</th>-->
-                    <th>状态</th>
-                    <th style="width:70px;" class="text-center">操作</th>
-                </thead>
-                <tbody>
-                    {% for item in containers_list %}
-                        <tr>
-                            <td class="fp" style="width:50px">{{ item.ID }}</td>
-                            <td style="width:50px">{{ item.Name }}</td>
-                            <!--<td style="width:50px"></td>
-                            <td style="width:50px"></td>
-                            <td style="width:50px"></td>
-                            <td style="width:50px"></td>-->
-                            <td>{{ item.AccessMethod }}</td>
-                            <td>{{ item.Sftp }}</td>
-                            <td style="width:200px">{{ item.Created }}</td>
-                            <td style="width:50px">{{ item.Status }}</td>
-                            <td style="width:80px">
-                                <div class="btn-group btn-group-sm pull-right">
-                                    <button id="preview" href="/admin/files/show" class="btn btn-mini container-info">详情
-                                    </button>
-                                    <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu custom-menu">
-                                        <!--<li ><a href="#" onclick="modifyFile()" data-stopPropagation="true">修改</a></li>-->
-                                        <li><a class="delete-container">删除</a></li>
-                                        <!--<li><a class="delete-image-force">强制删除</a></li>-->
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %} 
-                </tbody>
-            </table>
-        </div>
+        {% include 'container-create-modal.html' %}
+        {% include 'container-table.html' %}
     </div>
 </div>

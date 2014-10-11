@@ -11,28 +11,29 @@
                     <div class="control-group name">
                         <label cass="control-label" for="name">项目名称</label>
                         <div class="controls">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="项目名称">
+                            <input type="text" class="form-control" id="name" name="project_name">
                             <span class="help-inline">(项目的名称,必填项)</span>
                         </div>
                     </div>
-               <div class="control-group name">
-                  <label cass="control-label" for="name">HG地址</label>
-                  <div class="controls">
-                    <textarea class="form-control" rows="3" id="hgaddrs" name="hgaddrs" style="resize:none;"></textarea>
-                    <span class="help-inline">(项目的HG地址,必填项)</span>
-                  </div>
-                                                     </div>
-               <div class="control-group name">
-                  <label cass="control-label" for="name">项目成员</label>
-                  <div class="controls">
-                    <textarea class="form-control" rows="3" id="members" name="members" style="resize:none;"></textarea>
-                    <span class="help-inline">(项目的成员,必填项)</span>
-                  </div>
-                </div>
-                                                    <div class="control-group version">
+                    <div class="control-group">
+                      <label class="control-label" for="">管理员</label>
+                      <div class="controls">
+                          <input type="text" class="form-control" id="admin" name="project_admin">
+                          <span class="help-inline">(项目的管理员，必填项)</span>
+                      </div>  
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="">管理员邮箱</label>
+                      <div class="controls">
+                          <input type="text" class="form-control" id="email" name="admin_email">
+                          <span class="help-inline">(管理员的邮箱，必填项)</span>
+                      </div>  
+                    </div>
+
+                  <div class="control-group version">
                   <label class="control-label" for="version">项目描述</label>
                   <div class="controls">
-                    <textarea class="form-control" rows="3" id="desc" name="desc"></textarea>
+                    <textarea class="form-control" rows="3" id="desc" name="project_desc"></textarea>
                     <span class="help-inline">(项目简单描述,可选项)</span>
                   </div>
                 </div>
@@ -49,31 +50,22 @@
 function createProject()
 {
     var project_name = document.getElementById('name').value;
-    //alert(project_name);
+    var project_admin = document.getElementById('admin').value;
     var project_desc = document.getElementById('desc').value;
-    //alert(project_desc);
-    var project_members = document.getElementById('members').value;
-    //alert(project_members);
-    var project_hgs = document.getElementById('hgaddrs').value;
-    //alert(project_hgs);
+    var admin_email = document.getElementById('email').value;
 
-    //alert('step 1');
     var http = new createXmlHttpRequest();
     var url ="/projects/create/";
-    //alert(url);
-    var params = "name=" + project_name + "&desc=" + project_desc + "&members=" + project_members + "&hgaddrs=" + project_hgs;
-    //alert(params);
+    var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email;
     var token = '{{ csrf_token }}'; 
+    
     http.open("POST",url,true);
     http.setRequestHeader('X-CSRFToken', token);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     http.setRequestHeader("Content-length",params.length);
     http.setRequestHeader("Connection", "close");
-    //http.responseType = 'json';
-    //alert('step 5');
-    http.onreadystatechange = function() {//Call a function when the state changes.
+    http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
-            //var status = http.response.status;
             var content = http.response;
             var status = http.response.status; 
             if (status == 200){
@@ -83,24 +75,14 @@ function createProject()
         }
     }
     http.responseType = 'json';
-    //alert('step 6');
     http.send(params);
-    //alert('step 7');
-    //document.getElementById('project').submit();
-    var ul = document.getElementById("project-side-list");
-    //var li = document.createElement("li");
-    //li.appendChild(document.createTextNode("Four"));
-    //li.setAttribute("id","element4");
-    //ul.appendChild(li);
-    //$("#project-side-list").append('<li class="vertical-slide">' + '<a data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>' + '<span class="glyphicon glyphicon-th-list"></span>' + project_name + '</a>'+ '</li>');
-    
+
     $("a[href='#projectinfo']").click(function(e) {
       var $href = '/projects/detail';
       var $url = $href;
       $.ajax({
             type: "GET",
             url: $url }).done(function( data ) {
-                //alert(data);
                 $("#projectinfo").html(data);
         });
     });
