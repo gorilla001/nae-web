@@ -6,12 +6,12 @@
                 <h4 class="modal-title">创建容器</h4>
             </div>
             <div class="modal-body">
-                <form id="image" class="form-horizontal" action="/images/create/" method="POST" >
+                <form id="container" class="form-horizontal" action="/containers/create/" method="POST" >
                     {% csrf_token %}
                     <div class="control-group project">
                       <label class="control-label" for="image">选择镜像</label>
                       <div class="controls">
-                          <select id='image_list' class="form-control" name="image_proj">  
+                          <select id='image_list' class="form-control" name="image_name">  
                             <option value="-1">请选择</option>
                             <!--{% for item in image_list %}
                             <option value="{{ item.ProjectId }}">{{ item.ProjectName }}</option>  
@@ -20,10 +20,48 @@
                         <span class="help-inline">(创建容器所使用的镜像)</span>
                       </div>
                     </div>
+                    <div class="control-group environ">
+                        <label class="control-label" for="environ">所属环境</label>
+                        <div class="controls">
+                            <select  class="form-control" id="environ_list" name="container_environ">
+                                <option value="-1">请选择</option>
+                                <option value="config-dev">开发环境</option>
+                                <option value="config-qa">测试环境</option>
+                                <option value="config-st">Staging环境</option>
+                                <option value="config-pub">Publish环境</option>
+                                <option value="config-prod">生产环境</option>
+                            </select>
+                            <span class="help-inline">(容器的环境，比如开发、测试等)</span>
+                        </div>
+                    </div>
+                    <div class="control-group version">
+                        <label class="control-label" for="version">版本库</label>
+                        <div class="controls">
+                            <select id="hg_list" class="form-control" name="container_hg">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <span class="help-inline">(代码版本库)</span>
+                        </div>
+                    </div>
+                    <div class="control-group version">
+                        <label class="control-label" for="version">代码分支</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="container_code" name='container_code' placeholder="请填写代码分支" style="width:152px">
+                            <span class="help-inline">(代码分支)</span>
+                      </div>
+                    </div>
+                    <div class="control-group version">
+                        <label class="control-label" for="version">应用根目录</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="root_path" name='root_path' placeholder="请填写根目录" style="width:200px">
+                            <span class="help-inline">(例如，java应用的根目录是:/opt/jm/tomcat/wwwroot)</span>
+                        </div>
+                    </div>
+
                     <div class="control-group description">
                       <label cass="control-label" for="description">功能描述</label>
                       <div class="controls">
-                          <textarea class="form-control" id="description" name="image_desc" placeholder="功能描述"></textarea>
+                        <input type="text" class="form-control" id="container_desc" name='container_desc' placeholder="简单说明" style="width:152px">
                         <span class="help-inline">(可选项)</span>
                       </div>
                     </div>
@@ -49,6 +87,57 @@ $('#createContainerModal').on('shown.bs.modal', function() {
                 $("#image_list").append("<option value=" + i + ">" + data[i].ImageName + "</option>");
               }
         });
-})
+        var url = "/hgs?project_id=" + project_id;
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+              $("#hg_list option[value !='-1']").remove();
+              for (var i in data){
+                $("#hg_list").append("<option value=" + i + ">" + data[i].Content + "</option>");
+              }
+        });
+
+});
+
+function createContainer()
+{
+    var project_id = "{{ project_info.id }}"; 
+    var container_hg = document.getElementById('hg_list').text;
+    var image_name = document.getElementById('image_list').text;
+    var container_env = document.getElementById('environ_list').value;
+    var container_code = document.getElementById('container_code').value;
+    var root_path = document.getElementById('root_path').value;
+ 
+    var http = new createXmlHttpRequest();
+    var url ="/images/create/";
+    var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&root_path=" + root_path + "&container_env=" + container_env;
+    alert(params);
+    var token = '{{ csrf_token }}'; 
+    
+    http.open("POST",url,true);
+    http.setRequestHeader('X-CSRFToken', token);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    http.setRequestHeader("Content-length",params.length);
+    http.setRequestHeader("Connection", "close");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var content = http.response;
+            var status = http.response.status; 
+            var url = '/images/update?project_id=' + project_id;
+            if (status == 200){
+                $.ajax({
+                        type: "GET",
+                        url: url }).done(function( data ) {
+                                alert(data);
+                                $("#images_content").html(data);
+                });
+            }
+        }
+    }
+    http.responseType = 'json';
+    http.send(params);
+}
+
 </script>
 

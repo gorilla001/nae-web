@@ -1,6 +1,7 @@
 <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#projectinfoTab">项目详情</a></li>
         <li><a data-toggle="tab" href="#projectMembersTab">项目成员</a></li>
+        <li><a data-toggle="tab" href="#projectHgTab">HG地址</a></li>
         <li ><a data-toggle="tab" href="#imagesTab">镜像</a></li>
         <li><a data-toggle="tab" href="#containersTab">容器</a></li>
 </ul>
@@ -12,6 +13,9 @@
     <div id ="projectMembersTab" class="tab-pane fade ">
         {% include 'project-members.html' %}
     </div>
+    <div id ="projectHgTab" class="tab-pane fade ">
+        {% include 'project-hgs.html' %}
+    </div>
     <div id ="imagesTab" class="tab-pane fade">
         {% include 'project-images.html' %}
     </div>
@@ -20,8 +24,33 @@
     </div>
 </div>
 <script>
-    $("a[href='#containersTab']").on('show.bs.tab', function(e) {
-        alert('shown - after the tab has been shown');
-    });
+$("a[href='#projectMembersTab']").on('show.bs.tab',function(e){
+    var project_id = "{{ project_info.id }}";
+    var url = '/users/refresh?project_id=' + project_id;
+    $.ajax({
+        type: "GET",
+        url: url }).done(function( data ) {
+            $("#member-table").html(data);
+        });
+});
+$("a[href='#projectHgTab']").on('show.bs.tab',function(e){
+    var project_id = "{{ project_info.id }}";
+    var url = '/hgs/refresh?project_id=' + project_id;
+    $.ajax({
+        type: "GET",
+        url: url }).done(function( data ) {
+            $("#hg-table").html(data);
+        });
+});
+
+$("a[href='#containersTab']").on('show.bs.tab', function(e) {
+    var project_id = "{{ project_info.id }}";
+    var url = '/containers?project_id=' + project_id + '&user_id=' + "{{ user_id }}";
+    $.ajax({
+        type: "GET",
+        url: url }).done(function( data ) {
+            $("#container-table").html(data);
+        });
+});
 </script>
 

@@ -11,6 +11,8 @@ import accounts.urls
 import projects.urls
 import auth.urls
 import jaeadmin.urls
+import users.urls
+import hgs.urls
 
 urlpatterns = patterns('',
     # Examples:
@@ -31,6 +33,8 @@ urlpatterns = patterns('',
     url(r'^projects/',include(projects.urls)),
     url(r'^containers/',include(containers.urls)),
     url(r'^images/',include(images.urls)),
+    url(r'^users/',include(users.urls)),
+    url(r'^hgs/',include(hgs.urls)),
 
     url(r'^accounts/',include(accounts.urls)),
 

@@ -1,0 +1,60 @@
+<div id="createHgModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">添加HG</h4>
+            </div>
+            <div class="modal-body">
+                <form id="member" class="form-horizontal" action="/members/create/" method="POST" >
+                    {% csrf_token %}
+                    <div class="control-group name">
+                        <label cass="control-label" for="name">地址</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="hg_addr" name='hg_addr'>
+                            <span class="help-inline">(项目的HG地址,必填项)</span>
+                        </div>
+                   </div>
+                 </form>
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="createHg()">确定</button>
+        </div>
+    </div>
+</div> 
+</div>
+<script>
+function createHg()
+{
+    var project_id = {{ project_info.id }};
+    var hg_addr = document.getElementById('hg_addr').value;
+
+    var url ="/hgs/create/";
+    var params = "project_id=" + project_id + "&hg_addr=" + hg_addr;
+    var token = '{{ csrf_token }}'; 
+
+    var http = new createXmlHttpRequest();
+    http.open("POST",url,true);
+    http.setRequestHeader('X-CSRFToken', token);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    http.setRequestHeader("Content-length",params.length);
+    http.setRequestHeader("Connection", "close");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var status = http.response.status;
+            var url = '/hgs/refresh?project_id=' + project_id;
+            if (status == 200){
+                $.ajax({
+                        type: "GET",
+                        url: url }).done(function( data ) {
+                                $("#hg-table").html(data);
+                });
+            }
+        }
+    }
+    http.responseType = 'json';
+    http.send(params);
+}
+</script>
+

@@ -71,12 +71,9 @@ def show(request):
     return  HttpResponse(json.dumps(rs.json()))
 @require_auth
 def update(request):
-    project_id=os.path.basename(request.path)
-    project_name = request.GET['name']
-    project_desc =  request.GET['desc']
-    project_members = request.GET['members']
-    project_hgs = request.GET['hgs']
-    url='http://localhost:8383/v1/projects/%s?name=%s&desc=%s&members=%s&hgs=%s' % (project_id,project_name,project_desc,project_members,project_hgs)
+
+    project_id=request.GET.get('project_id')
+    url='http://localhost:8383/v1/users?project_id=%s' % project_id
     headers={'Content-Type':'application/json'}
     rs = requests.put(url,headers=headers)
     print rs.json()
@@ -90,7 +87,7 @@ def detail(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
-    role = 'normal'
+    role = ''
     if request.session.get('user_id',None) == project_info['admin']:
         role = 'admin'
 
@@ -107,14 +104,12 @@ def detail(request):
 
     print user_list
 
-    user_id = request.session.get('user_id',None)
     return render_to_response('project.html',
             {'project_info':project_info,
              'user_list':user_list,
              'image_list':image_list,
              'auth_username':auth_username,
-             'role':role,
-             'user_id': user_id},
+             'role':role},
             context_instance=RequestContext(request))
 
 
@@ -123,35 +118,48 @@ def detail(request):
 @require_auth
 def create(request):
     if request.method == 'POST':
-        project_name=request.POST.get('name').strip()
-        project_desc=request.POST.get('desc').strip()
-        project_admin=request.POST.get('admin').strip()
-        admin_email = request.POST.get('email').strip()
+        project_id=request.POST.get('project_id').strip()
+        user_name=request.POST.get('name').strip()
+        user_email=request.POST.get('email').strip()
+        role_id = request.POST.get('role_id').strip()
         data = {
-                'project_name' : project_name, 
-                'project_desc' : project_desc,
-                'project_admin':project_admin,
-                'admin_email':admin_email,
+                'project_id' : project_id, 
+                'user_name' : user_name,
+                'user_email': user_email,
+                'role_id':role_id,
         }
         print data
-        url='http://localhost:8383/v1/projects'
+        url='http://localhost:8383/v1/users'
         headers={'Content-Type':'application/json'}
         rs = requests.post(url,headers=headers,data=json.dumps(data))
-        print rs.json()
-    #return HttpResponseRedirect('/projects')
     return HttpResponse(json.dumps(rs.json()))
 
 
 @require_auth
 def delete(request):
-    project_id=request.GET['id']
-    url = 'http://localhost:8383/v1/projects/%s' % project_id
+    user_id=request.GET['id']
+    url = 'http://localhost:8383/v1/users/%s' % user_id
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
-    print project_id 
     print rs.json()
-    #return HttpResponseRedirect('/admin/files')
-    return HttpResponse("succeed")
+    return HttpResponse(json.dumps(rs.json()))
+
+@require_auth
+def refresh(request):
+    project_id = request.GET.get('project_id')
+    url='http://localhost:8383/v1/projects/%s' % project_id 
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    project_info = rs.json() 
+    role = 'normal'
+    if request.session.get('user_id',None) == project_info['admin']:
+        role = 'admin'
+    url='http://localhost:8383/v1/users?project_id=%s' % project_id
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    user_list=rs.json()
+    return render_to_response('member-table-replace.html',{'user_list':user_list,'role':role})
+
 
     
 @require_auth

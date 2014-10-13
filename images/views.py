@@ -20,6 +20,7 @@ def index(request):
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
 
+    print image_list
     return HttpResponse(json.dumps(image_list))
 
 @require_auth
@@ -42,8 +43,9 @@ def create(request):
             project_id=cleaned_data.get('project_id')
             repo_path=cleaned_data.get('repo_path')
             image_desc=cleaned_data.get('image_desc')
-            user_name=request.session.get('nickname')
-            image_name=os.path.basename(repo_path)
+            user_name=request.session.get('user_id')
+            #image_name=os.path.basename(repo_path)
+            image_name=utils.random_str()
             print image_name,project_id,repo_path,image_desc,user_name
             url="http://localhost:8383/v1/images"
             headers={'Content-Type':'application/json'}

@@ -20,18 +20,18 @@ def auth_login(request):
     auth_result = requests.get(url, headers=headers)
     resp_data = auth_result.json()
     if 'success' in resp_data:
-        nickname = resp_data['username'] 
-        realname = resp_data['fullname']
+        user_id = resp_data['username'] 
+        user_name = resp_data['fullname']
 
-        request.session['nickname'] = nickname
-        request.session['realname'] = realname
+        request.session['user_id'] = user_id 
+        request.session['user_name'] = user_name 
     url = "%s%s%s%s%s%s" % (auth_url, "/api/grouprole/?uid=", auth_username, app_key, auth_key, app_name)
     headers = {'content-type': 'application/json'}
     auth_result = requests.get(url, headers=headers,)
     auth_data = auth_result.json()
 
     if 'admin' in auth_data['groups']:
-        request.session['role']='admin'
+        request.session['user_role']='admin'
 
     url = "%s%s%s%s%s" % (auth_url, "/api/allkey/?",app_key, auth_key, app_name)
     headers = {'content-type': 'application/json'}

@@ -15,31 +15,14 @@ from pprint import pprint
 def index(request):
     #container_list = Containers.objects.all() 
     #print container_list
-    auth_username = request.session.get('realname')
-    role = request.session.get('role')
-
-    url="http://localhost:8383/v1/containers"
+    project_id = request.GET.get('project_id')
+    user_id = request.GET.get('user_id')
+    url="http://localhost:8383/v1/containers?project_id=%s&user_id=%s" % (project_id,user_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    containers_list=rs.json()
-    pprint(containers_list)
+    container_list = rs.json()
+    return render_to_response('container-table-replace.html',{'container_list':container_list})
 
-    url="http://localhost:8383/v1/projects"
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    projects_list = rs.json() 
-    print rs.json()
-    images_list=[]
-    total_containers = len(containers_list) 
-    print 'total_containers',total_containers
-    return render_to_response('containers.html',
-                            {'auth_username':auth_username,
-                             'role':role,
-                             'containers_list':containers_list,
-                             'projects_list':projects_list,
-                             'image_list':images_list
-                             },
-                            context_instance=RequestContext(request))
 @require_auth
 def detail(request):
     #project_id=os.path.basename(request.path)
@@ -58,8 +41,8 @@ def create(request):
     if request.method == 'POST':
         container_environ = request.POST.get('container_environ') 
         container_project = request.POST.get('container_project')
-        #container_image = request.POST.get('container_image')
-        container_hgs = request.POST.get('container_image')
+        container_image = request.POST.get('container_image')
+        container_hg = request.POST.get('container_hg')
         container_code = request.POST.get('container_code')
         root_path = request.POST.get('root_path')
         user_name = request.session.get('nickname')

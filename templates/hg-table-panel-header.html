@@ -1,14 +1,14 @@
 <div class="panel-heading heading-large">
                 <span class="section-toolbar">
                 {% ifequal role 'admin' %}
-                <a id="user-refresh" href="#"  style="margin-left:5px;">
+                <a id="hg-refresh" href="#"  style="margin-left:5px;">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </a>
                 {% endifequal %}
                 </span>
                 <span class="pull-right">
                     {% ifequal role 'admin' %}
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createMemberModal">添加</button>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createHgModal">添加</button>
                     {% else %}
                     <a href="/projects/">
                         <span class="glyphicon glyphicon-refresh"></span>
@@ -17,13 +17,13 @@
                 </span>
             </div>
 <script>
-$("#user-refresh").click(function(e) {
+$("#hg-refresh").click(function(e) {
         var project_id = "{{ project_info.id }}";
-        var url = '/users/refresh?project_id=' + project_id;
+        var url = '/hgs/refresh?project_id=' + project_id;
         $.ajax({
             type: "GET",
             url: url }).done(function( data ) {
-                $("#member-table").html(data);
+                $("#hg-table").html(data);
             });
 });
 </script>
