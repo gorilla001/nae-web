@@ -77,6 +77,7 @@ def delete(request):
 def update(request):
     project_id = request.GET.get('project_id')
     url='http://localhost:8383/v1/images?project_id=%s' % project_id
+    print url
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     print rs.text

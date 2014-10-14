@@ -41,14 +41,13 @@ def index(request):
 
 @require_auth
 def info(request):
-    name=request.GET['name']
-    url='http://localhost:8383/v1/projects/%s' % name 
+    id=request.GET['project_id']
+    url='http://localhost:8383/v1/projects/%s' % id 
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json()
 
-    users_list = []
-    return render_to_response('project.html',{'project_info':project_info,'users_list':users_list})
+    return render_to_response('info-table-replace.html',{'project_info':project_info})
 
 @require_auth
 def list(request):

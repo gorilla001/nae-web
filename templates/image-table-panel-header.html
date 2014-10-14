@@ -18,7 +18,7 @@
 </div>
 <script>
 $("#image-refresh").click(function(e) {
-        var project_id = "{{ project_info.id }}"
+        var project_id = "{{ project_info.id }}";
         var url = '/images/update?project_id=' + project_id;
         $.ajax({
             type: "GET",

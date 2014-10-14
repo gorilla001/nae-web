@@ -13,9 +13,6 @@
                       <div class="controls">
                           <select id='image_list' class="form-control" name="image_name">  
                             <option value="-1">请选择</option>
-                            <!--{% for item in image_list %}
-                            <option value="{{ item.ProjectId }}">{{ item.ProjectName }}</option>  
-                            {% endfor %}-->
                           </select>  
                         <span class="help-inline">(创建容器所使用的镜像)</span>
                       </div>
@@ -84,7 +81,7 @@ $('#createContainerModal').on('shown.bs.modal', function() {
               url: url }).done(function( data ) {
               $("#image_list option[value !='-1']").remove();
               for (var i in data){
-                $("#image_list").append("<option value=" + i + ">" + data[i].ImageName + "</option>");
+                $("#image_list").append("<option value=" + data[i].ImageName + ">" + data[i].ImageName + "</option>");
               }
         });
         var url = "/hgs?project_id=" + project_id;
@@ -94,7 +91,7 @@ $('#createContainerModal').on('shown.bs.modal', function() {
               url: url }).done(function( data ) {
               $("#hg_list option[value !='-1']").remove();
               for (var i in data){
-                $("#hg_list").append("<option value=" + i + ">" + data[i].Content + "</option>");
+                $("#hg_list").append("<option value=" + data[i].Content + ">" + data[i].Content + "</option>");
               }
         });
 
@@ -103,14 +100,14 @@ $('#createContainerModal').on('shown.bs.modal', function() {
 function createContainer()
 {
     var project_id = "{{ project_info.id }}"; 
-    var container_hg = document.getElementById('hg_list').text;
-    var image_name = document.getElementById('image_list').text;
+    var container_hg = document.getElementById('hg_list').value;
+    var image_name = document.getElementById('image_list').value;
     var container_env = document.getElementById('environ_list').value;
     var container_code = document.getElementById('container_code').value;
     var root_path = document.getElementById('root_path').value;
  
     var http = new createXmlHttpRequest();
-    var url ="/images/create/";
+    var url ="/containers/create/";
     var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&root_path=" + root_path + "&container_env=" + container_env;
     alert(params);
     var token = '{{ csrf_token }}'; 

@@ -1,7 +1,7 @@
 <div class="panel-heading heading-large">
         <span class="section-toolbar">
             {% ifequal role 'admin' %}
-            <a href="/containers/" style="margin-left:5px;">
+            <a id="container-refresh" href="#" style="margin-left:5px;">
                 <span class="glyphicon glyphicon-refresh"></span>
             </a>
             {% endifequal %}
@@ -16,4 +16,17 @@
             {% endifequal %}
         </span>
     </div>
+
+<script>
+$("#container-refresh").click(function(e) {
+        var project_id = "{{ project_info.id }}";
+        var user_id = "{{ user_id }}";
+        var url = '/containers/update?project_id=' + project_id + "&user_id=" + user_id;
+        $.ajax({
+            type: "GET",
+            url: url }).done(function( data ) {
+                $("#container-table").html(data);
+            });
+});
+</script>
 

@@ -39,22 +39,23 @@ def detail(request):
 @require_auth
 def create(request):
     if request.method == 'POST':
-        container_environ = request.POST.get('container_environ') 
-        container_project = request.POST.get('container_project')
-        container_image = request.POST.get('container_image')
+        container_environ = request.POST.get('container_env') 
+        container_project = request.POST.get('project_id')
+        container_image = request.POST.get('image_name')
         container_hg = request.POST.get('container_hg')
         container_code = request.POST.get('container_code')
         root_path = request.POST.get('root_path')
-        user_name = request.session.get('nickname')
+        user_name = request.session.get('user_id')
         user_key = request.session.get('user_key')
 
-        print container_environ,container_project,container_hgs,container_code
+        print container_environ,container_project,container_hg,container_code
         url='http://localhost:8383/v1/containers'
         headers={'Content-Type':'application/json'}
         data = {
                 'container_environ':container_environ,
                 'container_project':container_project,
-                'container_image':container_hgs,
+                'container_image':container_image,
+                'container_hg':container_hg,
                 'container_code':container_code,
                 'root_path':root_path,
                 'user_name':user_name,
@@ -94,3 +95,14 @@ def delete(request):
     print rs.json()
     #return HttpResponseRedirect('/admin/files')
     return HttpResponse("succeed")
+
+@require_auth
+def update(request):
+    project_id = request.GET.get('project_id')
+    user_id = request.GET.get('user_id')
+    url='http://localhost:8383/v1/containers?project_id=%s&user_id=%s' % (project_id,user_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    container_list = rs.json()
+    return render_to_response('container-table-replace.html',{'container_list':container_list})
+

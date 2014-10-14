@@ -7,23 +7,33 @@
 </ul>
     
 <div class="tab-content">
-    <div id ="projectinfoTab" class="tab-pane fade in active ">
+    <div id ="projectinfoTab" class="tab-pane fade in active">
         {% include 'project-info.html' %}
     </div>
-    <div id ="projectMembersTab" class="tab-pane fade ">
+    <div id ="projectMembersTab" class="tab-pane fade">
         {% include 'project-members.html' %}
     </div>
-    <div id ="projectHgTab" class="tab-pane fade ">
+    <div id ="projectHgTab" class="tab-pane fade">
         {% include 'project-hgs.html' %}
     </div>
     <div id ="imagesTab" class="tab-pane fade">
         {% include 'project-images.html' %}
     </div>
-    <div id ="containersTab" class="tab-pane fade ">
+    <div id ="containersTab" class="tab-pane fade">
         {% include 'project-containers.html' %}
     </div>
 </div>
 <script>
+$("a[href='#projectinfoTab']").on('show.bs.tab',function(e){
+    var project_id = "{{ project_info.id }}";
+    var url = '/projects/info?project_id=' + project_id;
+    $.ajax({
+        type: "GET",
+        url: url }).done(function( data ) {
+            $("#info-table").html(data);
+        });
+});
+
 $("a[href='#projectMembersTab']").on('show.bs.tab',function(e){
     var project_id = "{{ project_info.id }}";
     var url = '/users/refresh?project_id=' + project_id;
@@ -42,6 +52,16 @@ $("a[href='#projectHgTab']").on('show.bs.tab',function(e){
             $("#hg-table").html(data);
         });
 });
+$("a[href='#imagesTab']").on('show.bs.tab',function(e){
+    var project_id = "{{ project_info.id }}";
+    var url = '/images?project_id=' + project_id;
+    $.ajax({
+        type: "GET",
+        url: url }).done(function( data ) {
+            $("#image-table").html(data);
+        });
+});
+
 
 $("a[href='#containersTab']").on('show.bs.tab', function(e) {
     var project_id = "{{ project_info.id }}";
@@ -52,5 +72,24 @@ $("a[href='#containersTab']").on('show.bs.tab', function(e) {
             $("#container-table").html(data);
         });
 });
+$(document).ready(
+       function () {
+          setInterval(function() {
+              var url='/images/update?project_id=' + '{{ project_info.id }}';
+             $.ajax({
+                type: "GET",
+               url:url }).done(function( data ) {
+                  $("#image-table").html(data);
+               });
+             var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+             $.ajax({
+                type: "GET",
+                url:url }).done(function( data ) {
+                  $("#container-table").html(data);
+               });
+
+         },5000);
+});
+
 </script>
 
