@@ -61,25 +61,6 @@ def create(request):
         print json.dumps(data)
         rs = requests.post(url,headers=headers,data=json.dumps(data))
         print rs.json()
-        #project_name=request.POST.get('name').strip()
-        #project_hgs=request.POST.get('hgaddrs').splitlines()
-        #project_members=request.POST.get('members').splitlines()
-        #project_desc=request.POST.get('desc').strip()
-        #project_admin=request.session['nickname']
-        #print request.POST.get('members')
-        #print project_members
-        #data = {
-        #        'project_name' : project_name, 
-        #        'project_hgs' :  project_hgs, 
-        #        'project_members' : project_members,
-        #        'project_desc' : project_desc,
-        #        'project_admin':project_admin,
-        #}
-        #print data
-        #url='http://localhost:8383/v1/projects'
-        #headers={'Content-Type':'application/json'}
-        #rs = requests.post(url,headers=headers,data=json.dumps(data))
-        #print rs.json()
     return HttpResponseRedirect('/containers')
 
 @require_auth

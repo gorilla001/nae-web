@@ -105,5 +105,5 @@ app_name = "&app_name=ops_docker&key=1"
 auth_url = "http://auth.jumeird.com/"
 auth_key = "481986a634ca11e4ab8c842b2b738d12"
 
-BASE_URL="http://172.19.32.155:8383/v1"
+BASE_URL="http://192.168.55.6:8383/v1"
 
