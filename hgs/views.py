@@ -1,18 +1,17 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from auth.decorators import require_auth
 # Create your views here.
 import requests
 import json
-from django.http import HttpResponseRedirect
 from django.template  import RequestContext
 import os
+from jaeweb.settings import BASE_URL
 
 @require_auth
 def home(request):
     if request.session.get('user_role',None) == 'admin':
-        url='http://localhost:8383/v1/projects?user_id=admin'
+        url='{}/projects?user_id=admin'.format(BASE_URL)
     else:
         user_id = request.session.get('user_id')
         url='http://localhost:8383/v1/projects?user_id={}'.format(user_id)
@@ -26,7 +25,7 @@ def home(request):
 @require_auth
 def index(request):
     project_id = request.GET.get('project_id')
-    url='http://localhost:8383/v1/hgs?project_id=%s' % project_id
+    url='{}/hgs?project_id={}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     hg_list=rs.json()
@@ -38,7 +37,7 @@ def index(request):
 @require_auth
 def info(request):
     name=request.GET['name']
-    url='http://localhost:8383/v1/projects/%s' % name 
+    url='{}/projects/{}'.format(BASE_URL,name)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json()
@@ -48,7 +47,7 @@ def info(request):
 
 @require_auth
 def list(request):
-    url='http://localhost:8383/v1/projects'
+    url='{}/projects'.format(BASE_URL)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     projects_list=rs.json()
@@ -59,8 +58,7 @@ def list(request):
 @require_auth
 def show(request):
     project_id=os.path.basename(request.path)
-    #project_id=request.GET['id']
-    url='http://localhost:8383/v1/projects/%s' % project_id
+    url='{}/projects/{}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     print rs.json()
@@ -69,7 +67,7 @@ def show(request):
 def update(request):
 
     project_id=request.GET.get('project_id')
-    url='http://localhost:8383/v1/users?project_id=%s' % project_id
+    url='{}/users?project_id={}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.put(url,headers=headers)
     print rs.json()
@@ -79,7 +77,7 @@ def update(request):
 @require_auth
 def detail(request):
     id=request.GET['id']
-    url='http://localhost:8383/v1/projects/%s' % id 
+    url='{}/projects/{}'.format(BASE_URL,id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
@@ -88,12 +86,12 @@ def detail(request):
         role = 'admin'
 
     auth_username=request.session.get('user_name')
-    url='http://localhost:8383/v1/users?project_id=%s' % id
+    url='{}/users?project_id={}'.format(BASE_URL,id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     user_list = rs.json() 
 
-    url='http://localhost:8383/v1/images?project_id=%s' % id
+    url='{}/images?project_id={}'.format(BASE_URL,id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     image_list = rs.json() 
@@ -121,7 +119,7 @@ def create(request):
                 'hg_addr':hg_addr,
         }
         print data
-        url='http://localhost:8383/v1/hgs'
+        url='{}/hgs'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
         rs = requests.post(url,headers=headers,data=json.dumps(data))
     return HttpResponse(json.dumps(rs.json()))
@@ -130,7 +128,7 @@ def create(request):
 @require_auth
 def delete(request):
     hg_id=request.GET['id']
-    url = 'http://localhost:8383/v1/hgs/%s' % hg_id
+    url = '{}/hgs/{}'.format(BASE_URL,hg_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
     print rs.json()
@@ -139,14 +137,14 @@ def delete(request):
 @require_auth
 def refresh(request):
     project_id = request.GET.get('project_id')
-    url='http://localhost:8383/v1/projects/%s' % project_id 
+    url='{}/projects/{}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
     role = 'normal'
     if request.session.get('user_id',None) == project_info['admin']:
         role = 'admin'
-    url='http://localhost:8383/v1/hgs?project_id=%s' % project_id
+    url='{}/hgs?project_id={}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     hg_list=rs.json()

@@ -1,4 +1,4 @@
-<div id="images_content" class="panel panel-default">
+<div id="image-table" class="panel panel-default">
     <table class="table table-striped table-bordered table-hover table-condensed">
             <thead>
                 <th style="width:50px">ID</th>
@@ -47,7 +47,7 @@
         </table>
 </div>
 <script>
-$('#images_content').on("click",".delete-image",function() {
+$('#image-table').on("click",".delete-image",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
         var $href= "/images/delete" 
@@ -68,13 +68,13 @@ $('#images_content').on("click",".delete-image",function() {
                         type: "GET",
                         url: url }).done(function( data ) {
                                 alert(data);
-                                $("#images_content").html(data);
+                                $("#image-table").html(data);
                     });
                 }
             }
         }
     });
-$("#images_content").on("click",".delete-image-force",function() {
+$("#image-table").on("click",".delete-image-force",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
         var $href= "/images/delete" 
@@ -95,7 +95,7 @@ $("#images_content").on("click",".delete-image-force",function() {
                         type: "GET",
                         url: url }).done(function( data ) {
                                 alert(data);
-                                $("#images_content").html(data);
+                                $("#image-table").html(data);
                     });
                 }
             }

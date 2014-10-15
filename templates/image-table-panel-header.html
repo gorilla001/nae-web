@@ -23,7 +23,7 @@ $("#image-refresh").click(function(e) {
         $.ajax({
             type: "GET",
             url: url }).done(function( data ) {
-                $("#images_content").html(data);
+                $("#image-table").html(data);
             });
 });
 </script>

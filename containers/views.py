@@ -1,13 +1,10 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from containers.models import Containers
 import requests
 from auth.decorators import require_auth
 from django.http import HttpResponseRedirect
-from django.template  import RequestContext
 import json
-from pprint import pprint
+from jaeweb.settings import BASE_URL
 
 # Create your views here.
 
@@ -17,7 +14,7 @@ def index(request):
     #print container_list
     project_id = request.GET.get('project_id')
     user_id = request.GET.get('user_id')
-    url="http://localhost:8383/v1/containers?project_id=%s&user_id=%s" % (project_id,user_id)
+    url="{}/containers?project_id={}&user_id={}".format(BASE_URL,project_id,user_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     container_list = rs.json()
@@ -28,7 +25,7 @@ def detail(request):
     #project_id=os.path.basename(request.path)
     container_id=request.GET['id']
     print container_id
-    url='http://localhost:8383/v1/containers/%s' % container_id
+    url='{}/containers/{}'.format(BASE_URL,container_id)
     headers={'Content-Type':'application/json'}
     print url,headers
     rs = requests.get(url,headers=headers)
@@ -49,7 +46,7 @@ def create(request):
         user_key = request.session.get('user_key')
 
         print container_environ,container_project,container_hg,container_code
-        url='http://localhost:8383/v1/containers'
+        url='{}/containers'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
         data = {
                 'container_environ':container_environ,
@@ -88,7 +85,7 @@ def create(request):
 @require_auth
 def delete(request):
     container_id=request.GET['id']
-    url = 'http://localhost:8383/v1/containers/{}'.format(container_id)
+    url = '{}/containers/{}'.format(BASE_URL,container_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
     print 'here'
@@ -100,7 +97,7 @@ def delete(request):
 def update(request):
     project_id = request.GET.get('project_id')
     user_id = request.GET.get('user_id')
-    url='http://localhost:8383/v1/containers?project_id=%s&user_id=%s' % (project_id,user_id)
+    url='{}/containers?project_id={}&user_id={}'.format(BASE_URL,project_id,user_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     container_list = rs.json()

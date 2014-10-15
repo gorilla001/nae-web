@@ -54,7 +54,7 @@ $("a[href='#projectHgTab']").on('show.bs.tab',function(e){
 });
 $("a[href='#imagesTab']").on('show.bs.tab',function(e){
     var project_id = "{{ project_info.id }}";
-    var url = '/images?project_id=' + project_id;
+    var url = '/images/update?project_id=' + project_id;
     $.ajax({
         type: "GET",
         url: url }).done(function( data ) {
