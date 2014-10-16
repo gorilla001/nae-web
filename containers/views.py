@@ -66,12 +66,10 @@ def create(request):
 @require_auth
 def delete(request):
     container_id=request.GET['id']
-    url = '{}/containers/{}'.format(BASE_URL,container_id)
+    v=request.GET['v']
+    url = '{}/containers/{}?v={}'.format(BASE_URL,container_id,v)
     headers={'Content-Type':'application/json'}
-    rs = requests.delete(url,headers=headers)
-    print 'here'
-    print rs.json()
-    #return HttpResponseRedirect('/admin/files')
+    requests.delete(url,headers=headers)
     return HttpResponse("succeed")
 
 @require_auth

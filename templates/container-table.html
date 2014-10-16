@@ -1,3 +1,32 @@
 <div id="container-table" class="panel panel-default">
 </div>
+<script>
+$('#container-table').on("click",".delete-container",function() {
+        var $row = $(this).closest("tr");    
+        var $text = $row.find(".fp").text();
+        var $href= "/containers/delete";
+        var xmlHttpRequest;
+        xmlHttpRequest = createXmlHttpRequest();
+        xmlHttpRequest.onreadystatechange = getResult;
+        var $url = $href + "?id=" + $text + "&v=1";
+
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
+
+        function getResult(){
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                var $content = xmlHttpRequest.responseText;
+                if ($content == 'succeed'){
+                    var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+                    $.ajax({
+                        type: "GET",
+                        url: url }).done(function( data ) {
+                                alert(data);
+                                $("#container-table").html(data);
+                    });
+                }
+            }
+        }
+    });
+</script>
 

@@ -1,14 +1,14 @@
-<div id='info-table' class="modal-body">
-<span>
-    项目名称    {{ project_info.name }} </br></br>
-    项目成员    {{ project_info.members }} </br></br>
-    管理员      {{ project_info.admin }} </br>
-    项目描述    {{ project_info.desc }} </br>
-    创建时间    {{ project_info.created }} </br>
-    HG地址      {{ project_info.hgs }} </br>
-    镜像        {{ project_info.imgs }} </br>
-</span>
+<div id='info-table'>
+    <div>
+        <label style="margin-top:10px">项目名称</label><label style="margin-left:30px">{{ project_info.name }}</label> </br>
+        <label>项目成员</label><label style="margin-left:30px">{{ project_info.members }}</label> </br>
+        <label>管理员</label><label style="margin-left:43px;">{{ project_info.admin }}</label></br>
+        <label>项目描述</label><label style="margin-left:30px">{{ project_info.desc }}</label></br>
+        <label>创建时间</label><label style="margin-left:30px">{{ project_info.created }}</label></br>
+        <label>HG地址</label><label style="margin-left:36px"> {{ project_info.hgs }}</label></br>
+        <label>镜像</label><label style="margin-left:56px">{{ project_info.imgs }}</label></br>
     </div>
+ </div>
 
 <style>
     #projectInfo {

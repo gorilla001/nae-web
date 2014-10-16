@@ -40,11 +40,9 @@ function createImage()
     var repo_path = document.getElementById('repo_path').value;
     var image_desc = document.getElementById('image_desc').value;
 
-    alert(project_id);
     var http = new createXmlHttpRequest();
     var url ="/images/create/";
     var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repo_path=" + repo_path ;
-    alert(params);
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);
@@ -61,7 +59,6 @@ function createImage()
                 $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                alert(data);
                                 $("#images_content").html(data);
                 });
             }

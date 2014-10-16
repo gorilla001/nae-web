@@ -36,6 +36,7 @@ def index(request):
     projects_list=rs.json()
     role=request.session.get('user_role',None)
     auth_username=request.session.get('user_name')
+    print projects_list
     return render_to_response('project-list.html',{'auth_username':auth_username,'role':role,'projects_list':projects_list},context_instance=RequestContext(request))
 
 
@@ -94,23 +95,23 @@ def detail(request):
         role = 'admin'
 
     auth_username=request.session.get('user_name')
-    url='{}/users?project_id={}'.format(BASE_URL,id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_list = rs.json() 
+    #url='{}/users?project_id={}'.format(BASE_URL,id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #user_list = rs.json() 
 
-    url='{}/images?project_id={}'.format(BASE_URL,id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    image_list = rs.json() 
+    #url='{}/images?project_id={}'.format(BASE_URL,id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #image_list = rs.json() 
 
-    print user_list
+    #print user_list
 
     user_id = request.session.get('user_id',None)
     return render_to_response('project.html',
             {'project_info':project_info,
-             'user_list':user_list,
-             'image_list':image_list,
+             #'user_list':user_list,
+             #'image_list':image_list,
              'auth_username':auth_username,
              'role':role,
              'user_id': user_id},

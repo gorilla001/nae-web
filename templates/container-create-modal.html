@@ -109,7 +109,6 @@ function createContainer()
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
     var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&root_path=" + root_path + "&container_env=" + container_env;
-    alert(params);
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);
@@ -126,7 +125,6 @@ function createContainer()
                 $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                alert(data);
                                 $("#images_content").html(data);
                 });
             }
@@ -135,6 +133,4 @@ function createContainer()
     http.responseType = 'json';
     http.send(params);
 }
-
 </script>
-

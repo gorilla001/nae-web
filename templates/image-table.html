@@ -30,7 +30,7 @@
                             {% endifequal %}
                             <td style="width:80px">
                                  <div class="btn-group btn-group-sm pull-right">
-                                    <button id="preview" href="/images/show" class="btn btn-mini image-info">详情
+                                    <button id="preview" href="/images/show" class="btn btn-mini image-info">操作
                                     </button>
                                     <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
@@ -67,7 +67,6 @@ $('#image-table').on("click",".delete-image",function() {
                     $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                alert(data);
                                 $("#image-table").html(data);
                     });
                 }
@@ -94,7 +93,6 @@ $("#image-table").on("click",".delete-image-force",function() {
                     $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                alert(data);
                                 $("#image-table").html(data);
                     });
                 }
