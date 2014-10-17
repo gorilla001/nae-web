@@ -1,11 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 import requests
-import utils
 from forms import CreateImageForm
 import json
 from auth.decorators import require_auth
 from jaeweb.settings import BASE_URL
+import os
 
 # Create your views here.
 @require_auth
@@ -26,8 +26,7 @@ def show(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     print rs.json()
-    image_info=rs.json()
-    return render_to_response('image_info.html',{'image_info':image_info})
+    return HttpResponse(json.dumps(rs.json())) 
 
 
 @require_auth
@@ -38,10 +37,11 @@ def create(request):
             cleaned_data=form.cleaned_data
             project_id=cleaned_data.get('project_id')
             repo_path=cleaned_data.get('repo_path')
+            repo_branch=cleaned_data.get('repo_branch')
             image_desc=cleaned_data.get('image_desc')
             user_name=request.session.get('user_id')
             #image_name=os.path.basename(repo_path)
-            image_name=utils.random_str()
+            image_name= os.path.basename(repo_path) + '-' + repo_branch
             print image_name,project_id,repo_path,image_desc,user_name
             url="{}/images".format(BASE_URL)
             headers={'Content-Type':'application/json'}
@@ -49,6 +49,7 @@ def create(request):
                     'image_name':image_name,
                     'project_id':project_id,
                     'repo_path':repo_path,
+                    'repo_branch':repo_branch,
                     'image_desc':image_desc,
                     'user_name':user_name,
             }

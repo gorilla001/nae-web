@@ -8,15 +8,6 @@
             <div class="modal-body">
                 <form id="container" class="form-horizontal" action="/containers/create/" method="POST" >
                     {% csrf_token %}
-                    <div class="control-group project">
-                      <label class="control-label" for="image">选择镜像</label>
-                      <div class="controls">
-                          <select id='image_list' class="form-control" name="image_name">  
-                            <option value="-1">请选择</option>
-                          </select>  
-                        <span class="help-inline">(创建容器所使用的镜像)</span>
-                      </div>
-                    </div>
                     <div class="control-group environ">
                         <label class="control-label" for="environ">所属环境</label>
                         <div class="controls">
@@ -31,20 +22,31 @@
                             <span class="help-inline">(容器的环境，比如开发、测试等)</span>
                         </div>
                     </div>
-                    <div class="control-group version">
+
+                    <div class="control-group project">
+                      <label class="control-label" for="image">选择镜像</label>
+                      <div class="controls">
+                          <select id='image_list' class="form-control" name="image_name">  
+                            <option value="-1">请选择</option>
+                          </select>  
+                        <span class="help-inline">(创建容器所使用的镜像)</span>
+                      </div>
+                    </div>
+                                        <div class="control-group version">
                         <label class="control-label" for="version">版本库</label>
                         <div class="controls">
-                            <select id="hg_list" class="form-control" name="container_hg">
+                            <input type="text" class="form-control" id="hg_list" name='container_hg' style="width:300px">
+                            <!--<select id="hg_list" class="form-control" name="container_hg">
                                 <option value="-1">请选择</option>
-                            </select>
+                            </select>-->
                             <span class="help-inline">(代码版本库)</span>
                         </div>
                     </div>
                     <div class="control-group version">
-                        <label class="control-label" for="version">代码分支</label>
+                        <label class="control-label" for="version">分支号</label>
                         <div class="controls">
-                            <input type="text" class="form-control" id="container_code" name='container_code' placeholder="请填写代码分支" style="width:152px">
-                            <span class="help-inline">(代码分支)</span>
+                            <input type="text" class="form-control" id="container_code" name='container_code' placeholder="default" style="width:152px">
+                            <span class="help-inline">(分支号)</span>
                       </div>
                     </div>
                     <div class="control-group version">
@@ -81,21 +83,23 @@ $('#createContainerModal').on('shown.bs.modal', function() {
               url: url }).done(function( data ) {
               $("#image_list option[value !='-1']").remove();
               for (var i in data){
-                $("#image_list").append("<option value=" + data[i].ImageName + ">" + data[i].ImageName + "</option>");
+                $("#image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + "</option>");
               }
         });
-        var url = "/hgs?project_id=" + project_id;
-        $.ajax({
-              type: "GET",
-              dataType: "json",
-              url: url }).done(function( data ) {
-              $("#hg_list option[value !='-1']").remove();
-              for (var i in data){
-                $("#hg_list").append("<option value=" + data[i].Content + ">" + data[i].Content + "</option>");
-              }
-        });
-
 });
+$("#image_list").change(function(){
+       var id=$("#image_list").find("option:selected").val(); 
+       var url = "/images/show?id=" + id;
+       $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: url }).done(function( data ) {
+             $("#hg_list").val(data.RepoPath);
+             $("#container_code").val('default');
+
+   });
+});
+
 
 function createContainer()
 {

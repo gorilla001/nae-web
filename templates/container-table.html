@@ -1,7 +1,7 @@
-<div id="container-table" class="panel panel-default">
+<div id="container-table-{{project_info.id}}" class="panel panel-default">
 </div>
 <script>
-$('#container-table').on("click",".delete-container",function() {
+$('#container-table-{{project_info.id}}').on("click",".delete-container",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
         var $href= "/containers/delete";
@@ -22,7 +22,7 @@ $('#container-table').on("click",".delete-container",function() {
                         type: "GET",
                         url: url }).done(function( data ) {
                                 alert(data);
-                                $("#container-table").html(data);
+                                $("#container-table-{{project_info.id}}").html(data);
                     });
                 }
             }

@@ -1,8 +1,8 @@
-<div id="hg-table" class="panel panel-default">
+<div id="hg-table-{{project_info.id}}" class="panel panel-default">
 </div>
 
 <script>
-    $('#hg-table').on("click",".delete-hg",function() {
+$('#hg-table-{{project_info.id}}').on("click",".delete-hg",function() {
         var row = $(this).closest("tr");    
         var text = row.find(".fp").text();
         var href= "/hgs/delete";
@@ -16,7 +16,7 @@
                 $.ajax({
                     type: "GET",
                     url: _url }).done(function( data ) {
-                    $("#hg-table").html(data);
+                        $("#hg-table-{{project_info.id}}").html(data);
                 });
 
         });

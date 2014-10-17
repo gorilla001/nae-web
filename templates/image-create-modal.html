@@ -8,13 +8,24 @@
             <div class="modal-body">
                 <form id="image" class="form-horizontal" action="/images/create/" method="POST">
                 {% csrf_token %}
-                    <div class="control-group environ">
-                        <label class="control-label" for="environ">DockerFile地址</label>
+                    <div class="control-group hg">
+                        <label class="control-label" for="environ">版本库地址</label>
                         <div class="controls">
-                            <input type="text" class="form-control" id="repo_path" name='repo_path' style="width:350px">
-                            <span class="help-inline">(dockerfile的HG地址，必选项)</span>
+                            <select  class="form-control" id="repo_path" name="repo_path" style="width:350px">
+                                <option value="-1">请选择</option>
+                                <!--<input type="text" class="form-control" id="repo_path" name='repo_path' style="width:350px">-->
+                            </select>
+                            <span class="help-inline">(版本库地址，必选项)</span>
                         </div>  
                     </div>
+                    <div class="control-group branch">
+                        <label class="control-label" for="branch">分支号</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="repo_branch" name='repo_branch' style="width:350px">
+                            <span class="help-inline">(版本库的分支号，必填项)</span>
+                        </div>  
+                    </div>
+
                     <div class="control-group description">
                         <label cass="control-label" for="description">功能描述</label>
                         <div class="controls">
@@ -34,15 +45,31 @@
 </div>
 <!--<script src="/static/js/create-image.js"></script>-->
 <script>
+$('#createImageModal').on('shown.bs.modal', function() {
+        var project_id = {{ project_info.id }};
+        var url = "/hgs?project_id=" + project_id;
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+              $("#repo_path option[value !='-1']").remove();
+              for (var i in data){
+                $("#repo_path").append("<option value=" + data[i].Content + ">" + data[i].Content + "</option>");
+              }
+        });
+
+});
+
 function createImage()
 {
     var project_id = "{{ project_info.id }}"; 
     var repo_path = document.getElementById('repo_path').value;
+    var repo_branch = document.getElementById('repo_branch').value; 
     var image_desc = document.getElementById('image_desc').value;
 
     var http = new createXmlHttpRequest();
     var url ="/images/create/";
-    var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repo_path=" + repo_path ;
+    var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repo_path=" + repo_path + "&repo_branch=" + repo_branch;
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);

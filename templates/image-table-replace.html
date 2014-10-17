@@ -14,7 +14,7 @@
                             <td >{{ item.ImageName }}</td>
                             <td>{{ item.ImageDesc }}</td>
                             <td >{{ item.CreatedTime }}</td>
-                            {% ifequal item.Status  'building' %}
+                            {% if item.Status == 'building' %}
                             <td >
                             <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
                                 <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -22,11 +22,16 @@
                                   </div>
                             </div>
                             </td>
-                            {% else %}
+                            {% elif item.Status == 'ok' %}
                             <td class="text-center">
                                 <font size="2" color="green">构建完成</font> 
                             </td>
-                            {% endifequal %}
+                            {% else %}
+                            <td class="text-center">
+                                <font size="2" color="green">{{ item.Status }}</font> 
+                            </td>
+                            {% endif %}
+
                             <td style="width:5.8%">
                                  <div class="btn-group btn-group-sm pull-right">
                                     <button id="preview" href="/images/show" class="btn btn-mini image-info">操作
