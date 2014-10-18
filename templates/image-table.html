@@ -13,6 +13,16 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
         xmlHttpRequest.open("GET",$url,true);
         xmlHttpRequest.send(null);
 
+        var html=' \
+                <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px"> \
+                    <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> \
+                  <span class="show">正在删除</span> \
+                   </div> \
+               </div> \
+             ';
+        $row.find(".status").children().remove();
+        $row.find(".status").append($(html));
+
         function getResult(){
             if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
                 var $content = xmlHttpRequest.responseText;
@@ -38,6 +48,17 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
 
         xmlHttpRequest.open("GET",$url,true);
         xmlHttpRequest.send(null);
+
+        var html=' \
+                <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px"> \
+                    <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> \
+                  <span class="show">正在删除</span> \
+                   </div> \
+               </div> \
+             ';
+        $row.find(".status").children().remove();
+        $row.find(".status").append($(html));
+
 
         function getResult(){
             if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){

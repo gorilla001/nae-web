@@ -60,6 +60,11 @@ $('#createImageModal').on('shown.bs.modal', function() {
 
 });
 
+$("#repo_path").change(function(){
+    $("#repo_branch").val('default');
+});
+
+
 function createImage()
 {
     var project_id = "{{ project_info.id }}"; 

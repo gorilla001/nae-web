@@ -15,7 +15,7 @@
                             <td>{{ item.ImageDesc }}</td>
                             <td >{{ item.CreatedTime }}</td>
                             {% if item.Status == 'building' %}
-                            <td >
+                            <td class="status">
                             <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
                                 <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     <span class="show">正在构建</span>
@@ -23,12 +23,23 @@
                             </div>
                             </td>
                             {% elif item.Status == 'ok' %}
-                            <td class="text-center">
-                                <font size="2" color="green">构建完成</font> 
+                            <td class="status text-center">
+                                <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <span class="show">构建成功</span>
+                                     </div>
+                               </div> 
+                                         <!--<font size="2" color="green"><b>构建完成</b></font> -->
                             </td>
+                            {% elif item.Status == 'deleting' %}
+                            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+                                <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                    <span class="show">正在删除</span>
+                                  </div>
+                            </div>
                             {% else %}
-                            <td class="text-center">
-                                <font size="2" color="green">{{ item.Status }}</font> 
+                            <td class="status text-center">
+                                <font size="2" color="green"><b>{{ item.Status }}</b></font> 
                             </td>
                             {% endif %}
 
