@@ -48,7 +48,7 @@ function createHg()
                 $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                $("#hg-table").html(data);
+                            $("#hg-table-{{project_info.id}}").html(data);
                 });
             }
         }

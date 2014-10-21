@@ -70,7 +70,7 @@ function createMember()
                 $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                $("#member-table").html(data);
+                            $("#member-table-{{project_info.id}}").html(data);
                 });
             }
         }
