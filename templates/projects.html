@@ -11,25 +11,24 @@
    <script src="/static/js/notify-min.js"></script>
 </head>
 
-<body> 
+<body>
 <div id="wrapper">
-   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">		
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation"> 
        <div class="navbar-header">
-           <span class="navbar-brand">聚美优品JAE平台</span>
+           <span class="navbar-brand"><font style="color:white">聚美优品JAE平台</font></span>
        </div>
        <ul id="nav" class="nav navbar-nav navbar-right">
-           <li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ auth_username }}<b class="caret"></b></a>
-               <ul class="dropdown-menu custom-menu">
-                   <li><a href="/accounts/logout/">退出</a></li>
-               </ul>
-           </li>
+            <li >
+                <a style="height:40px;padding:10px;"><font style="color:white;margin-top:0px;">{{ auth_username }}</font></a>
+            </li>
+            <li>
+                <a style="height:40px;padding:10px;" href="/accounts/logout/"><font style="color:white">退出</font></a>
+            </li>
        </ul>
        <div class="collapse navbar-collapse navbar-ex1-collapse">
            <ul class="nav navbar-nav side-nav" id="project-side-list">
                    <li class="active">
                        <a data-toggle="tab" href="#projectList"><i class="fa fa-fw fa-dashboard"></i>
-                           <!--<span class="glyphicon glyphicon-th"></span>-->
                              项目列表
                        </a>
                    </li>
@@ -37,7 +36,7 @@
                         <li>
                         <a value="{{ item.ProjectId }}" data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>
                                 <span class="glyphicon glyphicon-th-list"></span>
-                                {{ item.ProjectName }} 
+                                {{ item.ProjectName }}
                             </a>
                         </li>
                         {% endfor %}
