@@ -1,9 +1,9 @@
 <div class="panel panel-default">
         <div class="panel-heading heading-large">
-            <span class="panel-title section-title">项目</span>
+            <!--<span class="panel-title section-title">项目</span>-->
             <span class="section-toolbar">
                 {% ifequal role 'admin' %}
-                <a href="/projects/" style="margin-left:5px;">
+                <a href="/projects/" style="margin:5px;">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </a>
                 {% endifequal %}
@@ -12,7 +12,7 @@
                 {% ifequal role 'admin' %}
                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#largeModal">创建</button>
                 {% else %}
-                    <a href="/projects/">
+                    <a href="/projects/" style="margin-right:10px;">
                         <span class="glyphicon glyphicon-refresh"></span>
                     </a>
                 {% endifequal %}
