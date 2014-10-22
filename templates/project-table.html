@@ -8,7 +8,9 @@
                 <th >版本库地址</th>-->
                 <th style="width:10%">管理员</th>
                 <th style="width:12%">创建时间</th>
+                {% if user_role == 'admin' %}
                 <th class="text-center" style="width:5.6%">操作</th>
+                {% endif %}
             </thead>
             <tbody>
                 {% for item in projects_list %}
