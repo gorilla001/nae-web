@@ -10,8 +10,8 @@
                     {% ifequal role 'admin' %}
                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createMemberModal">添加</button>
                     {% else %}
-                    <a href="/projects/">
-                        <span class="glyphicon glyphicon-refresh"></span>
+                    <a id="user-refresh" href="#">
+                        <span class="glyphicon glyphicon-refresh" style="top:5px;"></span>
                     </a>
                     {% endifequal %}
                 </span>

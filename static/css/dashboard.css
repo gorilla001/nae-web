@@ -653,6 +653,21 @@ input[type="checkbox"] {
     border-radius: 0px;
 }
 
+.btn-ok {
+    background-color:#5cb85c;
+    border-color:#5cb85c;
+    color:#fff;
+}
+
+.btn-blue {
+    background-color:#5cb85c;
+    border-color:#5cb85c;
+    color:#fff;
+    height:30px;
+    text-align:center;
+}
+
+
 /*.glyphicon {
     top:4px;
 }*/
