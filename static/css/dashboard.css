@@ -802,3 +802,15 @@ input[type="checkbox"] {
 .nav-tabs {
     border:none;
 }
+.panel {
+    border: none;
+    box-shadow:none;
+}
+
+.table > thead > tr > th {
+  border: 0;
+}
+.table > tbody > tr > td{
+  border: 0;
+  text-align:left;
+}
