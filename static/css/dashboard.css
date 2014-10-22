@@ -5,7 +5,9 @@ body {
    background-color: #001122;
 }
 
-html * { outline: 0 !important; }
+html * { 
+    font-family:STkaiti;
+    outline: 0 !important; }
 
 .navbar {
     margin-bottom: 0;
