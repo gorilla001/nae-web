@@ -6,6 +6,9 @@ import json
 from auth.decorators import require_auth
 from jaeweb.settings import BASE_URL
 import os
+import logging
+
+logger=logging.getLogger(__name__)
 
 # Create your views here.
 @require_auth
@@ -76,4 +79,5 @@ def update(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
+    logger.debug(image_list)
     return render_to_response('image-table-replace.html',{'image_list':image_list})

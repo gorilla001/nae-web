@@ -67,6 +67,31 @@ DATABASES = {
         'PORT':'3306',
     }
 }
+import logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard':{
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+            },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/jaeweb/jaeweb.log',
+            'formatter':'standard',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
