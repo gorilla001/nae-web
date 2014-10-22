@@ -67,7 +67,6 @@ DATABASES = {
         'PORT':'3306',
     }
 }
-import logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
