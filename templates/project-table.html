@@ -20,6 +20,7 @@
                         <td><div class="w1"> {{ item.ProjectHgs }}</div></td>-->
                         <td>{{ item.ProjectAdmin }}</td>
                         <td>{{ item.CreatedTime }}</td>
+                        {% if user_role == 'admin' %}
                         <td style="width:80px">
                             <div class="btn-group btn-group-sm pull-right">
                                 <button id="preview" class="btn btn-mini project-info">操作
@@ -32,6 +33,7 @@
                                     <!--<li><a href="#" class="modify-project">修改</a></li>-->
                                 </ul>
                         </td>
+                        {% endif %}
                     </tr>
                 {% endfor %} 
             </tbody>
