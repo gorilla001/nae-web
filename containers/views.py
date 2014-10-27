@@ -42,7 +42,6 @@ def create(request):
         container_image = request.POST.get('image_name')
         container_hg = request.POST.get('container_hg')
         container_code = request.POST.get('container_code')
-        #root_path = request.POST.get('root_path')
         app_type = request.POST.get('app_type')
         user_name = request.session.get('user_id')
         user_key = request.session.get('user_key')
@@ -56,7 +55,6 @@ def create(request):
                 'container_image':container_image,
                 'container_hg':container_hg,
                 'container_code':container_code,
-                #'root_path':root_path,
                 'app_type':app_type,
                 'user_name':user_name,
                 'user_key':user_key,
