@@ -1,5 +1,5 @@
 <div class="panel-heading heading-large">
-        <span class="section-toolbar">
+        <!--<span class="section-toolbar">
         {% ifequal role 'admin' %}
         <a id="image-refresh" style="margin-left:5px;">
         <span class="glyphicon glyphicon-refresh"></span>
@@ -14,7 +14,13 @@
                 <span class="glyphicon glyphicon-refresh" style="top:5px;"></span>
             </a>
         {% endifequal %}
+        </span>-->
+        {% ifequal role 'admin' %}
+        <span class="pull-right">
+            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createImageModal">创建</button>
         </span>
+        {% endifequal %}
+	
 </div>
 <script>
 $("#image-refresh").click(function(e) {
