@@ -17,7 +17,14 @@
                     <!--<td>{{ item.Sftp }}</td>-->
                     <td >{{ item.Created }}</td>
                     {% if item.Status == 'ok' %}
-                    <td class="status text-center"><font size="2" color="green"><b>运行</b></font></td>
+                    <!--<td class="status text-center"><font size="2" color="green"><b>运行</b></font></td>-->
+                    <td class="status text-center">
+			<div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+                                <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                    <span class="show">运行</span>
+                                  </div>
+                        </div>
+		    </td>
                     <!--<td class="text-center"><img src="/static/img/emoticon_smile.png"></td>-->
                     {% elif item.Status == 'building' %}
                     <td class="status">
