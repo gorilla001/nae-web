@@ -787,7 +787,7 @@ input[type="checkbox"] {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #bebebe;
+    background-color: #fff;
     border-color: #ddd #ddd transparent;
     border-image: none;
     border-style: solid;
