@@ -57,9 +57,9 @@ def create(request):
                     'user_name':user_name,
             }
             rs = requests.post(url,headers=headers,data=json.dumps(data))
-            print rs.json()
+            logger.debug(rs.json())
         else:
-            print 'form is invalid'
+            logger.debug('form is invalid')
         return HttpResponse(json.dumps(rs.json()))  
 
 @require_auth

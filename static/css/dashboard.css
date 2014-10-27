@@ -760,7 +760,6 @@ input[type="checkbox"] {
 }
 
 .panel-default > .panel-heading {
-    background-color: #f5f5f5;
     border-color: #ddd;
     color: #333;
     border:none;

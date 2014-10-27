@@ -1,11 +1,8 @@
 <div class="panel panel-default">
+       {% ifequal role 'admin' %}
         <div class="panel-heading heading-large">
-            <!--<span class="panel-title section-title" style="padding:5px;">项目</span>-->
             <span class="section-toolbar">
                 {% ifequal role 'admin' %}
-                <!--<button class="btn btn-blue btn-sm">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                </button>-->
                 <a href="/projects/" style="margin-left:5px;">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </a>
@@ -23,6 +20,7 @@
             </span>
             {% endifequal %}
         </div>
+	{% endifequal %}
         <div class="panel-body">
             {% include 'create-project-modal.html' %}
             {% include 'modify-project-modal.html' %}
