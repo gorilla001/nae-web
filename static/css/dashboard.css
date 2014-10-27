@@ -794,7 +794,7 @@ input[type="checkbox"] {
     border-width: 0;
     color: #555;
     cursor: default;
-    border-color:#bebebe;
+    border-color:#fff;
     border-radius:0;
     height:41px;
 }
