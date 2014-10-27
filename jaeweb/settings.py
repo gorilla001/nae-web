@@ -92,6 +92,25 @@ LOGGING = {
     },
 }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/jaeweb/jaeweb.log',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -130,4 +149,3 @@ auth_url = "http://auth.jumeird.com/"
 auth_key = "481986a634ca11e4ab8c842b2b738d12"
 
 BASE_URL="http://127.0.0.1:8282/v1"
-
