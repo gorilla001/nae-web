@@ -813,3 +813,6 @@ input[type="checkbox"] {
   border: 0;
   text-align:left;
 }
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
