@@ -49,12 +49,23 @@
                             <span class="help-inline">(分支号)</span>
                       </div>
                     </div>
-                    <div class="control-group version">
+                    <!--<div class="control-group version">
                         <label class="control-label" for="version">应用根目录</label>
                         <div class="controls">
                             <input type="text" class="form-control" id="root_path" name='root_path' placeholder="请填写根目录" style="width:200px">
                             <span class="help-inline">(例如，java应用的根目录是:/opt/jm/tomcat/wwwroot)</span>
                         </div>
+                    </div>-->
+		    <div class="control-group project">
+                      <label class="control-label" for="image">应用类型</label>
+                      <div class="controls">
+                          <select id='app_type' class="form-control" name="app_type">  
+                            <option value="-1">请选择</option>
+                            <option value="0">php</option>
+                            <option value="1">java</option>
+                          </select>  
+                        <span class="help-inline">(应用类型,eg.java,php,etc)</span>
+                      </div>
                     </div>
 
                     <div class="control-group description">
