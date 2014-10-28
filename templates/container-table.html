@@ -186,6 +186,9 @@ $('#container-table-{{project_info.id}}').on("click",".commit-container",functio
     });
 
 $('#container-table-{{project_info.id}}').on("click",".web-access",function() {
+        var $row = $(this).closest("tr");    
+        var network = $row.find(".network").text();
+	alert(network);
 	window.open('http://www.baidu.com');
     });
 
