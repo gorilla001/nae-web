@@ -157,7 +157,7 @@ textarea.content {
     width:30px
 }
 .pull-right > .custom-menu {
-    min-width:70px;
+    min-width:50px;
 }
 .navbar-right > .custom-menu {
     min-width:70px;
