@@ -56,7 +56,7 @@
                             <span class="help-inline">(例如，java应用的根目录是:/opt/jm/tomcat/wwwroot)</span>
                         </div>
                     </div>-->
-		    <div class="control-group project">
+		    <!--<div class="control-group project">
                       <label class="control-label" for="image">应用类型</label>
                       <div class="controls">
                           <select id='app_type' class="form-control" name="app_type">  
@@ -66,7 +66,7 @@
                           </select>  
                         <span class="help-inline">(应用类型,eg.java,php,etc)</span>
                       </div>
-                    </div>
+                    </div>-->
 
                     <div class="control-group description">
                       <label cass="control-label" for="description">功能描述</label>
@@ -120,7 +120,8 @@ function createContainer()
     var container_env = document.getElementById('environ_list').value;
     var container_code = document.getElementById('container_code').value;
     //var root_path = document.getElementById('root_path').value;
-    var app_type = document.getElementById('app_type').value;
+    //var app_type = document.getElementById('app_type').value;
+    var app_type = 0; 
 
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
