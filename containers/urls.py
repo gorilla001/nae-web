@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'detail/$',views.detail,name='detail'),
     url(r'update/$',views.update,name='update'),
     url(r'stop/$',views.stop,name='stop'),
+    url(r'start/$',views.start,name='start'),
 )

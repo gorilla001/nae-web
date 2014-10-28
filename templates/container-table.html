@@ -45,7 +45,7 @@ $('#container-table-{{project_info.id}}').on("click",".start-container",function
         	var xmlHttpRequest;
         	xmlHttpRequest = createXmlHttpRequest();
         	xmlHttpRequest.onreadystatechange = getResult;
-        	var $url = $href + "?id=" + $text + "&v=1";
+        	var $url = $href + "?id=" + $text;
 
         	xmlHttpRequest.open("GET",$url,true);
         	xmlHttpRequest.send(null);

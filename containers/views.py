@@ -90,3 +90,11 @@ def stop(request):
     headers={'Content-Type':'application/json'}
     requests.post(url,headers=headers)
     return HttpResponse("succeed")
+
+@require_auth
+def start(request):
+    ctn_id = request.GET['id']
+    url = '{}/containers/{}/start'.format(BASE_URL,ctn_id)
+    headers={'Content-Type':'application/json'}
+    requests.post(url,headers=headers)
+    return HttpResponse("succeed")
