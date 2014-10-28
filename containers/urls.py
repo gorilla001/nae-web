@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'update/$',views.update,name='update'),
     url(r'stop/$',views.stop,name='stop'),
     url(r'start/$',views.start,name='start'),
+    url(r'reboot/$',views.reboot,name='reboot'),
 )
