@@ -195,7 +195,7 @@ $('#container-table-{{project_info.id}}').on("click",".web-access",function() {
 		{
 		    web = net_ary[i].split("~");
 	    	    alert(web[0]);
-		    window.open(web[0]);
+		    window.open("http://" + web[0]);
 		}
 	}
     });
