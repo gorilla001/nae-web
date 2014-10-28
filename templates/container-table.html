@@ -36,7 +36,6 @@ $('#container-table-{{project_info.id}}').on("click",".delete-container",functio
             }
         }
     });
-</script>
 $('#container-table-{{project_info.id}}').on("click",".start-container",function() {
         var $row = $(this).closest("tr");    
         var status = $row.find(".status").text();
@@ -75,7 +74,6 @@ $('#container-table-{{project_info.id}}').on("click",".start-container",function
         	}
 	}
     });
-</script>
 $('#container-table-{{project_info.id}}').on("click",".stop-container",function() {
         var $row = $(this).closest("tr");    
         var status = $row.find(".status").text();
