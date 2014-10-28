@@ -83,3 +83,10 @@ def update(request):
     container_list = rs.json()
     return render_to_response('container-table-replace.html',{'container_list':container_list})
 
+@require_auth
+def stop(request):
+    ctn_id = request.GET['id']
+    url = '{}/containers/{}/stop'.format(BASE_URL,ctn_id)
+    headers={'Content-Type':'application/json'}
+    requests.post(url,headers=headers)
+    return HttpResponse("succeed")
