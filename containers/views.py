@@ -106,3 +106,12 @@ def reboot(request):
     headers={'Content-Type':'application/json'}
     requests.post(url,headers=headers)
     return HttpResponse("succeed")
+
+@require_auth
+def commit(request):
+    ctn_id = request.GET['id']
+    url = '{}/containers/{}/commit'.format(BASE_URL,ctn_id)
+    headers={'Content-Type':'application/json'}
+    requests.post(url,headers=headers)
+    return HttpResponse("succeed")
+
