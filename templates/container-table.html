@@ -191,7 +191,10 @@ $('#container-table-{{project_info.id}}').on("click",".web-access",function() {
 	net_ary=network.split(/\s+/);
 	for (i=0;i<net_ary.length;i++)
 	{
-	    alert(net_ary[i]);
+	    if(net_ary[i].indexOf("80") > 0)
+		{
+	    	    alert(net_ary[i]);
+		}
 	}
 	window.open('http://www.baidu.com');
     });
