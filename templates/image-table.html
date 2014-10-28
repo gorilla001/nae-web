@@ -75,7 +75,7 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
         }
     });
 $('#image-table-{{project_info.id}}').on('click','.edit-image',function() {
-        $('#editModal').modal('show')
+        $('#editModal').modal('show');
    #     var $row = $(this).closest("tr");    
    #     var $text = $row.find(".fp").text();
    #     var $href = '/images/show';
