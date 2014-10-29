@@ -1,7 +1,7 @@
 <div class="panel panel-default">
         <table class="table table-striped table-bordered table-hover table-condensed">
             <thead>
-                <th style="width:5%">ID</th>
+                <th style="width:5%;display:none">ID</th>
                 <th style="width:10%">项目名称</th>
                 <th> 项目描述</th>
                 <!--<th >项目成员</th>
@@ -15,7 +15,7 @@
             <tbody>
                 {% for item in projects_list %}
                     <tr>
-                        <td class="fp">{{ item.ProjectId }}</td>
+                        <td class="fp" style="display:none;">{{ item.ProjectId }}</td>
                         <td>{{ item.ProjectName }}</td>
                         <td><div class="w3">{{ item.ProjectDesc }}<div></td>
                         <!--<td><div class="w2">{{ item.ProjectMembers }}</div></td>
