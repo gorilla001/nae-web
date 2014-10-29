@@ -194,7 +194,6 @@ $('#container-table-{{project_info.id}}').on("click",".web-access",function() {
 	    if(net_ary[i].indexOf("80") > 0)
 		{
 		    web = net_ary[i].split("~");
-	    	    alert(web[0]);
 		    window.open("http://" + web[0]);
 		}
 	}
