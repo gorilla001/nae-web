@@ -76,10 +76,10 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
 });
 $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
         //$('#editModal').modal('show');
-	//var obj = new Object();
-	//obj.name="jae";
-	//window.showModalDialog('image-table.html',obj,"dialogWidth=200px;dialogHeight=100px");
-	window.open("http://172.19.32.119:1769/",null,"width=800,height=500,left=300,modal=yes,alwaysRaised=yes", null);
+	var obj = new Object();
+	obj.name="jae";
+	showModalDialog('http://172.19.32.119:1769/',null,"dialogWidth=200px;dialogHeight=100px");
+	//window.open("http://172.19.32.119:1769/",null,"width=800,height=500,left=300,modal=yes,alwaysRaised=yes", null);
 });
 
 
