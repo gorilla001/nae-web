@@ -1,6 +1,6 @@
 <table class="table table-striped table-bordered table-hover table-condensed">
             <thead>
-                <th style="width:5%">ID</th>
+                <th style="width:5%;display:none;">ID</th>
                 <th style="width:10%">名称</th>
                 <th>描述</th>
                 <th style="width:12%">创建时间</th>
@@ -10,7 +10,7 @@
                 <tbody>
                     {% for item in image_list %}
                         <tr>
-                            <td class="fp">{{ item.ID }}</td>
+                            <td class="fp" style="display:none">{{ item.ID }}</td>
                             <td >{{ item.ImageName }}</td>
                             <td>{{ item.ImageDesc }}</td>
                             <td >{{ item.CreatedTime }}</td>

@@ -1,6 +1,6 @@
 <table class="table table-striped table-bordered table-hover table-condensed">
     <thead>
-        <th style="width:5%">ID</th>
+        <th style="width:5%;display:none">ID</th>
         <th >地址</th>
         <th style="width:12%">添加时间</th>
         {% ifequal role 'admin' %}
@@ -10,7 +10,7 @@
     <tbody>
         {% for item in hg_list %}
             <tr>
-                <td class="fp">{{ item.Id }}</td>
+                <td class="fp" style="display:none">{{ item.Id }}</td>
                 <td>{{ item.Content}}<div></td>
                 <td>{{ item.Created }}</td>
                 {% ifequal role 'admin' %}
