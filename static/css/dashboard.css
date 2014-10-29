@@ -757,6 +757,7 @@ input[type="checkbox"] {
 .panel-body {
     padding:0px;
     border-bottom:0px;
+    margin-left: 14px;
 }
 
 .panel-default > .panel-heading {
