@@ -76,7 +76,9 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
 });
 $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
         //$('#editModal').modal('show');
-	window.showModalDialog();
+	var obj = new Object();
+	obj.name="jae";
+	window.showModalDialog('http://baidu.com',obj,"dialogWidth=200px;dialogHeight=100px");
 });
 
 
