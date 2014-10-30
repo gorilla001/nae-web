@@ -90,4 +90,4 @@ def edit(request):
     headers={'Content-Type':'application/json'}
     rs = requests.post(url,headers=headers)
     print rs.json()
-    return HttpResponse(rs.json())
+    return HttpResponse(json.dumps(rs.json()))
