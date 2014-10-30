@@ -75,9 +75,16 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
         }
 });
 $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
-        $('#editModal').modal('show');
-	//window.showModalDialog('http://172.19.32.119:1769/',null,"dialogWidth=800px;dialogHeight=500px;edge=sunken;");
-	//window.open("http://172.19.32.119:1769/",null,"width=800,height=500,left=300,modal=yes,alwaysRaised=yes", null);
+    var row = $(this).closest("tr");    
+    var id = row.find(".fp").text();
+    var url = '/images/edit?id=' + id;
+    $.ajax({
+        type: "GET",
+        url: url }).done(function( data ) {
+		alert(data);
+    });
+
+    //$('#editModal').modal('show');
 });
 
 

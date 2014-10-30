@@ -73,6 +73,7 @@ def delete(request):
     print rs.json()
     return HttpResponse("succeed")
 
+@require_auth
 def update(request):
     project_id = request.GET.get('project_id')
     url='{}/images?project_id={}'.format(BASE_URL,project_id)
@@ -81,3 +82,11 @@ def update(request):
     image_list=rs.json()
     logger.debug(image_list)
     return render_to_response('image-table-replace.html',{'image_list':image_list})
+
+@require_auth
+def edit(request):
+    img_id = request.GET['id']
+    url = '{}/images/edit?id={}'.format(BASE_URL,img_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.post(url,headers=headers)
+    return HttpResponse(rs.json())
