@@ -82,10 +82,10 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
         type: "GET",
 	dataType: "json",
         url: url }).done(function( data ) {
-		alert(data.url);
+		$('#sshFrame').attr("src",data.url);
+    		$('#editModal').modal('show');
     });
 
-    //$('#editModal').modal('show');
 });
 
 
