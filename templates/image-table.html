@@ -77,12 +77,14 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
 $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
     var row = $(this).closest("tr");    
     var id = row.find(".fp").text();
+    var name = row.find(".name").text();
     var url = '/images/edit?id=' + id;
     $.ajax({
         type: "GET",
 	dataType: "json",
         url: url }).done(function( data ) {
 		$('#sshFrame').attr("src",data.url);
+	        $('#imgName').attr("text",name);	
     		$('#editModal').modal('show');
     });
 
