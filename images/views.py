@@ -89,4 +89,5 @@ def edit(request):
     url = '{}/images/edit?id={}'.format(BASE_URL,img_id)
     headers={'Content-Type':'application/json'}
     rs = requests.post(url,headers=headers)
+    print rs.json()
     return HttpResponse(rs.json())
