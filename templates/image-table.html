@@ -84,7 +84,7 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
 	dataType: "json",
         url: url }).done(function( data ) {
 		$('#sshFrame').attr("src",data.url);
-	        $('#imgName').text(name);	
+	        $('#imgName').attr("text",name);	
     		$('#editModal').modal('show');
     });
 
