@@ -80,8 +80,9 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
     var url = '/images/edit?id=' + id;
     $.ajax({
         type: "GET",
+	dataType: "json",
         url: url }).done(function( data ) {
-		alert(data.url);
+		alert(data);
     });
 
     //$('#editModal').modal('show');
