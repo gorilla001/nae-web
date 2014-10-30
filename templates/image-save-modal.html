@@ -1,0 +1,25 @@
+<div id="saveImageModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="margin:0px;padding:0px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">保存镜像</h4>
+            </div>
+            <div id="editWindow" class="modal-body" style="background:#fff;margin:0px;padding:0px;">
+		<pre>你是想将当前修改保存成新镜像，还是保存到当前镜像。请输入需要保存的镜像名，默认为当前镜像。</pre>
+                <input type="text" class="form-control" id="image_desc" name='image_desc' style="width:350px">
+            </div>
+            <div class="modal-footer" style="margin-top:0px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="saveImage()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	function saveImage(){
+		alert('save-image');
+	}	
+</script>
+
