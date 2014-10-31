@@ -78,6 +78,7 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
     var row = $(this).closest("tr");    
     var id = row.find(".fp").text();
     var name = row.find(".name").text();
+    var tag = row.find(".tag").text();
     var url = '/images/edit?id=' + id;
     $.ajax({
         type: "GET",
@@ -86,7 +87,7 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
 		$('#sshFrame').attr("src",data.url);
 		$('#img_name').attr("value",data.name);
 		$('#img_name_2').attr("value",data.name);
-	        $('#imgName').attr("value",name + ":latest");	
+	        $('#imgName').attr("value",name + ":" + tag);	
     		$('#editModal').modal('show');
     });
 
