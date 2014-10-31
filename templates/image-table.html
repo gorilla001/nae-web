@@ -83,10 +83,10 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
         type: "GET",
 	dataType: "json",
         url: url }).done(function( data ) {
-    		$('#editModal').modal('show');
 		$('#sshFrame').attr("src",data.url);
 		$('#img_name').attr("value",data.name);
 	        $('#imgName').attr("value",name + ":latest");	
+    		$('#editModal').modal('show');
     });
 
 });
