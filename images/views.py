@@ -97,7 +97,8 @@ def commit(request):
     repo=request.GET.get('repo')
     tag=request.GET.get('tag')
     ctn=request.GET.get('ctn')
-    url="{}/images/commit?repo={}&tag={}&ctn={}".format(BASE_URL,repo,tag,ctn)
+    id=request.GET.get('ctn')
+    url="{}/images/commit?repo={}&tag={}&ctn={}&id={}".format(BASE_URL,repo,tag,ctn,id)
     headers={'Content-Type':'application/json'}
     rs = requests.post(url,headers=headers)
     return HttpResponse(json.dumps(rs.json()))
