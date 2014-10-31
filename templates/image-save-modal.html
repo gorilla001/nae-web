@@ -25,10 +25,11 @@
 $(".save-image").on("click",function(){
 	var text = $("#imgName").val();
 	var _text = text.split(":");
-	var repo = _text[0];
-	var tag = _text[1];
+	var id = _text[0]
+	var repo = _text[1];
+	var tag = _text[2];
 	var ctn = $("#img_name_2").val();
-	var url = "/images/commit?repo=" + repo + "&tag=" + tag + "&ctn=" + ctn;
+	var url = "/images/commit?repo=" + repo + "&tag=" + tag + "&ctn=" + ctn + "&id=" + id;
         alert(url);
 	$.ajax({
 		type:"GET",

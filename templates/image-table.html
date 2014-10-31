@@ -87,7 +87,7 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
 		$('#sshFrame').attr("src",data.url);
 		$('#img_name').attr("value",data.name);
 		$('#img_name_2').attr("value",data.name);
-	        $('#imgName').attr("value",name + ":" + tag);	
+	        $('#imgName').attr("value",id + ":" + name + ":" + tag);	
     		$('#editModal').modal('show');
     });
 
