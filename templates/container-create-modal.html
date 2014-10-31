@@ -106,7 +106,7 @@ $("#image_list").change(function(){
          dataType: "json",
          url: url }).done(function( data ) {
              $("#hg_list").val(data.RepoPath);
-             $("#container_code").val('default');
+             $("#container_code").val(data.Branch);
 
    });
 });
