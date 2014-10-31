@@ -31,7 +31,6 @@ $(".save-image").on("click",function(){
 	var ctn = $("#img_name_2").val();
 	var id = $("#imgId").val();
 	var url = "/images/commit?repo=" + repo + "&tag=" + tag + "&ctn=" + ctn + "&id=" + id;
-        alert(url);
 	$.ajax({
 		type:"GET",
 		dataType:"json",
