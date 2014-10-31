@@ -94,7 +94,7 @@ $('#createContainerModal').on('shown.bs.modal', function() {
               url: url }).done(function( data ) {
               $("#image_list option[value !='-1']").remove();
               for (var i in data){
-                $("#image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + "</option>");
+                $("#image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + ":" + data[i].ImageTag + "</option>");
               }
         });
 });
