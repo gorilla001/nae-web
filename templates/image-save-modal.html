@@ -15,16 +15,30 @@
             </div>
             <div class="modal-footer" style="margin-top:0px;">
                 <button id="img_name_2" value="" type="button" class="btn btn-default destroy_temp_ctn_2" data-dismiss="modal">取消</button>
-                <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="saveImage()">确定</button>
+                <button type="submit" class="btn btn-primary btn-ok save-image" data-dismiss="modal">确定</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-	function saveImage(){
-		alert($("#imgName").val());
-	}	
+$(".save-image").on("click",function(){
+	var text = $("#imgName").val();
+	var _text = text.split(":");
+	var repo = _text[0];
+	var tag = _text[1];
+	var ctn = $("#img_name_2").val();
+	var url = "/images/commit?repo=" + repo + "&tag=" + tag + "&ctn=" + ctn;
+	$.ajax({
+		type:"GET",
+		dataType:"json",
+		url:url
+	}).done(function(data){
+		;
+	});
+});
+	
+});
 $('.destroy_temp_ctn_2').on("click",function() {
 	var name = $("#img_name_2").val();
 	url = "/containers/destroy?name=" + name;
