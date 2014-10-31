@@ -21,7 +21,14 @@
     		$('#saveImageModal').modal('show');
 	}	
 $('.destroy_temp_ctn').on("click",function() {
-	alert('here');	
+	var name = $("#img_name").val();
+	url = "/containers/destroy?name=" + name;
+	$.ajax({
+            type: "POST",
+	    dataType: "json",
+            url: url }).done(function( data ) {
+		;
+    	});
 });
 		
 </script>

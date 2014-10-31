@@ -115,3 +115,10 @@ def commit(request):
     requests.post(url,headers=headers)
     return HttpResponse("succeed")
 
+@require_auth
+def destroy(request):
+    ctn_nm = request.GET.get('name')
+    url = '{}/containers/{}/destroy'.format(BASE_URL,ctn_nm)
+    headers={'Content-Type':'application/json'}
+    requests.post(url,headers=headers)
+    return HttpResponse("succeed")
