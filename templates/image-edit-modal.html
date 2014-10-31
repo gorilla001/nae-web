@@ -24,7 +24,7 @@ $('.destroy_temp_ctn').on("click",function() {
 	var name = $("#img_name").val();
 	url = "/containers/destroy?name=" + name;
 	$.ajax({
-            type: "POST",
+            type: "GET",
 	    dataType: "json",
             url: url }).done(function( data ) {
 		;
