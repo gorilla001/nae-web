@@ -826,3 +826,9 @@ background-color: #000;
 border: solid 1px black;
 color: gray;
 }
+.nav-tabs>li>a {
+margin-right: 2px;
+line-height: 1.42857143;
+border: none;
+border-radius: 0;
+}
