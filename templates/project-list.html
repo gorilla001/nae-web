@@ -2,22 +2,22 @@
        {% ifequal role 'admin' %}
         <div class="panel-heading heading-large">
             <span class="section-toolbar">
-                {% ifequal role 'admin' %}
+                <!--{% ifequal role 'admin' %}
                 <a href="/projects/" style="margin-left:5px;">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </a>
-                {% endifequal %}
+                {% endifequal %}-->
             </span>
             {% ifequal role 'admin' %}
             <span class="pull-right">
                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#largeModal">创建</button>
             </span>
             {% else %}
-            <span class="pull-right" style="padding-top:5px;">
+            <!--<span class="pull-right" style="padding-top:5px;">
                 <a href="/projects/" style="width:10px;height:20px;">
                    <span class="glyphicon glyphicon-refresh"></span>
                 </a>
-            </span>
+            </span>-->
             {% endifequal %}
         </div>
 	{% endifequal %}
