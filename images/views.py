@@ -81,7 +81,15 @@ def update(request):
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
     logger.debug(image_list)
-    return render_to_response('image-table-replace.html',{'image_list':image_list})
+    url='{}/projects/{}'.format(BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    project_info = rs.json() 
+    role = 'normal'
+    if request.session.get('user_id',None) == project_info['admin']:
+        role = 'admin'
+
+    return render_to_response('image-table-replace.html',{'image_list':image_list,'role':role})
 
 @require_auth
 def edit(request):
