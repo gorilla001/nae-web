@@ -81,6 +81,7 @@ def update(request):
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
     logger.debug(image_list)
+
     url='{}/projects/{}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
