@@ -199,7 +199,18 @@ $('#container-table-{{project_info.id}}').on("click",".web-access",function() {
 	}
     });
 $('#container-table-{{project_info.id}}').on("click",".web-login",function() {
-    		$('#ctnEditModal').modal('show');
+	var $row = $(this).closest("tr");    
+        var network = $row.find(".network").text();
+	net_ary=network.split(/\s+/);
+	for (i=0;i<net_ary.length;i++)
+	{
+	    if(net_ary[i].indexOf("17698") > 0)
+		{
+		    web = net_ary[i].split("~");
+		    $('#ctnSshFrame').attr("src","http://" + web[0]);
+		}
+	}
+    	$('#ctnEditModal').modal('show');
     });
 
 </script>
