@@ -6,8 +6,9 @@
                 <h4 class="modal-title">在线编辑容器</h4>
             </div>
             <div id="ctnEditWindow" class="modal-body" style="background:#fff;margin:0px;padding:0px;">
-		<iframe class="hide" id="ctnSshFrame" src="" style="zoom:0.70" width="100%" height="800" frameborder="0">
-		</iframe>
+		<!--<iframe class="hide" id="ctnSshFrame" src="" style="zoom:0.70" width="100%" height="800" frameborder="0">
+		</iframe>-->
+		<label class="hide" id="ctnSshFrame" src=""></label>
             </div>
         </div>
     </div>
@@ -22,7 +23,7 @@ $('#ctnEditModal').on('shown.bs.modal', function () {
         	     ';
         	$("#ctnEditWindow").children().remove();
         	$("#ctnEditWindow").append($(html));}
-	,3000);
+	,1000);
 });
 
 </script>
