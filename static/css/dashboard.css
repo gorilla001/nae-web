@@ -769,7 +769,7 @@ input[type="checkbox"] {
     color: #333;
     border:none;
     background-color:#fff;
-    padding-right: 6px;
+    padding-right: 5px;
 }
 .panel-title {
     color: inherit;
