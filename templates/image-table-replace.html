@@ -45,7 +45,7 @@
                                 <font size="2" color="green"><b>{{ item.Status }}</b></font> 
                             </td>
                             {% endif %}
-			    {% if role == 'admin' %}
+        		    {% ifequal role 'admin' %}
 			    <td>
                                  <div class="btn-group btn-group-sm pull-right">
                                     <button class="btn btn-mini btn-primary edit-image">编辑
@@ -56,7 +56,7 @@
 				    </button>
 				</div>
 			    </td>
-		 	    {% endif %}
+		 	    {% endifqual %}
 				
 
                             <!--<td style="width:5.8%">
