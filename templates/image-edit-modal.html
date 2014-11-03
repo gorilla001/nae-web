@@ -34,12 +34,10 @@ $('.destroy_temp_ctn').on("click",function() {
 $('#editModal').on('shown.bs.modal', function () {
 	setTimeout(function(){
 		var src= $("#sshFrame").attr("src");
-		alert(src);
 		var html=' \
 			<iframe id="sshFrame" src="' + src + '" style="zoom:0.70" width="100%" height="800" frameborder="0"> \
 			</iframe>\
         	     ';
-		alert(html);
         	$("#editWindow").children().remove();
         	$("#editWindow").append($(html));}
 	,3000);
