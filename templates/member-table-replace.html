@@ -22,7 +22,13 @@
                 {% endifequal %}
                 <td>{{ item.Created }}</td>
                 {% ifequal role 'admin' %}
-                <td style="width:5.6%">
+		<td>
+                    <div class="btn-group btn-group-sm pull-right">
+                    	<button class="btn btn-mini btn-danger delete-user">彻底删除
+		    	</button>
+		    </div>
+		</td>
+                <!--<td style="width:5.6%">
                     <div class="btn-group btn-group-sm pull-right">
                         <button id="preview" class="btn btn-mini project-info">操作
                         </button>
@@ -33,7 +39,7 @@
                             <li><a href="#" class="delete-user">删除</a></li>
                             <!--<li><a href="#" class="modify-project">修改</a></li>-->
                          </ul>
-                </td>
+                </td>-->
                 {% endifequal %}
             </tr>
         {% endfor %} 
