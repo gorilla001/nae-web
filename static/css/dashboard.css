@@ -652,7 +652,7 @@ input[type="checkbox"] {
     /*border-radius: 3px;*/
     font-size: 12px;
     line-height: 1.5;
-    padding: 5px 5px;
+    padding: 3px;
 }
 
 .btn-sm, .btn-group-sm > .btn {
@@ -769,7 +769,7 @@ input[type="checkbox"] {
     color: #333;
     border:none;
     background-color:#fff;
-    padding-right: 9px;
+    padding-right: 6px;
 }
 .panel-title {
     color: inherit;
