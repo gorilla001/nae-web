@@ -80,6 +80,7 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
     var name = row.find(".name").text();
     var tag = row.find(".tag").text();
     var url = '/images/edit?id=' + id;
+    alert(url);
     $.ajax({
         type: "GET",
 	dataType: "json",
