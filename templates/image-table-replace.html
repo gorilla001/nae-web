@@ -1,6 +1,7 @@
 <table class="table table-striped table-bordered table-hover table-condensed">
 	<tbody>
 	    {% for item in image_list %}
+		{% if role == 'admin' %}
 	        <tr>
 	            <td class="fp" style="display:none">{{ item.ID }}</td>
 	            <td class="name">{{ item.ImageName }}</td>
@@ -37,7 +38,6 @@
 	                <font size="2" color="green"><b>{{ item.Status }}</b></font> 
 	            </td>
 	            {% endif %}
-		    {% if role == 'admin' %}
 		    <td>
 	                 <div class="btn-group btn-group-sm pull-right">
 	                    <button class="btn btn-mini btn-primary edit-image">编辑
@@ -48,8 +48,17 @@
 			    </button>
 			</div>
 		    </td>
-		    {% endif %}
 	        </tr>
+		{% else %}
+		<tr>
+		    <td class="fp" style="display:none">{{ item.ID }}</td>
+	            <td class="name">{{ item.ImageName }}</td>
+	            <td class="tag">{{ item.ImageTag }}</td>
+	            <td>{{ item.ImageDesc }}</td>
+	            <td >{{ item.CreatedTime }}</td>
+		</tr>
+		{% endif %}
+
 	    {% endfor %} 
 	</tbody>
 </table>
