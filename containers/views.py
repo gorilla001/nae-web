@@ -5,7 +5,7 @@ from auth.decorators import require_auth
 from django.http import HttpResponseRedirect
 import json
 from jaeweb.settings import BASE_URL
-from django import RequestContext
+from django.template import RquestContext 
 
 
 # Create your views here.
