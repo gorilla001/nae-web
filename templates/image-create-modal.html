@@ -91,7 +91,7 @@ function createImage()
                 $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                $("#images_content").html(data);
+                                $("#image-table-{{project_info.id}}").html(data);
                 });
             }
         }
