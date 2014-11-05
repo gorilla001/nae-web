@@ -19,7 +19,6 @@ def index(request):
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
 
-    print image_list
     return HttpResponse(json.dumps(image_list))
 
 @require_auth
@@ -28,7 +27,6 @@ def show(request):
     url='{}/images/{}'.format(BASE_URL,image_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    print rs.json()
     return HttpResponse(json.dumps(rs.json())) 
 
 
@@ -45,7 +43,6 @@ def create(request):
             user_name=request.session.get('user_id')
             #image_name=os.path.basename(repo_path)
             image_name= os.path.basename(repo_path) + '-' + repo_branch
-            print image_name,project_id,repo_path,image_desc,user_name
             url="{}/images".format(BASE_URL)
             headers={'Content-Type':'application/json'}
             data  = {
@@ -69,8 +66,6 @@ def delete(request):
     url = '{}/images/{}?force={}'.format(BASE_URL,image_id,f_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
-    print image_id 
-    print rs.json()
     return HttpResponse("succeed")
 
 @require_auth
@@ -98,7 +93,6 @@ def edit(request):
     url = '{}/images/edit?id={}'.format(BASE_URL,img_id)
     headers={'Content-Type':'application/json'}
     rs = requests.post(url,headers=headers)
-    print rs.json()
     return HttpResponse(json.dumps(rs.json()))
 
 @require_auth

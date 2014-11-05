@@ -115,6 +115,13 @@ $("#image_list").change(function(){
 function createContainer()
 {
     var project_id = "{{ project_info.id }}"; 
+    var url = '/containers?project_id=' + project_id;
+    $.ajax({
+          type: "GET",
+	  dataType: "json",
+          url: url }).done(function( data ) {
+		alert(data);
+    });
     var container_hg = document.getElementById('hg_list').value;
     var image_name = document.getElementById('image_list').value;
     var container_env = document.getElementById('environ_list').value;
