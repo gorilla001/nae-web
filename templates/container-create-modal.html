@@ -125,7 +125,6 @@ function createContainer()
 
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
-    //var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&root_path=" + root_path + "&container_env=" + container_env;
     var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env;
     var token = '{{ csrf_token }}'; 
     
@@ -138,12 +137,12 @@ function createContainer()
         if(http.readyState == 4 && http.status == 200) {
             var content = http.response;
             var status = http.response.status; 
-            var url = '/images/update?project_id=' + project_id;
+            var url = '/containers/update?project_id=' + project_id;
             if (status == 200){
                 $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
-                                $("#images_content").html(data);
+                                $("#container-table-{{project_info.id}}").html(data);
                 });
             }
         }
