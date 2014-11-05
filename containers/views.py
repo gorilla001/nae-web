@@ -5,6 +5,8 @@ from auth.decorators import require_auth
 from django.http import HttpResponseRedirect
 import json
 from jaeweb.settings import BASE_URL
+from django import RequestContext
+
 
 # Create your views here.
 
@@ -81,7 +83,7 @@ def update(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     container_list = rs.json()
-    return render_to_response('container-table-replace.html',{'container_list':container_list})
+    return render_to_response('container-table-replace.html',{'container_list':container_list},context_instance=RequestContext(request))
 
 @require_auth
 def stop(request):
