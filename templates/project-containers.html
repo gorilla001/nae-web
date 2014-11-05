@@ -1,3 +1,5 @@
+{% load pagination_tags %}
+{% autopaginate container_list 15 %}
 <div class="panel panel-default">
     {% include 'container-table-panel-header.html' %}
     <div class="panel-body">
