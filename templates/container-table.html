@@ -38,8 +38,8 @@ $('#container-table-{{project_info.id}}').on("click",".delete-container",functio
     });
 $('#container-table-{{project_info.id}}').on("click",".start-container",function() {
         var $row = $(this).closest("tr");    
-        var status = $row.find(".status").text();
-	if ( ! status.localeCompare("正在运行") ){ 
+        var status = $row.find(".flag").text();
+	if ( status !== "running" ){ 
         	var $text = $row.find(".fp").text();
         	var $href= "/containers/start";
         	var xmlHttpRequest;
@@ -76,8 +76,8 @@ $('#container-table-{{project_info.id}}').on("click",".start-container",function
     });
 $('#container-table-{{project_info.id}}').on("click",".stop-container",function() {
         var $row = $(this).closest("tr");    
-        var status = $row.find(".status").text();
-	if ( ! status.localeCompare("已经停止") ){ 
+        var status = $row.find(".flag").text();
+	if ( status !== "stoped" ){ 
         	var $text = $row.find(".fp").text();
         	var $href= "/containers/stop";
         	var xmlHttpRequest;
