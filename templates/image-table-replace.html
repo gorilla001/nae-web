@@ -4,10 +4,10 @@
 		{% if role == 'admin' %}
 	        <tr>
 	            <td class="fp" style="display:none">{{ item.ID }}</td>
-	            <td class="name">{{ item.ImageName }}</td>
-	            <td class="tag">{{ item.ImageTag }}</td>
-	            <td>{{ item.ImageDesc }}</td>
-	            <td >{{ item.CreatedTime }}</td>
+	            <td width="15%" class="name">{{ item.ImageName }}</td>
+	            <td width="10%" class="tag">{{ item.ImageTag }}</td>
+	            <td width="15%">{{ item.ImageDesc }}</td>
+	            <td width="15%">{{ item.CreatedTime }}</td>
 	            {% if item.Status == 'building' %}
 	            <td class="status">
 	            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
@@ -38,7 +38,7 @@
 	                <font size="2" color="green"><b>{{ item.Status }}</b></font> 
 	            </td>
 	            {% endif %}
-		    <td>
+		    <td width="30%">
 	                 <div class="btn-group btn-group-sm pull-right">
 	                    <button class="btn btn-mini btn-primary edit-image">编辑
 			    </button>
