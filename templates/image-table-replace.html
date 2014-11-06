@@ -7,9 +7,9 @@
 	            <td width="15%" class="name">{{ item.ImageName }}</td>
 	            <td width="10%" class="tag">{{ item.ImageTag }}</td>
 	            <td width="25%">{{ item.ImageDesc }}</td>
-	            <td width="27%" style="text-align:right">{{ item.CreatedTime }}</td>
+	            <td width="28%" style="text-align:right">{{ item.CreatedTime }}</td>
 	            {% if item.Status == 'building' %}
-	            <td width="8%" style="text-align:right" class="status">
+	            <td width="7%" style="text-align:right" class="status">
 	            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
 	                <div class="progress-bar progress-bar-striped active"   role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
 	                    <span class="show">正在构建</span>
@@ -17,7 +17,7 @@
 	            </div>
 	            </td>
 	            {% elif item.Status == 'ok' %}
-	            <td width="8%" style="text-align:right" class="status">
+	            <td width="7%" style="text-align:right" class="status">
 	                <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
 	                    <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
 	                        <span class="show">构建成功</span>
