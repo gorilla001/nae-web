@@ -40,7 +40,7 @@ $('#container-table-{{project_info.id}}').on("click",".start-container",function
         var $row = $(this).closest("tr");    
         var status = $row.find(".status").text();
 	alert(status);
-	if ( status.localeCompare("正在运行") ){ 
+	if ( ! status.localeCompare("正在运行") ){ 
         	var $text = $row.find(".fp").text();
         	var $href= "/containers/start";
         	var xmlHttpRequest;
