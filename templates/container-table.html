@@ -38,7 +38,7 @@ $('#container-table-{{project_info.id}}').on("click",".delete-container",functio
     });
 $('#container-table-{{project_info.id}}').on("click",".start-container",function() {
         var $row = $(this).closest("tr");    
-        var status = $row.find(".status").val();
+        var status = $row.find(".status.status_flag").val();
 	alert(status);
 	if ( status != "ok" ){ 
         	var $text = $row.find(".fp").text();
