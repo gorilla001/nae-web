@@ -832,3 +832,7 @@ line-height: 1.42857143;
 border: none;
 border-radius: 0;
 }
+.table-bordered {
+    font-family:STkaiti,KaiTi,SimSun;
+    border: none;
+}
