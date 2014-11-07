@@ -57,7 +57,12 @@ $('#editModal').on('shown.bs.modal', function () {
         	     ';
 		}
 		if ( Sys.opera ){ ; }
-		if ( Sys.safari ){ ; }
+		if ( Sys.safari ){
+		    var html=' \
+			<iframe id="sshFrame" src="' + src + '" style="zoom:0.70" width="100%" height="800" frameborder="0"> \
+			</iframe>\
+        	     ';
+ 		}
         	$("#editWindow").children().remove();
         	$("#editWindow").append($(html));}
 	,3000);
