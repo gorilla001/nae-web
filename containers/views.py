@@ -18,8 +18,8 @@ def index(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     container_list = rs.json()
-    #return render_to_response('container-table-replace.html',{'container_list':container_list})
-    return HttpResponse(json.dumps(container_list))
+    return render_to_response('container-table-replace.html',{'container_list':container_list})
+    #return HttpResponse(json.dumps(container_list))
 
 @require_auth
 def detail(request):
