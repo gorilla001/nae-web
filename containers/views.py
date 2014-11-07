@@ -57,7 +57,8 @@ def create(request):
                 'user_key':user_key,
         }
         rs = requests.post(url,headers=headers,data=json.dumps(data))
-    return HttpResponseRedirect('/containers')
+    return HttpResponse(json.dumps(rs.json()))
+    #return HttpResponseRedirect('/containers')
 
 @require_auth
 def delete(request):

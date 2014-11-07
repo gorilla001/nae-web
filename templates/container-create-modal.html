@@ -112,7 +112,7 @@ $('#createContainerModal').on('show.bs.modal', function() {
               type: "GET",
               dataType: "json",
               url: url }).done(function( data ) {
-		alert(data);
+		;
         });
 });
 $('#createContainerModal').on('shown.bs.modal', function() {
@@ -175,7 +175,7 @@ function createContainer()
                         url: url }).done(function( data ) {
                                 $("#container-table-{{project_info.id}}").html(data);
                 });
-            };
+            }
 	    if ( status == 100 ){ $("#errorContainerModal").modal("show") };
         }
     }
