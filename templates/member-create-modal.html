@@ -50,6 +50,8 @@ function createMember()
     var user_name = document.getElementById('user_name').value;
     var user_email= document.getElementById('user_email').value;
     var role_id = document.getElementById('role').value;
+	
+    if ( ! user_name || ! user_email || ! role_id ) { return };
 
     var http = new createXmlHttpRequest();
     var url ="/users/create/";
