@@ -21,6 +21,17 @@
         </div>
     </div>
 </div>
+<div id="errorImageModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="margin:0px;padding:0px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="editWindow" class="modal-body" style="background:#fff;margin:0px;padding:0px;">
+		<label cass="control-label" style="margin-left:150px;margin-top:10px;margin-bottom:10px;" >
+		   不能再创建新镜像了，每个项目最多能创建12个镜像，请删除不用的镜像后重试！ 
+		</label>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 $(".save-image").on("click",function(){
@@ -39,7 +50,7 @@ $(".save-image").on("click",function(){
 	    if ( data.status == 100 )
 		{
 		    //alert('images limit exceed');
-		    $("#saveImageModal").modal('show');   
+		    $("#errorImageModal").modal('show');   
 		}
 	});
 });
