@@ -39,7 +39,7 @@ $(".save-image").on("click",function(){
 	    if ( data.status == 100 )
 		{
 		    //alert('images limit exceed');
-		    $("#imgInfoLabel").innerText = '不能再创建镜像了';	    
+		    $("#saveImageModal").show()    
 		}
 	});
 });
