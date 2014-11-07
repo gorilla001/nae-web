@@ -822,9 +822,9 @@ input[type="checkbox"] {
     color: #fff;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-background-color: #000;
-border: solid 1px black;
-color: gray;
+    background-color: #000;
+    border: solid 1px black;
+    color: gray;
 }
 .nav-tabs>li>a {
 margin-right: 2px;
@@ -833,6 +833,5 @@ border: none;
 border-radius: 0;
 }
 .table-bordered {
-    font-family:STkaiti,KaiTi,SimSun;
     border: none;
 }
