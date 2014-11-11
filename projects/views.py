@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from auth.decorators import require_auth
-# Create your views here.
 import requests
 import json
 from django.http import HttpResponseRedirect
 from django.template  import RequestContext
 import os
 from jaeweb.settings import BASE_URL
+
+# Create your views here.
 
 @require_auth
 def home(request):
