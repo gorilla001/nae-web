@@ -13,6 +13,12 @@ import hashlib, time
 from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE,SIG_DFL) 
 
+# Monkeypatch python not to print "Broken Pipe" errors to stdout.
+import SocketServer
+from wsgiref import handlers
+SocketServer.BaseServer.handle_error = lambda *args, **kwargs: None
+handlers.BaseHandler.log_exception = lambda *args, **kwargs: None
+
 import logging
 
 logger=logging.getLogger(__name__)
