@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from jaeweb.settings import LOGIN_URL, app_key, app_name, auth_key, auth_url
 from django.contrib.auth import authenticate, login
 import hashlib, time
-import pprint
 
 # Create your views here.
 def auth_login(request):
@@ -39,9 +38,6 @@ def auth_login(request):
     for item in auth_result.json():
         if item['uid'] == auth_username :
             request.session['user_key'] = item['key']
-            print request.session['user_key']
-    print url
-    print auth_result.json()
     #url= http://auth.jumeird.com/api/allkey/?app_key=1adcdec244fb11e28dbe7cd1c3eeb629&app_name=optool_jumei
     request.session.set_expiry(6000)
     return HttpResponseRedirect('/')
