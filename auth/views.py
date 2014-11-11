@@ -13,6 +13,10 @@ import hashlib, time
 from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE,SIG_DFL) 
 
+import logging
+
+logger=logging.getLogger(__name__)
+
 # Create your views here.
 
 def auth_login(request):
@@ -40,7 +44,7 @@ def auth_login(request):
     url = "%s%s%s%s%s" % (auth_url, "/api/allkey/?",app_key, auth_key, app_name)
     headers = {'content-type': 'application/json'}
     auth_result = requests.get(url, headers=headers,)
-    print auth_result
+    logger.debug(auth_result)
     for item in auth_result.json():
         if item['uid'] == auth_username :
             request.session['user_key'] = item['key']
