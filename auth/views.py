@@ -40,7 +40,7 @@ def auth_login(request):
     headers = {'content-type': 'application/json'}
     auth_result = requests.get(url, headers=headers,)
     for item in auth_result.json():
-        if item.get('uid') == auth_username :
-            request.session['user_key'] = item.get('key')
+        if item['uid'] == auth_username :
+            request.session['user_key'] = item['key']
     request.session.set_expiry(6000)
     return HttpResponseRedirect('/')
