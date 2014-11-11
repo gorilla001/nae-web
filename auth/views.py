@@ -17,7 +17,6 @@ signal(SIGPIPE,SIG_DFL)
 
 def auth_login(request):
     auth_username = request.GET['username']
-    print auth_username
 
     request.session['is_authed'] = True;
     url = "{}{}{}{}{}{}".format(auth_url,"/api/member/?uid=",auth_username,app_key,auth_key,app_name)
@@ -41,6 +40,7 @@ def auth_login(request):
     url = "%s%s%s%s%s" % (auth_url, "/api/allkey/?",app_key, auth_key, app_name)
     headers = {'content-type': 'application/json'}
     auth_result = requests.get(url, headers=headers,)
+    print auth_result
     for item in auth_result.json():
         if item['uid'] == auth_username :
             request.session['user_key'] = item['key']
