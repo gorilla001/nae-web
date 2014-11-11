@@ -9,6 +9,10 @@ from jaeweb.settings import LOGIN_URL, app_key, app_name, auth_key, auth_url
 from django.contrib.auth import authenticate, login
 import hashlib, time
 
+## fix IOError: [Errno 32] Broken pipe 
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE,SIG_DFL) 
+
 # Create your views here.
 
 def auth_login(request):
