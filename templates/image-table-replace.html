@@ -70,13 +70,16 @@
     $("span").click(function(){
         var row = $(this).closest("tr");
         var id = row.find(".fp").text();
-	var url = '/images/conflict?id=' + id;
-	$.ajax({
-              type: "GET",
-              url: url }).done(function( data ) {
-              $("#409Div").html(data);
-       });
+	var status =row.find(".status").text();
+	if ( status == '409' ){ 
+	    var url = '/images/conflict?id=' + id;
+	    $.ajax({
+                  type: "GET",
+                  url: url }).done(function( data ) {
+                  $("#409Div").html(data);
+           });
 
-	$("#409Modal").modal("show");
+	    $("#409Modal").modal("show");
+	}
     });
 </script>
