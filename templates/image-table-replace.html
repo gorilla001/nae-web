@@ -71,7 +71,6 @@
         var row = $(this).closest("tr");
         var id = row.find(".fp").text();
 	var status =row.find(".status").text();
-	alert(status);
 	if ( status == 409 ){ 
 	    var url = '/images/conflict?id=' + id;
 	    $.ajax({
