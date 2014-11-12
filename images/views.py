@@ -106,5 +106,14 @@ def commit(request):
     headers={'Content-Type':'application/json'}
     rs = requests.post(url,headers=headers)
     return HttpResponse(json.dumps(rs.json()))
+
+@require_auth
+def conflict(request):
+    id=request.GET.get('id')
+    url="{}/images/conflict/{}".format(BASE_URL,id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    container_list = rs.json()
+    return render_to_response('image-conflict-table.html',{'container_list':container_list})
     
 	
