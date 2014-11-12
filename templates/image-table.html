@@ -5,13 +5,14 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
         var $href= "/images/delete" 
-        var xmlHttpRequest;
-        xmlHttpRequest = createXmlHttpRequest();
-        xmlHttpRequest.onreadystatechange = getResult;
-        var $url = $href + "?id=" + $text + "&f=0";
+        //var xmlHttpRequest;
+        //xmlHttpRequest = createXmlHttpRequest();
+        //xmlHttpRequest.onreadystatechange = getResult;
+        //var $url = $href + "?id=" + $text + "&f=0";
+        var url = $href + "?id=" + $text + "&f=0";
 
-        xmlHttpRequest.open("GET",$url,true);
-        xmlHttpRequest.send(null);
+        //xmlHttpRequest.open("GET",$url,true);
+        //xmlHttpRequest.send(null);
 
         var html=' \
                 <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px"> \
@@ -22,8 +23,16 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
              ';
         $row.find(".status").children().remove();
         $row.find(".status").append($(html));
+	$.ajax({
+            type: "GET",
+	    dataType: "json",
+            url: url }).done(function( data ) {
+		if (data.status = 409){
+			alert("409");
+        });
 
-        function getResult(){
+
+        /*function getResult(){
             if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
                 var $content = xmlHttpRequest.responseText;
                 if ($content == 'succeed'){
@@ -35,7 +44,7 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
                     });
                 }
             }
-        }
+        }*/
     });
 $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function() {
         var $row = $(this).closest("tr");    
