@@ -11,8 +11,8 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
         var $url = $href + "?id=" + $text + "&f=0";
         //var url = $href + "?id=" + $text + "&f=0";
 
-        //xmlHttpRequest.open("GET",$url,true);
-        //xmlHttpRequest.send(null);
+        xmlHttpRequest.open("GET",$url,true);
+        xmlHttpRequest.send(null);
 
         var html=' \
                 <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px"> \
