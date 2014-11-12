@@ -66,7 +66,7 @@ def delete(request):
     url = '{}/images/{}?force={}'.format(BASE_URL,image_id,f_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
-    return HttpResponse("succeed")
+    return HttpResponse(json.dumps(rs.json()))
 
 @require_auth
 def update(request):
