@@ -9,21 +9,6 @@ from jaeweb.settings import LOGIN_URL, app_key, app_name, auth_key, auth_url
 from django.contrib.auth import authenticate, login
 import hashlib, time
 
-### fix IOError: [Errno 32] Broken pipe 
-#from signal import signal, SIGPIPE, SIG_DFL
-#signal(SIGPIPE,SIG_DFL) 
-#
-## Monkeypatch python not to print "Broken Pipe" errors to stdout.
-#import SocketServer
-#from wsgiref import handlers
-#SocketServer.BaseServer.handle_error = lambda *args, **kwargs: None
-#handlers.BaseHandler.log_exception = lambda *args, **kwargs: None
-#
-#import logging
-#
-#logger=logging.getLogger(__name__)
-#
-# Create your views here.
 
 def auth_login(request):
     auth_username = request.GET['username']
@@ -34,7 +19,7 @@ def auth_login(request):
     auth_result = requests.get(url, headers=headers)
     resp_data = auth_result.json()
     if 'success' in resp_data:
-       user_id = resp_data['username'] 
+        user_id = resp_data['username'] 
         user_name = resp_data['fullname']
 
         request.session['user_id'] = user_id 
