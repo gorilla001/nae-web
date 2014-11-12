@@ -5,8 +5,6 @@ from django.views.generic import RedirectView
 import overview.urls
 import containers.urls
 import images.urls
-#import codeversion.urls
-#import home.urls
 import accounts.urls
 import projects.urls
 import auth.urls
