@@ -29,22 +29,23 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
             url: url }).done(function( data ) {
 		if (data.status = 409){
 			alert("409");
+		}
         });
+	
 
-
-        /*function getResult(){
-            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
-                var $content = xmlHttpRequest.responseText;
-                if ($content == 'succeed'){
-                    var url = '/images/update?project_id=' + {{ project_info.id }};
-                    $.ajax({
-                        type: "GET",
-                        url: url }).done(function( data ) {
-                                $("#image-table").html(data);
-                    });
-                }
-            }
-        }*/
+        //function getResult(){
+        //   if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+        //        var $content = xmlHttpRequest.responseText;
+        //        if ($content == 'succeed'){
+        //           var url = '/images/update?project_id=' + {{ project_info.id }};
+        //            $.ajax({
+        //                type: "GET",
+        //                url: url }).done(function( data ) {
+        //                        $("#image-table").html(data);
+        //            });
+        //        }
+        //    }
+        //}
     });
 $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function() {
         var $row = $(this).closest("tr");    
