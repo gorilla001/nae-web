@@ -27,7 +27,7 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
             type: "GET",
 	    dataType: "json",
             url: url }).done(function( data ) {
-		if (data.status = 409){
+		if (data.status == 409){
 			alert("409");
 		}
         });
