@@ -67,5 +67,9 @@
 </table>
 <label id="imgInfoLabel"></lable>
 <script>
-    $("span").click(function(){alert('click');});
+    $("span").click(function(){
+        var row = $(this).closest("tr");
+        var id = row.find(".fp").text();
+	alert(id);
+    });
 </script>
