@@ -155,7 +155,7 @@ LANGUAGE_CODE = 'zh-cn'
 
 LOGIN_URL = "http://auth.int.jumei.com/api/login?camefrom=jae"
 app_key = "&app_key="
-app_name = "&app_name=ops_docker&key=1"
+app_name = "&app_name=jae&key=1"
 auth_url = "https://auth.int.jumei.com"
 auth_key = "f89530a66b0d11e4a309fa163e0976a"
 
