@@ -9,7 +9,9 @@ from jaeweb.settings import LOGIN_URL, app_key, app_name, auth_key, auth_url
 from django.contrib.auth import authenticate, login
 import hashlib, time
 from django.http import HttpResponse
+import logging
 
+LOG=logging.getLogger('django')
 
 def auth_login(request):
     auth_username = request.GET.get('username')
@@ -31,6 +33,7 @@ def auth_login(request):
     auth_data = auth_result.json()
 
     if 'errormsg' in auth_data:
+	LOG.debug("auth error")	
 	return HttpResponse("{}</br>{}".format(url,auth_data))
 
     if 'admin' in auth_data['groups']:

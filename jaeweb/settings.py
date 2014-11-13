@@ -100,26 +100,12 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
-    },
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/var/log/jaeweb/jaeweb.log',
-        },
-    },
-    'loggers': {
-        'django.request': {
+	'django':{
             'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
-        },
-    },
+        }
+    }
 }
 
 # Internationalization
