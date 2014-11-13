@@ -11,7 +11,7 @@ import hashlib, time
 
 
 def auth_login(request):
-    auth_username = request.GET['username']
+    auth_username = request.GET.get('username')
 
     request.session['is_authed'] = True;
     url = "{}{}{}{}{}{}".format(auth_url,"/api/member/?uid=",auth_username,app_key,auth_key,app_name)
