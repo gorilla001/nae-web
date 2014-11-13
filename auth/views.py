@@ -31,7 +31,7 @@ def auth_login(request):
     auth_data = auth_result.json()
 
     if 'errormsg' in auth_data:
-	return HttpResponse("{}:{}".format(url,auth_data))
+	return HttpResponse("{}\n{}".format(url,auth_data))
 
     if 'admin' in auth_data['groups']:
         request.session['user_role']='admin'
