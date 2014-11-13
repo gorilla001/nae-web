@@ -29,6 +29,8 @@ def auth_login(request):
     auth_result = requests.get(url, headers=headers,)
     auth_data = auth_result.json()
 
+    if 'errormsg' in auth_data:
+	return
     if 'admin' in auth_data['groups']:
         request.session['user_role']='admin'
 
