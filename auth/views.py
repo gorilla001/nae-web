@@ -11,7 +11,7 @@ import hashlib, time
 from django.http import HttpResponse
 import logging
 
-LOG=logging.getLogger('django')
+LOG=logging.getLogger(__name__)
 
 def auth_login(request):
     auth_username = request.GET.get('username')
