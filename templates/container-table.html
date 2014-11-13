@@ -210,6 +210,8 @@ $('#container-table-{{project_info.id}}').on("click",".web-login",function() {
 		    $('#ctnSshFrame').attr("src","http://" + web[0]);
 		}
 	}
+	var title = $row.find(".name").text();
+	$('#CtnEditModalTitle').attr("text",title);
     	$('#ctnEditModal').modal('show');
     });
 
