@@ -153,7 +153,7 @@ TEMPLATE_DIRS = (
 
 LANGUAGE_CODE = 'zh-cn'
 
-LOGIN_URL = "http://auth.int.jumei.com/login?camefrom=jae"
+LOGIN_URL = "http://auth.int.jumei.com/api/login?camefrom=jae"
 app_key = "&app_key="
 app_name = "&app_name=ops_docker&key=1"
 auth_url = "https://auth.int.jumei.com"
