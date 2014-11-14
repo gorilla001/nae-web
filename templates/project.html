@@ -85,15 +85,13 @@ $(document).ready(
 	     $.ajax({
 		type:"GET",
 		url:url}).done(function(data){
-			alert(data);
 		    if (data != "stop"){
-			alert("continue");
-			var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
-                        $.ajax({
-                           type: "GET",
-                           url:url }).done(function( data ) {
-                           $("#container-table-{{project_info.id}}").html(data);
-                         });
+			//var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+                        //$.ajax({
+                        //   type: "GET",
+                        //   url:url }).done(function( data ) {
+                        //   $("#container-table-{{project_info.id}}").html(data);
+                        // });
 		     }
 		});
              
