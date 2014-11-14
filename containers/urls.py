@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'reboot/$',views.reboot,name='reboot'),
     url(r'commit/$',views.commit,name='commit'),
     url(r'destroy/$',views.destroy,name='destroy'),
+    url(r'status/$',views.status,name='status'),
 )
