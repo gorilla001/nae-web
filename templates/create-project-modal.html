@@ -22,13 +22,13 @@
                           <span class="help-inline">(项目的管理员，必填项)</span>
                       </div>  
                     </div>
-                    <div class="control-group">
+                    <!--<div class="control-group">
                       <label class="control-label" for="">管理员邮箱</label>
                       <div class="controls">
                           <input type="text" class="form-control" id="email" name="admin_email">
                           <span class="help-inline">(管理员的邮箱，必填项)</span>
                       </div>  
-                    </div>
+                    </div>-->
 
                   <div class="control-group version">
                   <label class="control-label" for="version">项目描述</label>
@@ -52,7 +52,8 @@ function createProject()
     var project_name = document.getElementById('name').value;
     var project_admin = document.getElementById('admin').value;
     var project_desc = document.getElementById('desc').value;
-    var admin_email = document.getElementById('email').value;
+    //var admin_email = document.getElementById('email').value;
+    var admin_email = project_admin + "@jumei.com"; 
 
     var http = new createXmlHttpRequest();
     var url ="/projects/create/";
