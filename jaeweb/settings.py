@@ -100,6 +100,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+	'django.db.backends': {
+            'handlers': ['null'],  # Quiet by default!
+            'propagate': False,
+            'level':'DEBUG',
+            },
 	'django':{
             'handlers': ['file'],
             'level': 'DEBUG',
