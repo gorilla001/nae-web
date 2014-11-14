@@ -4,11 +4,9 @@
                 <th style="width:5%;display:none">ID</th>
                 <th style="width:10%">项目名称</th>
                 <th> 项目描述</th>
-                <!--<th >项目成员</th>
-                <th >版本库地址</th>-->
                 <th style="width:10%">管理员</th>
                 <th style="width:12%">创建时间</th>
-                {% if user_role == 'admin' %}
+                {% if role == 'admin' %}
                 <th class="text-center" style="width:5.6%">操作</th>
                 {% endif %}
             </thead>
@@ -18,22 +16,20 @@
                         <td class="fp" style="display:none;">{{ item.ProjectId }}</td>
                         <td>{{ item.ProjectName }}</td>
                         <td><div class="w3">{{ item.ProjectDesc }}<div></td>
-                        <!--<td><div class="w2">{{ item.ProjectMembers }}</div></td>
-                        <td><div class="w1"> {{ item.ProjectHgs }}</div></td>-->
                         <td>{{ item.ProjectAdmin }}</td>
                         <td>{{ item.CreatedTime }}</td>
-                        {% if user_role == 'admin' %}
+                        {% if role == 'admin' %}
                         <td style="width:80px">
                             <div class="btn-group btn-group-sm pull-right">
-                                <button id="preview" class="btn btn-mini project-info">操作
+                                <button id="delete" class="btn btn-mini delete-project">删除
                                 </button>
-                                <button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
+                                <!--<button class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu custom-menu">
                                     <li><a href="#" class="delete-project">删除</a></li>
-                                    <!--<li><a href="#" class="modify-project">修改</a></li>-->
-                                </ul>
+                                    <li><a href="#" class="modify-project">修改</a></li>
+                                </ul>-->
                         </td>
                         {% endif %}
                     </tr>
