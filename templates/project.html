@@ -86,7 +86,7 @@ $(document).ready(
 		type:"GET",
 		url:url}).done(function(data){
 			alert(data);
-		    if (data == "continue"){
+		    if (data != "stop"){
 			var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
                         $.ajax({
                            type: "GET",
