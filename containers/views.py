@@ -118,17 +118,3 @@ def destroy(request):
     headers={'Content-Type':'application/json'}
     requests.post(url,headers=headers)
     return HttpResponse("succeed")
-
-@require_auth
-def status(request):
-    project_id = request.GET.get('project_id')
-    user_id = request.GET.get('user_id')
-    url="{}/containers?project_id={}&user_id={}".format(BASE_URL,project_id,user_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    container_list = rs.json()
-    for item in container_list:
-	if item.get('Status') != 'ok':
-	    return HttpResponse("continue")
-    return HttpResponse("stop")
-
