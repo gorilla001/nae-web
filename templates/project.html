@@ -75,19 +75,26 @@ $("a[href='#containersTab']").on('show.bs.tab', function(e) {
 $(document).ready(
        function () {
           setInterval(function() {
-              var url='/images/update?project_id=' + '{{ project_info.id }}';
+             var url='/images/update?project_id=' + '{{ project_info.id }}';
              $.ajax({
                 type: "GET",
                url:url }).done(function( data ) {
                    $("#image-table-{{project_info.id}}").html(data);
                });
-             var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
-             $.ajax({
-                type: "GET",
-                url:url }).done(function( data ) {
-                    $("#container-table-{{project_info.id}}").html(data);
-               });
-
+	     var url='/containers/status?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+	     $.ajax({
+		type:"GET",
+		url:url}).done(function(data){
+		    if (data == "continue"){
+			var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+                        $.ajax({
+                           type: "GET",
+                           url:url }).done(function( data ) {
+                           $("#container-table-{{project_info.id}}").html(data);
+                         });
+		     }
+		});
+             
          },5000);
 });
 </script>
