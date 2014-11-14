@@ -15,13 +15,13 @@
                             <span class="help-inline">(用户的名称,邮箱@前面的部分,必填项)</span>
                         </div>
                    </div>
-                   <div class="control-group email">
+                   <!--<div class="control-group email">
                         <label cass="control-label" for="email">邮箱地址</label>
                         <div class="controls">
                             <input type="text" class="form-control" id="user_email" name='user_email' style="width:152px">
                             <span class="help-inline">(ie.minguon@jumei.com,必填项)</span>
                         </div>
-                   </div>
+                   </div>-->
 
                     <div class="control-group role">
                       <label class="control-label" for="environ">角色</label>
@@ -48,7 +48,8 @@ function createMember()
 {
     var project_id = {{ project_info.id }};
     var user_name = document.getElementById('user_name').value;
-    var user_email= document.getElementById('user_email').value;
+    //var user_email= document.getElementById('user_email').value;
+    var user_email= user_name + "@jumei.com"; 
     var role_id = document.getElementById('role').value;
 	
     if ( ! user_name || ! user_email || role_id == '-1' ) { return };
