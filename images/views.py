@@ -115,5 +115,15 @@ def conflict(request):
     rs = requests.get(url,headers=headers)
     container_list = rs.json()
     return render_to_response('image-conflict-table.html',{'container_list':container_list})
-    
-	
+
+@require_auth
+def status(request):
+    project_id = request.GET.get('project_id')
+    url='{}/images?project_id={}'.format(BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    image_list=rs.json()
+    for item in image_list:
+	if item.get('Status') != 'ok':
+	    return HttpResponse("continue")
+    return HttpResponse("stop")
