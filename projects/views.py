@@ -102,6 +102,8 @@ def detail(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     user_info = rs.json() 
+    
+    role=''
     if user_info:
         if user_info['RoleID'] == 1:
     	    role='admin'
