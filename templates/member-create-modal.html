@@ -23,7 +23,7 @@
                         </div>
                    </div>-->
 
-                    <!--<div class="control-group role">
+                    <div class="control-group role">
                       <label class="control-label" for="environ">角色</label>
                       <div class="controls">
                           <select  class="form-control" id="role" name="user_role">  
@@ -33,7 +33,7 @@
                           </select>
                           <span class="help-inline">(用户在项目中的角色，必选项)</span>
                       </div>  
-                    </div>-->
+                    </div>
                  </form>
             </div>
         <div class="modal-footer">
@@ -50,8 +50,7 @@ function createMember()
     var user_name = document.getElementById('user_name').value;
     //var user_email= document.getElementById('user_email').value;
     var user_email= user_name + "@jumei.com"; 
-    //var role_id = document.getElementById('role').value;
-    var role_id = 0;
+    var role_id = document.getElementById('role').value;
 	
     if ( ! user_name || ! user_email || role_id == '-1' ) { return };
 
