@@ -91,35 +91,25 @@ def detail(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
-    role = 'normal'
-    if request.session.get('user_id',None) == project_info['admin']:
-        role = 'admin'
-
+    #role = 'normal'
+    #if request.session.get('user_id',None) == project_info['admin']:
+    #    role = 'admin'
     auth_username=request.session.get('user_name')
-    #url='{}/users?project_id={}'.format(BASE_URL,id)
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #user_list = rs.json() 
-
-    #url='{}/images?project_id={}'.format(BASE_URL,id)
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #image_list = rs.json() 
-
-    #print user_list
-
     user_id = request.session.get('user_id',None)
+
+    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    user_info = rs.json() 
+    if user_info['RoleID'] == 1:
+	role='admin'
+
     return render_to_response('project.html',
             {'project_info':project_info,
-             #'user_list':user_list,
-             #'image_list':image_list,
              'auth_username':auth_username,
              'role':role,
              'user_id': user_id},
             context_instance=RequestContext(request))
-
-
-
 
 @require_auth
 def create(request):
