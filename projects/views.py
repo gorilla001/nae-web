@@ -8,8 +8,10 @@ from django.http import HttpResponseRedirect
 from django.template  import RequestContext
 import os
 from jaeweb.settings import BASE_URL
+import logging
 
-# Create your views here.
+
+LOG=logging.getLogger('django')
 
 @require_auth
 def home(request):
@@ -80,7 +82,6 @@ def update(request):
     url='{}/projects/{}?name={}&desc={}&members={}&hgs={}'.format(BASE_URL,project_id,project_name,project_desc,project_members,project_hgs)
     headers={'Content-Type':'application/json'}
     rs = requests.put(url,headers=headers)
-    print rs.json()
     return  HttpResponse(json.dumps(rs.json()))
 
 
@@ -102,7 +103,8 @@ def detail(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     user_info = rs.json() 
-    
+    LOG.debug(user_info) 
+
     role=''
     if user_info:
         if user_info['RoleID'] == 1:
