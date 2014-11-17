@@ -149,9 +149,21 @@ def refresh(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
-    role = 'normal'
-    if request.session.get('user_id',None) == project_info['admin']:
-        role = 'admin'
+
+    user_id = request.session.get('user_id',None)
+    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    user_info = rs.json() 
+    role=''
+    if user_info:
+        if user_info['RoleID'] == 1:
+    	    role='admin'
+
+    #role = 'normal'
+    #if request.session.get('user_id',None) == project_info['admin']:
+    #    role = 'admin'
+
     url='{}/users?project_id={}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
