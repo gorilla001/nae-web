@@ -110,6 +110,7 @@ def detail(request):
         if user_info['RoleID'] == 1:
     	    role='admin'
 
+    LOG.debug(role)
     return render_to_response('project.html',
             {'project_info':project_info,
              'auth_username':auth_username,
