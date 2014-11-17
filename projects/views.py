@@ -91,18 +91,19 @@ def detail(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
-    #role = 'normal'
-    #if request.session.get('user_id',None) == project_info['admin']:
-    #    role = 'admin'
+
+    role = 'normal'
+    if request.session.get('user_id',None) == project_info['admin']:
+        role = 'admin'
     auth_username=request.session.get('user_name')
     user_id = request.session.get('user_id',None)
 
-    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_info = rs.json() 
-    if user_info['RoleID'] == 1:
-	role='admin'
+    #url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #user_info = rs.json() 
+    #if user_info['RoleID'] == 1:
+    #	role='admin'
 
     return render_to_response('project.html',
             {'project_info':project_info,
