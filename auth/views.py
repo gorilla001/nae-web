@@ -45,6 +45,6 @@ def auth_login(request):
     for item in auth_result.json():
         if item['uid'] == auth_username :
             request.session['user_key'] = item['key']
-    request.session.set_expiry(6000)
+    request.session.set_expiry(86400)
 
     return HttpResponseRedirect('/')
