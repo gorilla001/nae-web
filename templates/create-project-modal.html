@@ -97,6 +97,19 @@ function createProject()
         });
     });
 }
+$('#createProjectModal').on('shown.bs.modal', function() {
+        var url = "/images/base";
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+              $("#image_list option[value !='-1']").remove();
+              for (var i in data){
+                $("#image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + ":" + data[i].ImageTag + "</option>");
+              }
+        });
+});
+
 </script>
 
 

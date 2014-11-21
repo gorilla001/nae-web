@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'edit/$',views.edit,name="edit"),
     url(r'commit/$',views.commit,name="commit"),
     url(r'conflict/$',views.conflict,name="conflict"),
+    url(r'base/$',views.base,name="base"),
 )

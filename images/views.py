@@ -126,5 +126,15 @@ def conflict(request):
     rs = requests.get(url,headers=headers)
     container_list = rs.json()
     return render_to_response('image-conflict-table.html',{'container_list':container_list})
+
+@require_auth
+def base(request):
+    url="{}/images/base".format(BASE_URL,id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    image_list = rs.json()
+    return HttpResponse(json.dumps(image_list))
+
+
     
 	
