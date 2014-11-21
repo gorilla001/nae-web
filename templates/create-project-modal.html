@@ -32,7 +32,7 @@
 		    <div class="control-group project">
                       <label class="control-label" for="image">基础镜像</label>
                       <div class="controls">
-                          <select id='image_list' class="form-control" name="image_name" style="width:350px">  
+                          <select id='base_image_list' class="form-control" name="image_name" style="width:350px">  
                             <option value="-1">请选择</option>
                           </select>  
                         <span class="help-inline">(项目所需的基础镜像)</span>
@@ -103,9 +103,9 @@ $('#createProjectModal').on('shown.bs.modal', function() {
               type: "GET",
               dataType: "json",
               url: url }).done(function( data ) {
-              $("#image_list option[value !='-1']").remove();
+              $("#base_image_list option[value !='-1']").remove();
               for (var i in data){
-                $("#image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + ":" + data[i].ImageTag + "</option>");
+                $("#base_image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + ":" + data[i].ImageTag + "</option>");
               }
         });
 });
