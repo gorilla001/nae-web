@@ -125,11 +125,13 @@ def create(request):
         project_desc=request.POST.get('desc').strip()
         project_admin=request.POST.get('admin').strip()
         admin_email = request.POST.get('email').strip()
+        base_image = request.POST.get('image').strip()
         data = {
                 'project_name' : project_name, 
                 'project_desc' : project_desc,
                 'project_admin':project_admin,
                 'admin_email':admin_email,
+		'base_image':base_image,
         }
         url='{}/projects'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
