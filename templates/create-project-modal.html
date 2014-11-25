@@ -67,7 +67,7 @@ function createProject()
 
     var http = new createXmlHttpRequest();
     var url ="/projects/create/";
-    var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image" + base_image;
+    var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image=" + base_image;
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);
