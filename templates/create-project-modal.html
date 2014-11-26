@@ -63,8 +63,8 @@ function createProject()
     var project_desc = document.getElementById('desc').value;
     //var admin_email = document.getElementById('email').value;
     var admin_email = project_admin + "@jumei.com"; 
-    var base_image=$('#base_image_list option:selected').text();
-
+    var base_image=$('#base_image_list option:selected').val();
+    alert(base_image);
     var http = new createXmlHttpRequest();
     var url ="/projects/create/";
     var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image=" + base_image;
