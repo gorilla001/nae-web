@@ -39,7 +39,7 @@ $('#image-table-{{project_info.id}}').on("click",".delete-image",function() {
            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
                 var $content = xmlHttpRequest.responseText;
                 if ($content == 'succeed'){
-                   var url = '/images/update?project_id=' + {{ project_info.id }};
+                   var url = '/images/update?project_id=' + '{{ project_info.id }}';
                     $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
@@ -76,7 +76,7 @@ $("#image-table-{{project_info.id}}").on("click",".delete-image-force",function(
             if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
                 var $content = xmlHttpRequest.responseText;
                 if ($content == 'succeed'){
-                    var url = '/images/update?project_id=' + {{ project_info.id }};
+                    var url = '/images/update?project_id=' + '{{ project_info.id }}';
                     $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {

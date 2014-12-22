@@ -34,9 +34,9 @@
                    </li>
                         {% for item in projects_list %}
                         <li>
-                        <a value="{{ item.ProjectId }}" data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>
+                            <a value="{{ item.id }}" data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>
                                 <span class="glyphicon glyphicon-th-list"></span>
-                                {{ item.ProjectName }}
+                                {{ item.name }}
                             </a>
                         </li>
                         {% endfor %}

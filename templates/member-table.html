@@ -11,7 +11,7 @@ $('#member-table-{{project_info.id}}').on("click",".delete-user",function() {
               type: "GET",
               dataType: "json",
               url: url }).done(function( data ) {
-                var project_id = {{ project_info.id }};
+                var project_id = '{{ project_info.id }}';
                 var _url = "/users/refresh?project_id=" + project_id;
                 $.ajax({
                     type: "GET",

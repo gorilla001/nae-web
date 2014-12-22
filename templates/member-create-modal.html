@@ -15,43 +15,34 @@
                             <span class="help-inline">(用户的名称,邮箱@前面的部分,必填项)</span>
                         </div>
                    </div>
-                   <!--<div class="control-group email">
-                        <label cass="control-label" for="email">邮箱地址</label>
-                        <div class="controls">
-                            <input type="text" class="form-control" id="user_email" name='user_email' style="width:152px">
-                            <span class="help-inline">(ie.minguon@jumei.com,必填项)</span>
-                        </div>
-                   </div>-->
-
                     <div class="control-group role">
                       <label class="control-label" for="environ">角色</label>
                       <div class="controls">
                           <select  class="form-control" id="role" name="user_role">  
                             <option value="-1">请选择</option>
-                            <option value="0">开发者</option>
-                            <option value="1">管理员</option>
+                            <option value="0">管理员</option>
+                            <option value="1">开发者</option>
+                            <option value="2">测试者</option>
                           </select>
                           <span class="help-inline">(用户在项目中的角色，必选项)</span>
                       </div>  
                     </div>
                  </form>
             </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="createMember()">确定</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="createMember()">确定</button>
+            </div>
         </div>
-    </div>
-</div> 
+    </div> 
 </div>
 <script>
 function createMember()
 {
-    var project_id = {{ project_info.id }};
+    var project_id = '{{ project_info.id }}';
     var user_name = document.getElementById('user_name').value;
-    //var user_email= document.getElementById('user_email').value;
     var user_email= user_name + "@jumei.com"; 
     var role_id = document.getElementById('role').value;
-    //var role_id = 0;
 	
     if ( ! user_name || ! user_email || role_id == '-1' ) { return };
 

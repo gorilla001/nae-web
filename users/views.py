@@ -122,8 +122,8 @@ def create(request):
         role_id = request.POST.get('role_id').strip()
         data = {
                 'project_id' : project_id, 
-                'user_name' : user_name,
-                'user_email': user_email,
+                'name' : user_name,
+                'email': user_email,
                 'role_id':role_id,
         }
         print data
@@ -148,27 +148,27 @@ def refresh(request):
     url='{}/projects/{}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
+    print 'here'
     project_info = rs.json() 
+    user_list = project_info['users']
+    print user_list
 
-    user_id = request.session.get('user_id',None)
-    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_info = rs.json() 
-    role=''
-    if user_info:
-        if user_info['RoleID'] == 1:
-    	    role='admin'
+    #user_id = request.session.get('user_id',None)
+    #url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #user_info = rs.json() 
+    #role=''
+    #if user_info:
+    #    if user_info['RoleID'] == 1:
+    #	    role='admin'
 
-    #role = 'normal'
-    #if request.session.get('user_id',None) == project_info['admin']:
-    #    role = 'admin'
-
-    url='{}/users?project_id={}'.format(BASE_URL,project_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_list=rs.json()
-    return render_to_response('member-table-replace.html',{'user_list':user_list,'role':role})
+    #url='{}/users?project_id={}'.format(BASE_URL,project_id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #user_list=rs.json()
+    #return render_to_response('member-table-replace.html',{'user_list':user_list,'role':role})
+    return render_to_response('member-table-replace.html',{'user_list':user_list})
 
 
     

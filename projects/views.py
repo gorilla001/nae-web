@@ -16,7 +16,7 @@ LOG=logging.getLogger('django')
 @require_auth
 def home(request):
     if request.session.get('user_role',None) == 'admin':
-        url='{}/projects?user_id=admin'.format(BASE_URL)
+        url='{}/projects'.format(BASE_URL)
     else:
         user_id = request.session.get('user_id')
         url='{}/projects?user_id={}'.format(BASE_URL,user_id)
@@ -30,10 +30,10 @@ def home(request):
 @require_auth
 def index(request):
     if request.session.get('user_role',None) == 'admin':
-        url='{}/projects?user_id=admin'.format(BASE_URL)
+        url='{}/projects'.format(BASE_URL)
     else:
         user_id = request.session.get('user_id')
-        url='{}/projects?user_id={}'.format(BASE_URL,user_id)
+        url='%s/users/%s' % (BASE_URL,user_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     projects_list=rs.json()
@@ -93,29 +93,34 @@ def detail(request):
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
 
-    #role = 'normal'
-    #if request.session.get('user_id',None) == project_info['admin']:
-    #    role = 'admin'
-    auth_username=request.session.get('user_name')
-    user_id = request.session.get('user_id',None)
+    if request.session.get('user_role',None) == 'admin':
+	role = 'admin'
+    #auth_username=request.session.get('user_name')
+    #user_id = request.session.get('user_id',None)
 
-    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_info = rs.json() 
-    LOG.debug(user_info) 
+    #url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #user_info = rs.json() 
+    #LOG.debug(user_info) 
 
-    role=''
-    if user_info:
-        if user_info['RoleID'] == 1:
-    	    role='admin'
+    #role=''
+    #if user_info:
+    #    if user_info['RoleID'] == 1:
+    #	    role='admin'
 
-    LOG.debug(role)
+    #LOG.debug(role)
+    #return render_to_response('project.html',
+    #        {'project_info':project_info,
+    #         'auth_username':auth_username,
+    #         'role':role,
+    #         'user_id': user_id},
+    #        context_instance=RequestContext(request))
     return render_to_response('project.html',
             {'project_info':project_info,
-             'auth_username':auth_username,
-             'role':role,
-             'user_id': user_id},
+             #'auth_username':auth_username},
+             'role':role},
+    #         'user_id': user_id},
             context_instance=RequestContext(request))
 
 @require_auth
@@ -123,15 +128,15 @@ def create(request):
     if request.method == 'POST':
         project_name=request.POST.get('name').strip()
         project_desc=request.POST.get('desc').strip()
-        project_admin=request.POST.get('admin').strip()
-        admin_email = request.POST.get('email').strip()
-        base_image = request.POST.get('image').strip()
+        #project_admin=request.POST.get('admin').strip()
+        #admin_email = request.POST.get('email').strip()
+        #base_image = request.POST.get('image').strip()
         data = {
-                'project_name' : project_name, 
-                'project_desc' : project_desc,
-                'project_admin':project_admin,
-                'admin_email':admin_email,
-		'base_image':base_image,
+                'name' : project_name, 
+                'desc' : project_desc,
+                #'admin':project_admin,
+                #'email':admin_email,
+		#'base_image':base_image,
         }
         url='{}/projects'.format(BASE_URL)
         headers={'Content-Type':'application/json'}

@@ -27,7 +27,7 @@
 <script>
 function createHg()
 {
-    var project_id = {{ project_info.id }};
+    var project_id = "{{ project_info.id }}";
     var hg_addr = document.getElementById('hg_addr').value;
     if ( ! hg_addr ){ return };
     var url ="/hgs/create/";

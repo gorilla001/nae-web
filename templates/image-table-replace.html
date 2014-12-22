@@ -3,12 +3,12 @@
 	    {% for item in image_list %}
 		{% if role == 'admin' %}
 	        <tr>
-	            <td class="fp" style="display:none">{{ item.ID }}</td>
-	            <td width="15%" class="name">{{ item.ImageName }}</td>
-	            <td width="15%" class="tag">{{ item.ImageTag }}</td>
-	            <td width="20%">{{ item.ImageDesc }}</td>
-	            <td width="28%" style="text-align:right">{{ item.CreatedTime }}</td>
-	            {% if item.Status == 'building' %}
+	            <td class="fp" style="display:none">{{ item.id }}</td>
+	            <td width="15%" class="name">{{ item.name }}</td>
+	            <td width="15%" class="tag">{{ item.tag }}</td>
+	            <td width="20%">{{ item.desc }}</td>
+	            <td width="28%" style="text-align:right">{{ item.created }}</td>
+	            {% if item.status == 'building' %}
 	            <td width="7%" style="text-align:right" class="status">
 	            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
 	                <div class="progress-bar progress-bar-striped active"   role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -16,7 +16,7 @@
 	                  </div>
 	            </div>
 	            </td>
-	            {% elif item.Status == 'ok' %}
+	            {% elif item.status == 'ok' %}
 	            <td width="7%" style="text-align:right" class="status">
 	                <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
 	                    <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -24,7 +24,7 @@
 	                     </div>
 	               </div> 
 	            </td>
-	            {% elif item.Status == 'deleting' %}
+	            {% elif item.status == 'deleting' %}
 	            <td width="7%" style="text-align:right" class="status">
 	            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
 	                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -41,7 +41,7 @@
 	                </div>
 	            </td>
 		    <td style="display:none" class="flag">
-	                <span style="display:none">{{ item.Status }}</span>
+	                <span style="display:none">{{ item.status }}</span>
 		    </td>
 	            {% endif %}
 		    <td >
@@ -57,11 +57,48 @@
 	        </tr>
 		{% else %}
 		<tr>
-		    <td class="fp" style="display:none">{{ item.ID }}</td>
-	            <td width="25%" class="name">{{ item.ImageName }}</td>
-	            <td width="25%" class="tag">{{ item.ImageTag }}</td>
-	            <td width="25%">{{ item.ImageDesc }}</td>
-	            <td width="25%" style="text-align:right">{{ item.CreatedTime }}</td>
+		    <td class="fp" style="display:none">{{ item.id }}</td>
+	            <td width="25%" class="name">{{ item.name }}</td>
+	            <td width="25%" class="tag">{{ item.tag }}</td>
+	            <td width="25%">{{ item.desc }}</td>
+		    {% if item.status == 'building' %}
+	            <td width="7%" style="text-align:right" class="status">
+	            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+	                <div class="progress-bar progress-bar-striped active"   role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	                    <span class="show">正在构建</span>
+	                  </div>
+	            </div>
+	            </td>
+	            {% elif item.status == 'ok' %}
+	            <td width="7%" style="text-align:right" class="status">
+	                <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+	                    <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	                        <span class="show">构建成功</span>
+	                     </div>
+	               </div> 
+	            </td>
+	            {% elif item.status == 'deleting' %}
+	            <td width="7%" style="text-align:right" class="status">
+	            <div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+	                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	                    <span class="show">正在删除</span>
+	                  </div>
+	            </div>
+	            </td>
+	            {% else %}
+	            <td width="7%" style="text-align:right" class="status">
+			<div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
+	                    <div class="progress-bar progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	                        <span class="show" style="cursor:pointer;">点我试试</span>
+	                    </div>
+	                </div>
+	            </td>
+		    <td style="display:none" class="flag">
+	                <span style="display:none">{{ item.status }}</span>
+		    </td>
+		    {% endif %}
+
+	            <td width="25%" style="text-align:right">{{ item.created }}</td>
 		</tr>
 		{% endif %}
 

@@ -27,6 +27,7 @@ def show(request):
     url='{}/images/{}'.format(BASE_URL,image_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
+    print rs.json()
     return HttpResponse(json.dumps(rs.json())) 
 
 
@@ -46,12 +47,12 @@ def create(request):
             url="{}/images".format(BASE_URL)
             headers={'Content-Type':'application/json'}
             data  = {
-                    'image_name':image_name,
+                    'name':image_name,
                     'project_id':project_id,
-                    'repo_path':repo_path,
-                    'repo_branch':repo_branch,
-                    'image_desc':image_desc,
-                    'user_name':user_name,
+                    'repos':repo_path,
+                    'branch':repo_branch,
+                    'desc':image_desc,
+                    'user_id':user_name,
             }
             rs = requests.post(url,headers=headers,data=json.dumps(data))
             logger.debug(rs.json())
@@ -75,28 +76,30 @@ def update(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
-    logger.debug(image_list)
-
-    url='{}/projects/{}'.format(BASE_URL,project_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    project_info = rs.json() 
-
-    user_id = request.session.get('user_id',None)
-    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_info = rs.json() 
-    role=''
-    if user_info:
-        if user_info['RoleID'] == 1:
-    	    role='admin'
-
+    print image_list
+#    logger.debug(image_list)
+#
+#    url='{}/projects/{}'.format(BASE_URL,project_id)
+#    headers={'Content-Type':'application/json'}
+#    rs = requests.get(url,headers=headers)
+#    project_info = rs.json() 
+#
+#    user_id = request.session.get('user_id',None)
+#    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
+#    headers={'Content-Type':'application/json'}
+#    rs = requests.get(url,headers=headers)
+#    user_info = rs.json() 
+#    role=''
+#    if user_info:
+#        if user_info['RoleID'] == 1:
+#    	    role='admin'
+#
     #role = 'normal'
     #if request.session.get('user_id',None) == project_info['admin']:
     #    role = 'admin'
 
-    return render_to_response('image-table-replace.html',{'image_list':image_list,'role':role})
+    #return render_to_response('image-table-replace.html',{'image_list':image_list,'role':role})
+    return render_to_response('image-table-replace.html',{'image_list':image_list})
 
 @require_auth
 def edit(request):

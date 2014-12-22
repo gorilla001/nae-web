@@ -18,8 +18,8 @@ def index(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     container_list = rs.json()
+    print container_list
     return render_to_response('container-table-replace.html',{'container_list':container_list})
-    #return HttpResponse(json.dumps(container_list))
 
 @require_auth
 def detail(request):
@@ -47,13 +47,13 @@ def create(request):
         url='{}/containers'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
         data = {
-                'container_environ':container_environ,
-                'container_project':container_project,
-                'container_image':container_image,
-                'container_hg':container_hg,
-                'container_code':container_code,
+                'env':container_environ,
+                'project_id':container_project,
+                'image_id':container_image,
+                'repos':container_hg,
+                'branch':container_code,
                 'app_type':app_type,
-                'user_name':user_name,
+                'user_id':user_name,
                 'user_key':user_key,
         }
         rs = requests.post(url,headers=headers,data=json.dumps(data))

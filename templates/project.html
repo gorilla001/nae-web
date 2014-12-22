@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#projectinfoTab">项目详情</a></li>
+        <li class="active"><a data-toggle="tab" href="#projectinfoTab">基本信息</a></li>
         <li><a data-toggle="tab" href="#projectMembersTab">项目成员</a></li>
         <li><a data-toggle="tab" href="#projectHgTab">版本库</a></li>
         <li ><a data-toggle="tab" href="#imagesTab">镜像</a></li>
@@ -72,23 +72,23 @@ $("a[href='#containersTab']").on('show.bs.tab', function(e) {
             $("#container-table-{{project_info.id}}").html(data);
         });
 });
-$(document).ready(
-       function () {
-          setInterval(function() {
-              var url='/images/update?project_id=' + '{{ project_info.id }}';
-             $.ajax({
-                type: "GET",
-               url:url }).done(function( data ) {
-                   $("#image-table-{{project_info.id}}").html(data);
-               });
-             var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
-             $.ajax({
-                type: "GET",
-                url:url }).done(function( data ) {
-                    $("#container-table-{{project_info.id}}").html(data);
-               });
-
-         },5000);
-});
+//$(document).ready(
+//       function () {
+//          setInterval(function() {
+//              var url='/images/update?project_id=' + '{{ project_info.id }}';
+//             $.ajax({
+//                type: "GET",
+//               url:url }).done(function( data ) {
+//                   $("#image-table-{{project_info.id}}").html(data);
+//               });
+//             var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+//             $.ajax({
+//                type: "GET",
+//                url:url }).done(function( data ) {
+//                    $("#container-table-{{project_info.id}}").html(data);
+//               });
+//
+//         },5000);
+//});
 </script>
 

@@ -11,9 +11,9 @@
         {% for item in hg_list %}
            {% ifequal role 'admin' %}
             <tr>
-                <td class="fp" style="display:none">{{ item.Id }}</td>
-                <td width="30%">{{ item.Content}}<div></td>
-                <td width="30%" style="text-align:right">{{ item.Created }}</td>
+                <td class="fp" style="display:none">{{ item.id }}</td>
+                <td width="30%">{{ item.repo_path}}<div></td>
+                <td width="30%" style="text-align:right">{{ item.created }}</td>
 		<td width="40%">
                     <div class="btn-group btn-group-sm pull-right">
                     	<button class="btn btn-mini btn-danger delete-hg">删除
@@ -23,9 +23,9 @@
             </tr>
 	    {% else %}
             <tr>
-                <td class="fp" style="display:none">{{ item.Id }}</td>
-                <td width="50%">{{ item.Content}}<div></td>
-                <td width="50%" style="text-align:right">{{ item.Created }}</td>
+                <td class="fp" style="display:none">{{ item.id }}</td>
+                <td width="50%">{{ item.repo_path}}<div></td>
+                <td width="50%" style="text-align:right">{{ item.created }}</td>
             </tr>
             {% endifequal %}
         {% endfor %} 

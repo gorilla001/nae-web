@@ -3,15 +3,15 @@
         {% for item in user_list %}
             {% ifequal role 'admin' %}
             <tr>
-                <td class="fp" style="display:none">{{ item.Id }}</td>
-                <td>{{ item.UserID}}</td>
-                <td>{{ item.Email}}<div></td>
-                {% ifequal item.RoleID  0 %}
+                <td class="fp" style="display:none">{{ item.id }}</td>
+                <td>{{ item.name}}</td>
+                <td>{{ item.email}<div></td>
+                {% ifequal item.role_id  0 %}
                 <td class="text-center"><font size="2" color="green">普通用户</font></div></td>
                 {% else %}
                 <td class="text-center"><font size="2" color="green">管理员</font></div></td>
                 {% endifequal %}
-                <td class="text-center" width="30%">{{ item.Created }}</td>
+                <td class="text-center" width="30%">{{ item.created }}</td>
 		<td>
                     <div class="btn-group btn-group-sm pull-right">
                     	<button class="btn btn-mini btn-danger delete-user">删除
@@ -21,15 +21,17 @@
             </tr>
 	    {% else %}
             <tr>
-		<td class="fp" style="display:none">{{ item.Id }}</td>
-                <td>{{ item.UserID}}</td>
-                <td>{{ item.Email}}<div></td>
-                {% ifequal item.RoleID  0 %}
-                <td class="text-center" ><font size="2" color="green">普通用户</font></div></td>
-                {% else %}
+		<td class="fp" style="display:none">{{ item.id }}</td>
+                <td>{{ item.name}}</td>
+                <td>{{ item.email}}<div></td>
+                {% if item.role_id == 0 %}
                 <td class="text-center" ><font size="2" color="green">管理员</font></div></td>
-                {% endifequal %}
-                <td style="text-align:right" width="25%">{{ item.Created }}</td>
+                {% elif item.role_id == 1 %}
+                <td class="text-center" ><font size="2" color="green">开发者</font></div></td>
+                {% elif item.role_id == 2 %}
+                <td class="text-center" ><font size="2" color="green">测试者</font></div></td>
+                {% endif %}
+                <td style="text-align:right" width="25%">{{ item.created }}</td>
 	    </tr>
             {% endifequal %}
         {% endfor %} 

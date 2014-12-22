@@ -25,7 +25,7 @@ def home(request):
 @require_auth
 def index(request):
     project_id = request.GET.get('project_id')
-    url='{}/hgs?project_id={}'.format(BASE_URL,project_id)
+    url='{}/repos?project_id={}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     hg_list=rs.json()
@@ -113,13 +113,12 @@ def detail(request):
 def create(request):
     if request.method == 'POST':
         project_id=request.POST.get('project_id').strip()
-        hg_addr = request.POST.get('hg_addr').strip()
+        repo_path = request.POST.get('hg_addr').strip()
         data = {
                 'project_id' : project_id, 
-                'hg_addr':hg_addr,
+                'repo_path':repo_path,
         }
-        print data
-        url='{}/hgs'.format(BASE_URL)
+        url='{}/repos'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
         rs = requests.post(url,headers=headers,data=json.dumps(data))
     return HttpResponse(json.dumps(rs.json()))
@@ -137,28 +136,35 @@ def delete(request):
 @require_auth
 def refresh(request):
     project_id = request.GET.get('project_id')
-    url='{}/projects/{}'.format(BASE_URL,project_id)
+    #url='{}/projects/{}'.format(BASE_URL,project_id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #project_info = rs.json() 
+    url = '%s/repos?project_id=%s' % (BASE_URL,project_id)  
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    project_info = rs.json() 
+    hg_list = rs.json()
+    #hg_list = project_info['repos'] 
+    print hg_list
 
-    user_id = request.session.get('user_id',None)
-    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    user_info = rs.json() 
-    role=''
-    if user_info:
-        if user_info['RoleID'] == 1:
-    	    role='admin'
-    #role = 'normal'
-    #if request.session.get('user_id',None) == project_info['admin']:
-    #    role = 'admin'
-    url='{}/hgs?project_id={}'.format(BASE_URL,project_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    hg_list=rs.json()
-    return render_to_response('hg-table-replace.html',{'hg_list':hg_list,'role':role})
+    #user_id = request.session.get('user_id',None)
+    #url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #user_info = rs.json() 
+    #role=''
+    #if user_info:
+    #    if user_info['RoleID'] == 1:
+    #	    role='admin'
+    ##role = 'normal'
+    ##if request.session.get('user_id',None) == project_info['admin']:
+    ##    role = 'admin'
+    #url='{}/hgs?project_id={}'.format(BASE_URL,project_id)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #hg_list=rs.json()
+    #return render_to_response('hg-table-replace.html',{'hg_list':hg_list,'role':role})
+    return render_to_response('hg-table-replace.html',{'hg_list':hg_list})
 
 
     

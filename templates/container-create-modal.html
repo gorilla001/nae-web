@@ -106,7 +106,7 @@
 
 <script>
 $('#createContainerModal').on('show.bs.modal', function() {
-        var project_id = {{ project_info.id }};
+        var project_id = '{{ project_info.id }}';
         var url = "/containers?project_id=" + project_id;
         $.ajax({
               type: "GET",
@@ -116,7 +116,7 @@ $('#createContainerModal').on('show.bs.modal', function() {
         });
 });
 $('#createContainerModal').on('shown.bs.modal', function() {
-        var project_id = {{ project_info.id }};
+        var project_id = '{{ project_info.id }}';
         var url = "/images?project_id=" + project_id;
         $.ajax({
               type: "GET",
@@ -124,7 +124,7 @@ $('#createContainerModal').on('shown.bs.modal', function() {
               url: url }).done(function( data ) {
               $("#image_list option[value !='-1']").remove();
               for (var i in data){
-                $("#image_list").append("<option value=" + data[i].ID + ">" + data[i].ImageName + ":" + data[i].ImageTag + "</option>");
+                $("#image_list").append("<option value=" + data[i].id + ">" + data[i].name + ":" + data[i].tag + "</option>");
               }
         });
 });
@@ -135,8 +135,8 @@ $("#image_list").change(function(){
          type: "GET",
          dataType: "json",
          url: url }).done(function( data ) {
-             $("#hg_list").val(data.RepoPath);
-             $("#container_code").val(data.Branch);
+             $("#hg_list").val(data.repos);
+             $("#container_code").val(data.branch);
 
    });
 });

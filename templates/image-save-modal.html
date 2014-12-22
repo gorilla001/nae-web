@@ -48,7 +48,7 @@ $(".save-image").on("click",function(){
 	var tag = _text[1];
 	var ctn = $("#img_name_2").val();
 	var id = $("#imgId").val();
-	var url = "/images/commit?repo=" + repo + "&tag=" + tag + "&ctn=" + ctn + "&id=" + id + "&proj_id=" + {{ project_info.id }};
+	var url = "/images/commit?repo=" + repo + "&tag=" + tag + "&ctn=" + ctn + "&id=" + id + "&proj_id=" + '{{ project_info.id }}';
 	$.ajax({
 		type:"GET",
 		dataType:"json",
