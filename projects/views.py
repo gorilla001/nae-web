@@ -15,32 +15,43 @@ LOG=logging.getLogger('django')
 
 @require_auth
 def home(request):
+    """get all project list  or projects that belong to specified user."""
     if request.session.get('user_role',None) == 'admin':
         url='{}/projects'.format(BASE_URL)
+        headers={'Content-Type':'application/json'}
+        rs = requests.get(url,headers=headers)
+        projects_list=rs.json()
     else:
         user_id = request.session.get('user_id')
-        url='{}/projects?user_id={}'.format(BASE_URL,user_id)
-    print url
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    projects_list=rs.json()
+        url='%s/users/%s' % (BASE_URL,user_id)
+        headers={'Content-Type':'application/json'}
+        rs = requests.get(url,headers=headers)
+        projects_list=rs.json()['projects']
+
     auth_username=request.session.get('user_name')
+
     return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username},context_instance=RequestContext(request))
 
 @require_auth
 def index(request):
+    """show all projects for admin and projects for specified user."""
     if request.session.get('user_role',None) == 'admin':
         url='{}/projects'.format(BASE_URL)
+        headers={'Content-Type':'application/json'}
+        rs = requests.get(url,headers=headers)
+        projects_list=rs.json()
     else:
         user_id = request.session.get('user_id')
         url='%s/users/%s' % (BASE_URL,user_id)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    projects_list=rs.json()
-    role=request.session.get('user_role',None)
+        headers={'Content-Type':'application/json'}
+        rs = requests.get(url,headers=headers)
+        projects_list=rs.json()['projects']
+
+    """get role for this platform"""
+    platform_role=request.session.get('user_role',None)
+
     auth_username=request.session.get('user_name')
-    print projects_list
-    return render_to_response('project-list.html',{'auth_username':auth_username,'role':role,'projects_list':projects_list},context_instance=RequestContext(request))
+    return render_to_response('project-list.html',{'auth_username':auth_username,'platform_role':platform_role,'projects_list':projects_list},context_instance=RequestContext(request))
 
 
 
@@ -51,6 +62,12 @@ def info(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json()
+    users = project_info.pop('users')
+    admin=[]
+    for user in users:
+        if user['role_id'] == 0:
+            admin.append(user['name'])
+    project_info.update({'admin':' '.join(admin)})
 
     return render_to_response('info-table-replace.html',{'project_info':project_info})
 
@@ -87,40 +104,37 @@ def update(request):
 
 @require_auth
 def detail(request):
+    """get project detail by project_id"""
     id=request.GET['id']
     url='{}/projects/{}'.format(BASE_URL,id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json() 
 
-    if request.session.get('user_role',None) == 'admin':
-	role = 'admin'
-    #auth_username=request.session.get('user_name')
-    #user_id = request.session.get('user_id',None)
+    """get user_id from session."""
+    user_id = request.session.get('user_id',None)
 
-    #url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,id)
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #user_info = rs.json() 
-    #LOG.debug(user_info) 
+    """get current user role in project"""
+    role = 'default'
+    if project_info:
+        for user in project_info['users']:
+	    if user['name'] == user_id:
+                if user['role_id'] == 0:
+                    role = 'admin' 
 
-    #role=''
-    #if user_info:
-    #    if user_info['RoleID'] == 1:
-    #	    role='admin'
+    """get project admin."""
+    users = project_info.pop('users')
+    admin=[]
+    for user in users:
+        if user['role_id'] == 0:
+            admin.append(user['name'])
+    project_info.update({'admin':' '.join(admin)})
 
-    #LOG.debug(role)
-    #return render_to_response('project.html',
-    #        {'project_info':project_info,
-    #         'auth_username':auth_username,
-    #         'role':role,
-    #         'user_id': user_id},
-    #        context_instance=RequestContext(request))
     return render_to_response('project.html',
             {'project_info':project_info,
              #'auth_username':auth_username},
-             'role':role},
-    #         'user_id': user_id},
+             'role':role,
+             'user_id': user_id},
             context_instance=RequestContext(request))
 
 @require_auth
@@ -128,15 +142,15 @@ def create(request):
     if request.method == 'POST':
         project_name=request.POST.get('name').strip()
         project_desc=request.POST.get('desc').strip()
-        #project_admin=request.POST.get('admin').strip()
-        #admin_email = request.POST.get('email').strip()
-        #base_image = request.POST.get('image').strip()
+        project_admin=request.POST.get('admin').strip()
+        admin_email = request.POST.get('email').strip()
+        base_image = request.POST.get('image').strip()
         data = {
                 'name' : project_name, 
                 'desc' : project_desc,
-                #'admin':project_admin,
-                #'email':admin_email,
-		#'base_image':base_image,
+                'admin':project_admin,
+                'email':admin_email,
+		'base_image':base_image,
         }
         url='{}/projects'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
@@ -150,8 +164,6 @@ def delete(request):
     url = '{}/projects/{}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
-    print project_id 
-    print rs.json()
     #return HttpResponseRedirect('/admin/files')
     return HttpResponse("succeed")
 

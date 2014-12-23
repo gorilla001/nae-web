@@ -71,35 +71,26 @@ def delete(request):
 
 @require_auth
 def update(request):
+    """get images list by project id."""
     project_id = request.GET.get('project_id')
     url='{}/images?project_id={}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     image_list=rs.json()
-    print image_list
-#    logger.debug(image_list)
-#
-#    url='{}/projects/{}'.format(BASE_URL,project_id)
-#    headers={'Content-Type':'application/json'}
-#    rs = requests.get(url,headers=headers)
-#    project_info = rs.json() 
-#
-#    user_id = request.session.get('user_id',None)
-#    url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
-#    headers={'Content-Type':'application/json'}
-#    rs = requests.get(url,headers=headers)
-#    user_info = rs.json() 
-#    role=''
-#    if user_info:
-#        if user_info['RoleID'] == 1:
-#    	    role='admin'
-#
-    #role = 'normal'
-    #if request.session.get('user_id',None) == project_info['admin']:
-    #    role = 'admin'
 
-    #return render_to_response('image-table-replace.html',{'image_list':image_list,'role':role})
-    return render_to_response('image-table-replace.html',{'image_list':image_list})
+    """get current user id."""
+    user_id = request.session.get('user_id',None)
+
+    """get current user role in current project."""
+    url='%s/projects/%s' % (BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    users = rs.json()['users'] 
+    for user in users:
+        if user['name'] == user_id:
+            project_role = user['role_id']
+
+    return render_to_response('image-table-replace.html',{'image_list':image_list,'project_role':project_role})
 
 @require_auth
 def edit(request):
@@ -132,7 +123,7 @@ def conflict(request):
 
 @require_auth
 def base(request):
-    url="{}/images/base".format(BASE_URL,id)
+    url="{}/baseimages".format(BASE_URL,id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     image_list = rs.json()

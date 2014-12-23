@@ -127,44 +127,32 @@ def create(request):
 @require_auth
 def delete(request):
     hg_id=request.GET['id']
-    url = '{}/hgs/{}'.format(BASE_URL,hg_id)
+    url = '{}/repos/{}'.format(BASE_URL,hg_id)
     headers={'Content-Type':'application/json'}
     rs = requests.delete(url,headers=headers)
-    print rs.json()
     return HttpResponse(json.dumps(rs.json()))
 
 @require_auth
 def refresh(request):
+    """get repos list from project_id"""
     project_id = request.GET.get('project_id')
-    #url='{}/projects/{}'.format(BASE_URL,project_id)
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #project_info = rs.json() 
     url = '%s/repos?project_id=%s' % (BASE_URL,project_id)  
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     hg_list = rs.json()
-    #hg_list = project_info['repos'] 
-    print hg_list
+    
+    """get current user id."""
+    user_id = request.session.get('user_id',None)
 
-    #user_id = request.session.get('user_id',None)
-    #url='{}/users/{}?project_id={}'.format(BASE_URL,user_id,project_id)
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #user_info = rs.json() 
-    #role=''
-    #if user_info:
-    #    if user_info['RoleID'] == 1:
-    #	    role='admin'
-    ##role = 'normal'
-    ##if request.session.get('user_id',None) == project_info['admin']:
-    ##    role = 'admin'
-    #url='{}/hgs?project_id={}'.format(BASE_URL,project_id)
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #hg_list=rs.json()
-    #return render_to_response('hg-table-replace.html',{'hg_list':hg_list,'role':role})
-    return render_to_response('hg-table-replace.html',{'hg_list':hg_list})
+    """get current user role in current project."""
+    url='%s/projects/%s' % (BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    users = rs.json()['users'] 
+    for user in users:
+        if user['name'] == user_id:
+            project_role = user['role_id']
+    return render_to_response('hg-table-replace.html',{'hg_list':hg_list,'project_role':project_role})
 
 
     

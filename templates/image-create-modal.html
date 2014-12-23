@@ -43,8 +43,8 @@
         </div>
     </div>
 </div>
-<!--<script src="/static/js/create-image.js"></script>-->
 <script>
+
 $('#createImageModal').on('shown.bs.modal', function() {
         var project_id = '{{ project_info.id }}';
         var url = "/hgs?project_id=" + project_id;
@@ -99,6 +99,7 @@ function createImage()
     }
     http.responseType = 'json';
     http.send(params);
+
 }
 
 </script>
