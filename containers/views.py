@@ -37,12 +37,13 @@ def create(request):
     if request.method == 'POST':
         container_environ = request.POST.get('container_env') 
         container_project = request.POST.get('project_id')
-        container_image = request.POST.get('image_name')
-        container_hg = request.POST.get('container_hg')
-        container_code = request.POST.get('container_code')
-        app_type = request.POST.get('app_type')
-        user_name = request.session.get('user_id')
-        user_key = request.session.get('user_key')
+        container_image   = request.POST.get('image_name')
+        container_hg      = request.POST.get('container_hg')
+        container_code    = request.POST.get('container_code')
+        app_type          = request.POST.get('app_type')
+        user_name         = request.session.get('user_id')
+        user_key          = request.session.get('user_key')
+        zone_id           = request.POST.get('zone_id')
 
         url='{}/containers'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
@@ -55,10 +56,10 @@ def create(request):
                 'app_type':app_type,
                 'user_id':user_name,
                 'user_key':user_key,
+                'zone_id': zone_id,
         }
         rs = requests.post(url,headers=headers,data=json.dumps(data))
     return HttpResponse(json.dumps(rs.json()))
-    #return HttpResponseRedirect('/containers')
 
 @require_auth
 def delete(request):
@@ -118,3 +119,11 @@ def destroy(request):
     headers={'Content-Type':'application/json'}
     requests.post(url,headers=headers)
     return HttpResponse("succeed")
+
+@require_auth
+def refresh(request):
+    id = request.GET['id']
+    url = '%s/containers/%s/refresh' % ( BASE_URL,id)
+    headers = {'Content-Type':'application/json'}
+    requests.post(url,headers=headers)
+    return HttpResponse("succeed") 

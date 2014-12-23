@@ -2,6 +2,8 @@
         <thead style="display:none;">
             <th style="width:5%;display: none;">ID</th>
             <th style="width:20%">容器名称</th>
+            <th>版本库</th>
+            <th>分支</th>
             <th >访问地址</th>
             <th style="width:50%">创建时间</th>
             <th style="width:5.5%" class="text-center">状态</th>
@@ -12,12 +14,14 @@
                 <tr>
                     <td class="fp" style="display:none;">{{ item.id }}</td>
                     <td class="name" >{{ item.name }}</td>
+                    <td class="repos">{{ item.repos }}</td>
+                    <td class="branch">{{ item.branch }}</td>
                     {% if item.network == None %}
-                    <td class="network">--------</td>
+                    <td class="network" style="text-align:center">--------</td>
                     {% else %}
-                    <td class="network">{{ item.network }}</td>
+                    <td class="network" style="text-align:center">{{ item.network }}</td>
                     {% endif %}
-                    <td >{{ item.created }}</td>
+                    <td style="text-align:right">{{ item.created }}</td>
                     {% if item.status == 'running' %}
 		    <td class="status text-center">
                     	<div class="progress" style="width:60px;margin-bottom:0px;margin-top:2px">
@@ -98,22 +102,20 @@
                     {% else %}
                     <td class="status text-center"><font size="2" color="red"><b>未知</b></font></td>
                     {% endif %} 
-		    <td>
+		    <td style="width:30%">
                           <div class="btn-group btn-group-sm pull-right">
                               <button class="btn btn-mini btn-primary web-access">访问
 			      </button>
-                              <!--<button class="btn btn-mini btn-primary web-login">登录
-			      </button>-->
-                              <button class="btn btn-mini btn-success web-share">共享
+                              <button class="btn btn-mini btn-success web-login">登录
 			      </button>
-                              <button class="btn btn-mini btn-primary web-refresh">刷新
+                              <button class="btn btn-mini btn-primary web-share">共享
 			      </button>
-                              <button class="btn btn-mini btn-success start-container">启动
+                              <button class="btn btn-mini btn-success web-refresh">刷新
+			      </button>
+                              <button class="btn btn-mini btn-primary start-container">启动
 			      </button>
                               <button class="btn btn-mini btn-success stop-container">停止
 			      </button>
-                                    <!--<button class="btn btn-mini btn-primary stop-container">停止
-				    </button>-->
                                <button class="btn btn-mini btn-danger delete-container">删除
 			       </button>
 			   </div>

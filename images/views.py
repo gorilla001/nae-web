@@ -95,7 +95,7 @@ def update(request):
 @require_auth
 def edit(request):
     img_id = request.GET['id']
-    url = '{}/images/edit?id={}'.format(BASE_URL,img_id)
+    url = '%s/images/%s/edit' % (BASE_URL,img_id)
     headers={'Content-Type':'application/json'}
     rs = requests.post(url,headers=headers)
     return HttpResponse(json.dumps(rs.json()))

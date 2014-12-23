@@ -48,9 +48,6 @@
                         <label class="control-label" for="version">版本库</label>
                         <div class="controls">
                             <input type="text" class="form-control" id="hg_list" name='container_hg' style="width:300px">
-                            <!--<select id="hg_list" class="form-control" name="container_hg">
-                                <option value="-1">请选择</option>
-                            </select>-->
                             <span class="help-inline">(代码版本库)</span>
                         </div>
                     </div>
@@ -61,32 +58,6 @@
                             <span class="help-inline">(分支号)</span>
                       </div>
                     </div>
-                    <!--<div class="control-group version">
-                        <label class="control-label" for="version">应用根目录</label>
-                        <div class="controls">
-                            <input type="text" class="form-control" id="root_path" name='root_path' placeholder="请填写根目录" style="width:200px">
-                            <span class="help-inline">(例如，java应用的根目录是:/opt/jm/tomcat/wwwroot)</span>
-                        </div>
-                    </div>-->
-		    <!--<div class="control-group project">
-                      <label class="control-label" for="image">应用类型</label>
-                      <div class="controls">
-                          <select id='app_type' class="form-control" name="app_type">  
-                            <option value="-1">请选择</option>
-                            <option value="0">php</option>
-                            <option value="1">java</option>
-                          </select>  
-                        <span class="help-inline">(应用类型,eg.java,php,etc)</span>
-                      </div>
-                    </div>-->
-
-                    <!--<div class="control-group description">
-                      <label cass="control-label" for="description">功能描述</label>
-                      <div class="controls">
-                        <input type="text" class="form-control" id="container_desc" name='container_desc' placeholder="简单说明" style="width:152px">
-                        <span class="help-inline">(可选项)</span>
-                      </div>
-                    </div>-->
                 </form>
             </div>
         <div class="modal-footer">
@@ -161,13 +132,13 @@ function createContainer()
     var image_name = document.getElementById('image_list').value;
     var container_env = document.getElementById('environ_list').value;
     var container_code = document.getElementById('container_code').value;
-    //var root_path = document.getElementById('root_path').value;
-    //var app_type = document.getElementById('app_type').value;
     var app_type = 0; 
+    var zone_id = document.getElementById('zone_list').value;
+
 
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
-    var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env;
+    var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id;
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);

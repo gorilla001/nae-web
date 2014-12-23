@@ -75,7 +75,6 @@ function createImage()
     var http = new createXmlHttpRequest();
     var url ="/images/create/";
     var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repo_path=" + repo_path + "&repo_branch=" + repo_branch;
-    alert(params);
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);

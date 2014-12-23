@@ -15,6 +15,13 @@
                             <span class="help-inline">(项目的名称,必填项)</span>
                         </div>
                     </div>
+                    <div class="control-group version">
+                        <label class="control-label" for="version">项目描述</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="desc" name="project_desc"></textarea>
+                            <span class="help-inline">(项目简单描述,可选项)</span>
+                        </div>
+                    </div>
                     <div class="control-group">
                       <label class="control-label" for="">管理员</label>
                       <div class="controls">
@@ -22,13 +29,6 @@
                           <span class="help-inline">(项目的管理员，必填项)</span>
                       </div>  
                     </div>
-                    <!--<div class="control-group">
-                      <label class="control-label" for="">管理员邮箱</label>
-                      <div class="controls">
-                          <input type="text" class="form-control" id="email" name="admin_email">
-                          <span class="help-inline">(管理员的邮箱，必填项)</span>
-                      </div>  
-                    </div>-->
 		    <div class="control-group project">
                       <label class="control-label" for="image">基础镜像</label>
                       <div class="controls">
@@ -38,20 +38,12 @@
                         <span class="help-inline">(项目所需的基础镜像)</span>
                       </div>
                     </div>
-
-                  <div class="control-group version">
-                  <label class="control-label" for="version">项目描述</label>
-                  <div class="controls">
-                    <input type="text" class="form-control" id="desc" name="project_desc"></textarea>
-                    <span class="help-inline">(项目简单描述,可选项)</span>
-                  </div>
-                </div>
             </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="createProject()">确定</button>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="createProject()">确定</button>
+        </div>
 </div>
 </div>
 </div>
