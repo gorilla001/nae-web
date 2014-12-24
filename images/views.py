@@ -86,6 +86,7 @@ def update(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     users = rs.json()['users'] 
+    project_role=None
     for user in users:
         if user['name'] == user_id:
             project_role = user['role_id']
@@ -97,7 +98,7 @@ def edit(request):
     img_id = request.GET['id']
     url = '%s/images/%s/edit' % (BASE_URL,img_id)
     headers={'Content-Type':'application/json'}
-    rs = requests.post(url,headers=headers)
+    rs = requests.get(url,headers=headers)
     return HttpResponse(json.dumps(rs.json()))
 
 @require_auth
@@ -128,6 +129,15 @@ def base(request):
     rs = requests.get(url,headers=headers)
     image_list = rs.json()
     return HttpResponse(json.dumps(image_list))
+
+@require_auth
+def destroy(request):
+    name = request.GET.get('name')
+    url="%s/images/%s/destroy" % (BASE_URL,name)
+    headers={'Content-Type':'application/json'}
+    rs = requests.post(url,headers=headers)
+    return HttpResponse(json.dumps(rs.json()))
+    
 
 
     

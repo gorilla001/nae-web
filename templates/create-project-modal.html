@@ -58,7 +58,7 @@ function createProject()
     var base_image=$('#base_image_list option:selected').val();
     var http = new createXmlHttpRequest();
     var url ="/projects/create/";
-    var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image=" + base_image;
+    var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image_id=" + base_image;
     //var params = "name=" + project_name + "&desc=" + project_desc;
     
     var token = '{{ csrf_token }}'; 

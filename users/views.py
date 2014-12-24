@@ -160,6 +160,7 @@ def refresh(request):
 
     """get project role for current user."""
     user_id = request.session.get('user_id',None)
+    project_role=None
     for user in user_list:
         if user['name'] == user_id:
     	    project_role = user['role_id']

@@ -149,6 +149,9 @@ def refresh(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     users = rs.json()['users'] 
+    """if current user not in project,project role will be None."""
+    project_role = None
+    """if current user is in project,project role will be override."""
     for user in users:
         if user['name'] == user_id:
             project_role = user['role_id']

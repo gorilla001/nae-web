@@ -2,28 +2,10 @@
         <span class="pull-right">
                 <button class="btn btn-success btn-sm ct_ctn" data-toggle="modal" data-target="#createContainerModal">创建</button>
         </span>
-        <!--<span class="section-toolbar">
-            {% ifequal role 'admin' %}
-            <a id="container-refresh" href="#" style="margin-left:5px;">
-                <span class="glyphicon glyphicon-refresh"></span>
-            </a>
-            {% endifequal %}
-        </span>
         <span class="pull-right">
-            {% ifequal role 'admin' %}
-                <button class="btn btn-success btn-sm ct_ctn" data-toggle="modal" data-target="#createContainerModal">创建</button>
-            {% else %}
-                <a id="container-refresh" href="#">
-                    <span class="glyphicon glyphicon-refresh" style="top:5px;"></span>
-                </a>
-            {% endifequal %}
+            <button class="btn btn-primary btn-sm container-refresh">刷新</button>
         </span>
-        {% ifequal role 'admin' %}
-        <span class="pull-right">
-                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createContainerModal">创建</button>
-        </span>
-        {% endifequal %}-->
-    </div>
+</div>
 
 <script>
 //$(".ct_ctn").notify(
@@ -31,14 +13,14 @@
   //  { position:"top left" }
 //);
 
-$("#container-refresh").click(function(e) {
+$(".container-refresh").click(function(e) {
         var project_id = "{{ project_info.id }}";
         var user_id = "{{ user_id }}";
         var url = '/containers/update?project_id=' + project_id + "&user_id=" + user_id;
         $.ajax({
             type: "GET",
             url: url }).done(function( data ) {
-                $("#container-table").html(data);
+                $("#container-table-{{project_info.id}}").html(data);
             });
 });
 </script>
