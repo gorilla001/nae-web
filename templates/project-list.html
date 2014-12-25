@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-       {% if platform_role == 'admin' %}
+       {% if role == 0 %}
         <div class="panel-heading heading-large">
             <span class="pull-right">
                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createProjectModal">创建</button>
@@ -10,7 +10,7 @@
             {% include 'create-project-modal.html' %}
             {% include 'modify-project-modal.html' %}
             {% include 'info-project-modal.html' %}
-            {% if project_list.count != 0  %}
+            {% if projects_list_count != 0  %}
                 {% include 'project-table.html' %}
             {% else %}
                 {% include 'project-table-empty.html' %}

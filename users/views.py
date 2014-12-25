@@ -165,7 +165,15 @@ def refresh(request):
         if user['name'] == user_id:
     	    project_role = user['role_id']
 	 
-    return render_to_response('member-table-replace.html',{'user_list':user_list,'project_role':project_role})
+    """check if current user is superuser"""
+    if request.session.get('user_role',None) == 'admin':
+       role = 0    
+    elif project_role == 0:
+       role = 0
+    else:
+       role = project_role
+    print role 
+    return render_to_response('member-table-replace.html',{'user_list':user_list,'role':role})
 
 
     

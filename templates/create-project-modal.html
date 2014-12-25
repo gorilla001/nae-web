@@ -22,14 +22,14 @@
                             <span class="help-inline">(项目简单描述,可选项)</span>
                         </div>
                     </div>
-                    <div class="control-group">
+                    <!--<div class="control-group">
                       <label class="control-label" for="">管理员</label>
                       <div class="controls">
                           <input type="text" class="form-control" id="admin" name="project_admin">
                           <span class="help-inline">(项目的管理员，必填项)</span>
                       </div>  
-                    </div>
-		    <div class="control-group project">
+                    </div>-->
+		    <!--<div class="control-group project">
                       <label class="control-label" for="image">基础镜像</label>
                       <div class="controls">
                           <select id='base_image_list' class="form-control" name="image_name" style="width:350px">  
@@ -37,7 +37,7 @@
                           </select>  
                         <span class="help-inline">(项目所需的基础镜像)</span>
                       </div>
-                    </div>
+                    </div>-->
             </form>
         </div>
         <div class="modal-footer">
@@ -51,15 +51,15 @@
 function createProject()
 {
     var project_name = document.getElementById('name').value;
-    var project_admin = document.getElementById('admin').value;
+    //var project_admin = document.getElementById('admin').value;
     var project_desc = document.getElementById('desc').value;
     //var admin_email = document.getElementById('email').value;
-    var admin_email = project_admin + "@jumei.com"; 
-    var base_image=$('#base_image_list option:selected').val();
+    //var admin_email = project_admin + "@jumei.com"; 
+    //var base_image=$('#base_image_list option:selected').val();
     var http = new createXmlHttpRequest();
     var url ="/projects/create/";
-    var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image_id=" + base_image;
-    //var params = "name=" + project_name + "&desc=" + project_desc;
+    //var params = "name=" + project_name + "&desc=" + project_desc + "&admin=" + project_admin + "&email=" + admin_email + "&image_id=" + base_image;
+    var params = "name=" + project_name + "&desc=" + project_desc;
     
     var token = '{{ csrf_token }}'; 
     

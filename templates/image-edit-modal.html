@@ -6,6 +6,8 @@
                 <h4 class="modal-title">在线修改镜像</h4>
             </div>
             <div id="editWindow" class="modal-body" style="background:#fff;margin:0px;padding:0px;">
+                <!--<iframe id="sshFrame" src="" style="zoom:0.70" width="100%" height="800" frameborder="0">
+		</iframe>-->
 		<img src="/static/img/loading.jpg" width="100%" height="550"></img>
 		<label class="hide" id="sshFrame" src=""></label>
             </div>
@@ -65,7 +67,7 @@ $('#editModal').on('shown.bs.modal', function () {
  		}
         	$("#editWindow").children().remove();
         	$("#editWindow").append($(html));}
-	,3000);
+	,2000);
 });
 		
 </script>
