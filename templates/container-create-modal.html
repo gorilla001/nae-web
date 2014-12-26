@@ -119,7 +119,8 @@ $("#image_list").change(function(){
          dataType: "json",
          url: url }).done(function( data ) {
              $("#hg_list").val(data.repos);
-             $("#container_code").val(data.branch);
+             //$("#container_code").val(data.branch);
+             $("#container_code").val('default');
 
    });
 });
