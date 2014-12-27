@@ -1,6 +1,27 @@
 <div class="panel panel-default">
-    {% include 'info-table-panel-header.html' %}
+    <div class="panel-heading heading-large">
+        <span class="pull-right" style="display:none">
+                <button class="btn btn-success btn-sm ct_ctn" data-toggle="modal" data-target="#createContainerModal">编辑</button>
+        </span>
+    </div>
     <div class="panel-body">
-	{% include 'info-table.html' %}
+        <div id="info-table-{{project_info.id}}" class="panel panel-default">
+            <table class="table table-striped table-bordered table-hover table-condensed" style="width:100%;table-layout:fixed;">
+                <tbody>
+    	            <tr>
+                        <td width="6%" style="font-size:14px">项目名称</td>
+                        <td>{{ project_info.name }}</td>
+    	            </tr>
+    	            <tr>
+                        <td style="font-size:14px">项目描述</td>
+                        <td>{{ project_info.desc }}</td>
+    	            </tr>
+                    <tr>
+                        <td style="font-size:14px">创建时间</td>
+                        <td>{{ project_info.created }}</td>
+    	            </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
