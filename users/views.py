@@ -144,9 +144,8 @@ def delete(request):
     user_id=request.GET['id']
     url = '{}/users/{}'.format(BASE_URL,user_id)
     headers={'Content-Type':'application/json'}
-    rs = requests.delete(url,headers=headers)
-    print rs.json()
-    return HttpResponse(json.dumps(rs.json()))
+    requests.delete(url,headers=headers)
+    return HttpResponse("") 
 
 @require_auth
 def refresh(request):

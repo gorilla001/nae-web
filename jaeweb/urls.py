@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 from django.views.generic import RedirectView
 
-import overview.urls
+#import overview.urls
 import containers.urls
 import images.urls
 import accounts.urls
@@ -27,7 +27,7 @@ urlpatterns = patterns('',
 
     #url(r'^$', RedirectView.as_view(url='/overview/')),
     url(r'^$', RedirectView.as_view(url='/projects/')),
-    url(r'^overview/$',include(overview.urls)),
+    #url(r'^overview/$',include(overview.urls)),
     url(r'^projects/',include(projects.urls)),
     url(r'^containers/',include(containers.urls)),
     url(r'^images/',include(images.urls)),
