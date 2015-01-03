@@ -4,6 +4,8 @@
    <link href="/static/css/bootstrap.css" rel="stylesheet">
    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
    <link href="/static/css/dashboard.css" rel="stylesheet">
+   <link href="/static/css/font-awesome.css" rel="stylesheet">
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
    <script src="/static/js/jquery.min.js"></script>
    <script src="/static/js/bootstrap.min.js"></script>
@@ -28,15 +30,25 @@
        <div class="collapse navbar-collapse navbar-ex1-collapse">
            <ul class="nav navbar-nav side-nav" id="project-side-list">
                    <li class="active">
-                       <a data-toggle="tab" href="#projectList"><i class="fa fa-fw fa-dashboard"></i>
-                             项目列表
+                       <a data-toggle="tab" href="#projectList">
+                            <i class="fa fa-fw fa-dashboard"></i>
+                            <span>项目列表</span>
+                            <!--<span class="label label-success pull-right r-activity">{{ projects_list | length }}</span>-->
+                            <span class="main-nav-count" title="total projects">{{ projects_list | length }}</span>
+                            <!--<span class="badge pull-right">{{ projects_list | length }}</span>-->
                        </a>
                    </li>
                         {% for item in projects_list %}
                         <li>
-                            <a value="{{ item.id }}" data-toggle="tab" href="#projectinfo"><i class="fa fa-fw fa-dashboard"></i>
-                                <span class="glyphicon glyphicon-th-list"></span>
-                                {{ item.name }}
+                            <!--<a value="{{ item.id }}" href="/projects/{{item.id}}">-->
+                            <a value="{{ item.id }}" data-toggle="tab" href="#projectinfo">
+                                <!--<i class="fa fa-fw fa-dashboard"></i>-->
+                                <!--<span class="glyphicon glyphicon-th-list"></span>-->
+		                <!--<i class=" fa fa-circle" style="margin-left:5px"></i>-->
+                                <!--<div class="round-span">
+                                    <span></span> 
+                                </div>-->
+                                <span style="margin-left:15px">{{ item.name }}</span>
                             </a>
                         </li>
                         {% endfor %}

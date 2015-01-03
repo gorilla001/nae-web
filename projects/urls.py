@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'admin/$',views.admin,name='admin'),
     url(r'info/$',views.info,name='info'),
     url(r'index/$',views.index,name='index'),
+    url(r'[0-9a-f]{32}',views.show,name='show'),
 )
