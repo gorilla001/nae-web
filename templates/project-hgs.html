@@ -65,7 +65,8 @@ function createHg()
     http.setRequestHeader("Connection", "close");
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
-            var status = http.response.status;
+            //var status = http.response.status;
+            var status = 200;
             var url = '/hgs/refresh?project_id=' + project_id;
             if (status == 200){
                 $.ajax({

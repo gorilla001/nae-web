@@ -135,8 +135,8 @@ def create(request):
         print data
         url='{}/users'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
-        rs = requests.post(url,headers=headers,data=json.dumps(data))
-    return HttpResponse(json.dumps(rs.json()))
+        requests.post(url,headers=headers,data=json.dumps(data))
+    return HttpResponse("")
 
 
 @require_auth

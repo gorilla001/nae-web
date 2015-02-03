@@ -120,8 +120,8 @@ def create(request):
         }
         url='{}/repos'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
-        rs = requests.post(url,headers=headers,data=json.dumps(data))
-    return HttpResponse(json.dumps(rs.json()))
+        requests.post(url,headers=headers,data=json.dumps(data))
+    return HttpResponse({"status":200})
 
 
 @require_auth
