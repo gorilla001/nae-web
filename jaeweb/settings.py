@@ -139,10 +139,16 @@ TEMPLATE_DIRS = (
 
 LANGUAGE_CODE = 'zh-cn'
 
+#LOGIN_URL = "http://auth.jumeird.com/api/login?camefrom=ops_docker"
+#app_key = "&app_key="
+#app_name = "&app_name=ops_docker&key=1"
+#auth_url = "http://auth.jumeird.com"
+#auth_key = "481986a634ca11e4ab8c842b2b738d12"
+
 LOGIN_URL = "http://auth.jumeird.com/api/login?camefrom=ops_docker"
 app_key = "&app_key="
 app_name = "&app_name=ops_docker&key=1"
-auth_url = "http://auth.jumeird.com"
+auth_url = "http://auth.jumeird.com/"
 auth_key = "481986a634ca11e4ab8c842b2b738d12"
 
-BASE_URL="http://192.168.56.105:8282/v1"
+BASE_URL="http://localhost:8282/v1"

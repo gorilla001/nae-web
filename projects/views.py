@@ -168,8 +168,8 @@ def create(request):
         }
         url='{}/projects'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
-        rs = requests.post(url,headers=headers,data=json.dumps(data))
-    return HttpResponse(json.dumps(rs.json()))
+        requests.post(url,headers=headers,data=json.dumps(data))
+    return HttpResponse("")
 
 
 @require_auth
