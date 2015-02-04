@@ -179,6 +179,10 @@ $('#container-table-{{project_info.id}}').on("click",".reboot-container",functio
        	}
     });
 $('#container-table-{{project_info.id}}').on("click",".commit",function() {
+    var row = $(this).closest("tr");    
+    var image_id = row.find(".image_id").text();
+
+    $('#imgId').attr("value",image_id);	
     $('#saveImageModal').modal('show');
 });
  
