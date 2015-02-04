@@ -129,8 +129,8 @@ def delete(request):
     hg_id=request.GET['id']
     url = '{}/repos/{}'.format(BASE_URL,hg_id)
     headers={'Content-Type':'application/json'}
-    rs = requests.delete(url,headers=headers)
-    return HttpResponse(json.dumps(rs.json()))
+    requests.delete(url,headers=headers)
+    return HttpResponse("")
 
 @require_auth
 def refresh(request):
