@@ -177,7 +177,7 @@ $('#container-table-{{project_info.id}}').on("click",".reboot-container",functio
        	    }
        	}
     });
-$('#container-table-{{project_info.id}}').on("click",".commit-container",function() {
+$('#container-table-{{project_info.id}}').on("click",".commit",function() {
         var $row = $(this).closest("tr");    
         var status = $row.find(".status").text();
         var $text = $row.find(".fp").text();
