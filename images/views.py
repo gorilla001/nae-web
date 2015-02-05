@@ -26,9 +26,8 @@ def show(request):
     image_id=request.GET['id']
     url='{}/images/{}'.format(BASE_URL,image_id)
     headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    print rs.json()
-    return HttpResponse(json.dumps(rs.json())) 
+    resp = requests.get(url,headers=headers)
+    return HttpResponse(json.dumps(resp.json())) 
 
 
 @require_auth

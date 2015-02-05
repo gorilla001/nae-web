@@ -11,14 +11,34 @@ from jaeweb.settings import BASE_URL
 
 @require_auth
 def index(request):
-    #container_list = Containers.objects.all() 
     project_id = request.GET.get('project_id')
     user_id = request.GET.get('user_id')
     url="{}/containers?project_id={}&user_id={}".format(BASE_URL,project_id,user_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    container_list = rs.json()
+    container_list_org = rs.json()
+    #for container in container_list:
+    #    image_id = container.pop('image_id',None)
+    #    image = ""
+    #    if image_id: 
+    #        url='{}/images/{}'.format(BASE_URL,image_id)
+    #        headers={'Content-Type':'application/json'}
+    #        resp = requests.get(url,headers=headers)
+    #        try:
+    #            image = "%s:%s" % (resp.json()['name'],resp.json()['tag'])
+    #        except KeyError as ex:
+    #            raise
+    #    container.update({"image":image})
+    #    container_list.append(container)
+    container_list = []
+    for container in container_list_org:
+        repos = container.pop("repos",None)
+        if repos is not None:
+            repos = repos.split("/")[-1] 
+        container.update({"repos":repos})
+        container_list.append(container)
     print container_list
+        
     return render_to_response('container-table-replace.html',{'container_list':container_list})
 
 @require_auth
@@ -77,7 +97,16 @@ def update(request):
     url='{}/containers?project_id={}&user_id={}'.format(BASE_URL,project_id,user_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    container_list = rs.json()
+    container_list_org = rs.json()
+
+    container_list = []
+    for container in container_list_org:
+        repos = container.pop("repos",None)
+        if repos is not None:
+            repos = repos.split("/")[-1] 
+        container.update({"repos":repos})
+        container_list.append(container)
+
     return render_to_response('container-table-replace.html',{'container_list':container_list})
 
 @require_auth
