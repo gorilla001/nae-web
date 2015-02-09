@@ -162,7 +162,6 @@ function createContainer()
     var url ="/containers/create/";
     var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id;
     var token = '{{ csrf_token }}'; 
-    alert(params);
     
     http.open("POST",url,true);
     http.setRequestHeader('X-CSRFToken', token);
