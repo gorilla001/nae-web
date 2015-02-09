@@ -25,10 +25,8 @@
                         <div class="controls">
                             <select  class="form-control" id="environ_list" name="container_environ">
                                 <option value="-1">请选择</option>
-                                <option value="DEVCD">开发环境(成都)</option>
-                                <option value="DEVBJ">开发环境(北京)</option>
-                                <option value="QACD">测试环境(成都)</option>
-                                <option value="QABJ">测试环境</option>
+                                <option value="DEV">开发环境</option>
+                                <option value="QA">测试环境</option>
                                 <option value="STAG">Staging环境</option>
                                 <option value="PUB">Publish环境</option>
                                 <option value="PROD">生产环境</option>
@@ -133,7 +131,28 @@ function createContainer()
     var project_id = "{{ project_info.id }}"; 
     var container_hg = document.getElementById('hg_list').value;
     var image_name = document.getElementById('image_list').value;
+
+    var zone = document.getElementById('zone_list').value;
     var container_env = document.getElementById('environ_list').value;
+    if ( container_env == "DEV" ) {
+        if ( zone == 0 ) {
+            container_env = container_env + "BJ"
+        }
+        if ( zone == 1 ) {
+            container_env = container_env + "CD"
+        }
+    }
+    if ( container_env == "QA" ) {
+        if ( zone == 0 ) {
+            container_env = container_env + "BJ"
+        }
+        if ( zone == 1 ) {
+            container_env = container_env + "CD"
+        }
+    }
+  
+    
+    
     var container_code = document.getElementById('container_code').value;
     var app_type = 0; 
     var zone_id = document.getElementById('zone_list').value;
@@ -143,6 +162,7 @@ function createContainer()
     var url ="/containers/create/";
     var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id;
     var token = '{{ csrf_token }}'; 
+    alert(params);
     
     http.open("POST",url,true);
     http.setRequestHeader('X-CSRFToken', token);
