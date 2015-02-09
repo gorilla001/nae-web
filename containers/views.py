@@ -130,7 +130,7 @@ def update(request):
             project_role = user['role_id']
 
     return render_to_response('container-table-replace.html',
-                             {'container_list':container_list
+                             {'container_list':container_list,
                               'project_role': project_role})
 
 @require_auth
