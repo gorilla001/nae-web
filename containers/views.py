@@ -47,6 +47,8 @@ def index(request):
     for user in users:
         if user['name'] == user_id:
             project_role = user['role_id']
+
+    print 'project_role',project_role
    
     return render_to_response('container-table-replace.html',
                              {'container_list':container_list,
