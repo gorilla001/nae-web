@@ -37,9 +37,20 @@ def index(request):
             repos = repos.split("/")[-1] 
         container.update({"repos":repos})
         container_list.append(container)
-    print container_list
-        
-    return render_to_response('container-table-replace.html',{'container_list':container_list})
+
+    """get current user role in current project."""
+    url='%s/projects/%s' % (BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    users = rs.json()['users'] 
+    project_role=None
+    for user in users:
+        if user['name'] == user_id:
+            project_role = user['role_id']
+   
+    return render_to_response('container-table-replace.html',
+                             {'container_list':container_list,
+                              'project_role': project_role})
 
 @require_auth
 def detail(request):
@@ -106,8 +117,19 @@ def update(request):
             repos = repos.split("/")[-1] 
         container.update({"repos":repos})
         container_list.append(container)
+    """get current user role in current project."""
+    url='%s/projects/%s' % (BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    users = rs.json()['users'] 
+    project_role=None
+    for user in users:
+        if user['name'] == user_id:
+            project_role = user['role_id']
 
-    return render_to_response('container-table-replace.html',{'container_list':container_list})
+    return render_to_response('container-table-replace.html',
+                             {'container_list':container_list
+                              'project_role': project_role})
 
 @require_auth
 def stop(request):
