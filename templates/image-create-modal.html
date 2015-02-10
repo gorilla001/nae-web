@@ -60,6 +60,10 @@
 <script>
 
 $('#createImageModal').on('shown.bs.modal', function() {
+        $("#repo_path").val("");
+        $("#repo_branch").val("");
+        $("#image_desc").val("");
+
         var project_id = '{{ project_info.id }}';
         var url = "/hgs?project_id=" + project_id;
         $.ajax({
@@ -76,6 +80,9 @@ $('#createImageModal').on('shown.bs.modal', function() {
 
 $("#repo_path").change(function(){
     $("#repo_branch").val('default');
+    var text = $("#repo_path").val();
+    var text_array=text.split("/"); 
+    $("#image_desc").val(text_array.pop());
 });
 
 
