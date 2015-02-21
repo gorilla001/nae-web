@@ -823,7 +823,7 @@ input[type="checkbox"] {
     color: #fff;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background-color: #000;
+    background-color: #fff;
     border: solid 1px black;
     color: #fff;
 }
