@@ -23,7 +23,7 @@ html * {
         top: 40px;
     width:100%;
     height:100%;
-        border: none;
+    border: none;
 }
 .navbar-default {
     color:#fff;
@@ -439,7 +439,7 @@ ul.alert-dropdown {
     padding-top:10px;
 }
 .navbar-default .navbar-nav > .active > a, 
-/*.navbar-default .navbar-nav > .active > a:hover, */
+.navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     background-color: #000;
     border:solid 1px black;
@@ -791,7 +791,7 @@ input[type="checkbox"] {
 }
 
 .nav-tabs > li.active > a, 
-/*.nav-tabs > li.active > a:hover, */
+.nav-tabs > li.active > a:hover, 
 .nav-tabs > li.active > a:focus {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
