@@ -790,7 +790,9 @@ input[type="checkbox"] {
     margin-right:15px;
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+.nav-tabs > li.active > a, 
+/*.nav-tabs > li.active > a:hover, */
+.nav-tabs > li.active > a:focus {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
