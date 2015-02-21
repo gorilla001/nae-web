@@ -33,21 +33,13 @@
                        <a data-toggle="tab" href="#projectList">
                             <i class="fa fa-fw fa-dashboard"></i>
                             <span>项目列表</span>
-                            <!--<span class="label label-success pull-right r-activity">{{ projects_list | length }}</span>-->
                             <span class="main-nav-count" title="total projects">{{ projects_list | length }}</span>
-                            <!--<span class="badge pull-right">{{ projects_list | length }}</span>-->
                        </a>
                    </li>
                         {% for item in projects_list %}
                         <li>
                             <!--<a value="{{ item.id }}" href="/projects/{{item.id}}">-->
                             <a value="{{ item.id }}" data-toggle="tab" href="#projectinfo">
-                                <!--<i class="fa fa-fw fa-dashboard"></i>-->
-                                <!--<span class="glyphicon glyphicon-th-list"></span>-->
-		                <!--<i class=" fa fa-circle" style="margin-left:5px"></i>-->
-                                <!--<div class="round-span">
-                                    <span></span> 
-                                </div>-->
                                 <span style="margin-left:15px">{{ item.name }}</span>
                             </a>
                         </li>
