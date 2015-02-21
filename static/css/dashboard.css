@@ -823,7 +823,9 @@ input[type="checkbox"] {
   border: 0;
   text-align:left;
 }
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:hover 
+{
     color: #fff;
 }
 .navbar-default .navbar-nav > .active > a, 
