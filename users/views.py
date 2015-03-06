@@ -172,6 +172,7 @@ def refresh(request):
     else:
        role = project_role
     print role 
+    print user_list
     return render_to_response('member-table-replace.html',{'user_list':user_list,'role':role})
 
 

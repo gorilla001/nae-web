@@ -116,7 +116,8 @@ def show(request):
         role=project_role
 
     print 'role',role
-    return render_to_response('project-detail.html',{"project_info": project_info,"user_id": user_id,"role": role},context_instance=RequestContext(request))
+    auth_username=request.session.get('user_name')
+    return render_to_response('project-detail.html',{"project_info": project_info,"user_id": user_id,"role": role,"auth_username":auth_username},context_instance=RequestContext(request))
 
 @require_auth
 def update(request):
