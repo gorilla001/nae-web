@@ -96,8 +96,28 @@ def show(request):
     url='{}/projects/{}'.format(BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
+    project_info = rs.json()
     print rs.json()
-    return  HttpResponse(json.dumps(rs.json()))
+    #return  HttpResponse(json.dumps(rs.json()))
+    user_id = request.session.get('user_id',None)
+
+    """get current user role in project"""
+    project_role = None 
+    if project_info:
+        for user in project_info['users']:
+            if user['name'] == user_id:
+                project_role=user['role_id']
+
+    if request.session.get('user_role',None) == 'admin':
+        role=0
+    elif project_role == 0:
+        role=0
+    else:
+        role=project_role
+
+    print 'role',role
+    return render_to_response('project-detail.html',{"project_info": project_info,"user_id": user_id,"role": role},context_instance=RequestContext(request))
+
 @require_auth
 def update(request):
     project_id=os.path.basename(request.path)
@@ -114,7 +134,8 @@ def update(request):
 @require_auth
 def detail(request):
     """get project detail by project_id"""
-    id=request.GET['id']
+    id=os.path.basename(request.path)
+    #id=request.GET['id']
     url='{}/projects/{}'.format(BASE_URL,id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)

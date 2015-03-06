@@ -155,7 +155,18 @@ def refresh(request):
     for user in users:
         if user['name'] == user_id:
             project_role = user['role_id']
+    print hg_list
     return render_to_response('hg-table-replace.html',{'hg_list':hg_list,'project_role':project_role})
+
+@require_auth
+def mavens(request):
+    id = request.GET.get("repos_id")
+    url = "%s/repos/%s/mavens" % (BASE_URL,id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    print rs.json()
+    return HttpResponse(json.dumps(rs.json()))
+   
 
 
     

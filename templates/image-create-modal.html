@@ -72,7 +72,7 @@ $('#createImageModal').on('shown.bs.modal', function() {
               url: url }).done(function( data ) {
               $("#repo_path option[value !='-1']").remove();
               for (var i in data){
-                $("#repo_path").append("<option value=" + data[i].repo_path + ">" + data[i].repo_path + "</option>");
+                $("#repo_path").append("<option value=" + data[i].id + ">" + data[i].repo_path + "</option>");
               }
         });
 
@@ -80,22 +80,32 @@ $('#createImageModal').on('shown.bs.modal', function() {
 
 $("#repo_path").change(function(){
     $("#repo_branch").val('default');
-    var text = $("#repo_path").val();
+    var repos_id = $("#repo_path").val();
+    var text = $("#repo_path").text();
     var text_array=text.split("/"); 
     $("#image_desc").val(text_array.pop());
 });
 
+function createXmlHttpRequest(){
+            if(window.ActiveXObject){ //如果是IE浏览器
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else if(window.XMLHttpRequest){ //非IE浏览器
+                return new XMLHttpRequest();
+            }
+        }
 
 function createImage()
 {
     var project_id = "{{ project_info.id }}"; 
-    var repo_path = document.getElementById('repo_path').value;
+    var repos_id = document.getElementById('repo_path').value;
     var repo_branch = document.getElementById('repo_branch').value; 
     var image_desc = document.getElementById('image_desc').value;
 
     var http = new createXmlHttpRequest();
     var url ="/images/create/";
-    var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repo_path=" + repo_path + "&repo_branch=" + repo_branch;
+    var params = "project_id=" + project_id + "&image_desc=" + image_desc + "&repos_id=" + repos_id + "&repo_branch=" + repo_branch;
+    //alert(params);
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);

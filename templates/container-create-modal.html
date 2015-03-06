@@ -47,6 +47,7 @@
                                         <div class="control-group version">
                         <label class="control-label" for="version">版本库</label>
                         <div class="controls">
+                            <input id="repos_id" style="display:none">
                             <input type="text" class="form-control" id="hg_list" name='container_hg' style="width:300px">
                             <span class="help-inline">(代码版本库)</span>
                         </div>
@@ -56,6 +57,22 @@
                         <div class="controls">
                             <input type="text" class="form-control" id="container_code" name='container_code' style="width:152px">
                             <span class="help-inline">(分支号)</span>
+                      </div>
+                    </div>
+
+                    <div class="control-group app_type">
+                        <label class="control-label" for="version">应用类型</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="app_type" name='app_type' style="width:152px">
+                            <span class="help-inline">应用类型</span>
+                      </div>
+                    </div>
+
+                    <div class="control-group packaging">
+                        <label class="control-label" for="version">打包参数</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="maven_flags" name='maven_flags' style="width:500px">
+                            <span class="help-inline">maven打包参数</span>
                       </div>
                     </div>
                 </form>
@@ -118,13 +135,28 @@ $("#image_list").change(function(){
          type: "GET",
          dataType: "json",
          url: url }).done(function( data ) {
-             $("#hg_list").val(data.repos);
+             $("#hg_list").val(data.repo_path);
              //$("#container_code").val(data.branch);
              $("#container_code").val('default');
-
+             url = "/hgs/mavens?repos_id=" + data.repos_id;
+             $.ajax({
+               type: "GET",
+               dataType: "json",
+               url: url}).done(function(repo_info) { 
+                   if ( repo_info.java ){
+                       $("#app_type").val("java")
+                   }
+                   else {
+                       $("#app_type").val("php")
+                   }
+                   $("#maven_flags").val(repo_info.path);
+             });
    });
 });
 
+$("#hg_list").change(function(){
+    $("#repos_id").val("hello");
+});
 
 function createContainer()
 {
@@ -154,13 +186,14 @@ function createContainer()
     
     
     var container_code = document.getElementById('container_code').value;
-    var app_type = 0; 
+    var app_type = document.getElementById('app_type').value;
     var zone_id = document.getElementById('zone_list').value;
+    var maven_flags =document.getElementById('maven_flags').value; 
 
 
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
-    var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id;
+    var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);

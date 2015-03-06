@@ -313,7 +313,8 @@ $("a[href='#projectList']").on('show.bs.tab', function(e) {
 });
 
 $(document).ready(
-    function () {
-    $("a[href='#projectList']").click();
-});
+    //function () {
+    //$("a[href='#projectList']").click();
+    document.body.parentNode.style.overflow="hidden";
+);
 

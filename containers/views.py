@@ -77,6 +77,7 @@ def create(request):
         user_name         = request.session.get('user_id')
         user_key          = request.session.get('user_key')
         zone_id           = request.POST.get('zone_id')
+        maven_flags       = request.POST.get('maven_flags')
 
         url='{}/containers'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
@@ -90,6 +91,7 @@ def create(request):
                 'user_id':user_name,
                 'user_key':user_key,
                 'zone_id': zone_id,
+                'maven_flags': maven_flags,
         }
         rs = requests.post(url,headers=headers,data=json.dumps(data))
     return HttpResponse(json.dumps(rs.json()))

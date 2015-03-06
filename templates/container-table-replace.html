@@ -1,5 +1,5 @@
 <table id="container_table_{{project_id}}" class="table table-striped table-bordered table-hover table-condensed">
-        <thead>
+        <thead style="border:1px solid #bebebe">
             <th style="width:5%;display: none;">ID</th>
             <th style="width:10%">容器名称</th>
             <th style="width:10%">版本库</th>
@@ -12,7 +12,7 @@
             <th style="width:8%">状态</th>
             <th style="width:30%" class="text-center">操作</th>
         </thead>
-        <tbody>
+        <tbody style="border:1px solid #bebebe">
             {% for item in container_list %}
                 <tr>
                     <td class="fp" style="display:none;">{{ item.id }}</td>

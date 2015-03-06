@@ -27,6 +27,7 @@ def show(request):
     url='{}/images/{}'.format(BASE_URL,image_id)
     headers={'Content-Type':'application/json'}
     resp = requests.get(url,headers=headers)
+    print resp.json()
     return HttpResponse(json.dumps(resp.json())) 
 
 
@@ -37,7 +38,13 @@ def create(request):
         if form.is_valid():
             cleaned_data=form.cleaned_data
             project_id=cleaned_data.get('project_id')
-            repo_path=cleaned_data.get('repo_path')
+            repos_id=cleaned_data.get('repos_id')
+
+            url="%s/repos/%s" % (BASE_URL, repos_id)
+            headers={'Content-Type':'application/json'}
+            rs = requests.get(url,headers=headers)
+            repo_path = rs.json().get("repo_path")
+
             repo_branch=cleaned_data.get('repo_branch')
             image_desc=cleaned_data.get('image_desc')
             user_name=request.session.get('user_id')
@@ -48,11 +55,12 @@ def create(request):
             data  = {
                     'name':image_name,
                     'project_id':project_id,
-                    'repos':repo_path,
+                    'repos_id':repos_id,
                     'branch':repo_branch,
                     'desc':image_desc,
                     'user_id':user_name,
             }
+            print data
             rs = requests.post(url,headers=headers,data=json.dumps(data))
             logger.debug(rs.json())
         else:
@@ -89,8 +97,14 @@ def update(request):
     for user in users:
         if user['name'] == user_id:
             project_role = user['role_id']
+    if request.session.get('user_role',None) == 'admin':
+        role=0
+    elif project_role == 0:
+        role=0
+    else:
+        role=project_role
 
-    return render_to_response('image-table-replace.html',{'image_list':image_list,'project_role':project_role})
+    return render_to_response('image-table-replace.html',{'image_list':image_list,'role':role})
 
 @require_auth
 def edit(request):
