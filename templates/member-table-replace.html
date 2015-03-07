@@ -14,13 +14,13 @@
                 <td>{{ item.email }}</td>
 
                 {% if item.role_id == 0 %}
-                <td ><font size="2" color="green">管理员</font></div></td>
+                <td ><font size="2" color="green">运维</font></div></td>
                 {% elif item.role_id == 1 %}
-                <td ><font size="2" color="green">开发者</font></div></td>
+                <td ><font size="2" color="green">开发</font></div></td>
                 {% elif item.role_id == 2 %}
-                <td ><font size="2" color="green">测试者</font></div></td>
+                <td ><font size="2" color="green">测试</font></div></td>
                 {% elif item.role_id == 3 %}
-                <td ><font size="2" color="green">项目经理</font></div></td>
+                <td ><font size="2" color="green">产品</font></div></td>
                 {% endif %}
 
                 <td width="30%">{{ item.created }}</td>
