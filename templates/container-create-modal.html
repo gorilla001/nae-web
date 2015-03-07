@@ -136,7 +136,7 @@ $("#image_list").change(function(){
          dataType: "json",
          url: url }).done(function( data ) {
              $("#hg_list").val(data.repo_path);
-             $("#repos_id").var(data.repos_id);
+             $("#repos_id").val(data.repos_id);
              //$("#container_code").val(data.branch);
              $("#container_code").val('default');
              url = "/hgs/mavens?repos_id=" + data.repos_id;
