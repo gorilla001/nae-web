@@ -69,10 +69,10 @@
                     </div>
 
                     <div class="control-group packaging">
-                        <label class="control-label" for="version">打包参数</label>
+                        <label class="control-label" for="version">打包参数(代码路径)</label>
                         <div class="controls">
                             <input type="text" class="form-control" id="maven_flags" name='maven_flags' style="width:500px">
-                            <span class="help-inline">maven打包参数</span>
+                            <span class="help-inline">maven打包参数(代码路径)</span>
                       </div>
                     </div>
                 </form>
@@ -136,6 +136,7 @@ $("#image_list").change(function(){
          dataType: "json",
          url: url }).done(function( data ) {
              $("#hg_list").val(data.repo_path);
+             $("#repos_id").var(data.repos_id);
              //$("#container_code").val(data.branch);
              $("#container_code").val('default');
              url = "/hgs/mavens?repos_id=" + data.repos_id;
@@ -161,7 +162,7 @@ $("#hg_list").change(function(){
 function createContainer()
 {
     var project_id = "{{ project_info.id }}"; 
-    var container_hg = document.getElementById('hg_list').value;
+    var repos_id = document.getElementById('repos_id').value;
     var image_name = document.getElementById('image_list').value;
 
     var zone = document.getElementById('zone_list').value;
@@ -193,7 +194,7 @@ function createContainer()
 
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
-    var params = "project_id=" + project_id + "&image_name=" + image_name + "&container_hg=" + container_hg + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
+    var params = "project_id=" + project_id + "&image_name=" + image_name + "&repos_id=" + repos_id + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);
