@@ -178,7 +178,7 @@ $("a[href='#imagesTab']").on('show.bs.tab',function(e){
 
 $("a[href='#containersTab']").on('show.bs.tab', function(e) {
     var project_id = "{{ project_info.id }}";
-    var url = '/containers?project_id=' + project_id + '&user_id=' + "{{ user_id }}";
+    var url = '/containers/update?project_id=' + project_id + '&user_id=' + "{{ user_id }}";
     $.ajax({
         type: "GET",
         url: url }).done(function( data ) {

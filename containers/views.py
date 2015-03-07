@@ -125,15 +125,28 @@ def update(request):
     url='%s/projects/%s' % (BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    users = rs.json()['users'] 
-    project_role=None
-    for user in users:
-        if user['name'] == user_id:
-            project_role = user['role_id']
 
+    project_info = rs.json()
+    user_id = request.session.get('user_id',None)
+
+    """get current user role in project"""
+    project_role = None 
+    if project_info:
+        for user in project_info['users']:
+            if user['name'] == user_id:
+                project_role=user['role_id']
+
+    if request.session.get('user_role',None) == 'admin':
+        role=0
+    elif project_role == 0:
+        role=0
+    else:
+        role=project_role
+
+    print role
     return render_to_response('container-table-replace.html',
                              {'container_list':container_list,
-                              'project_role': project_role})
+                              'role': role})
 
 @require_auth
 def stop(request):

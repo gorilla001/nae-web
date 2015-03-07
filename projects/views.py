@@ -29,7 +29,7 @@ def home(request):
         projects_list=rs.json()['projects']
 
     auth_username=request.session.get('user_name')
-
+    projects_list = sorted(projects_list,key = lambda x:x['name'])
     return render_to_response('projects.html',{'projects_list':projects_list,'auth_username':auth_username},context_instance=RequestContext(request))
 
 @require_auth
