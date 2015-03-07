@@ -71,7 +71,7 @@ def create(request):
         container_environ = request.POST.get('container_env') 
         container_project = request.POST.get('project_id')
         container_image   = request.POST.get('image_name')
-        repos_id          = request.POST.get('repos_id')
+        repos             = request.POST.get('repos')
         container_code    = request.POST.get('container_code')
         app_type          = request.POST.get('app_type')
         user_name         = request.session.get('user_id')
@@ -85,7 +85,7 @@ def create(request):
                 'env':container_environ,
                 'project_id':container_project,
                 'image_id':container_image,
-                'repos_id':repos_id,
+                'repos':repos,
                 'branch':container_code,
                 'app_type':app_type,
                 'user_id':user_name,

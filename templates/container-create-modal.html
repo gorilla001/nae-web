@@ -162,7 +162,7 @@ $("#hg_list").change(function(){
 function createContainer()
 {
     var project_id = "{{ project_info.id }}"; 
-    var repos_id = document.getElementById('repos_id').value;
+    var repos = document.getElementById('hg_list').value;
     var image_name = document.getElementById('image_list').value;
 
     var zone = document.getElementById('zone_list').value;
@@ -194,7 +194,7 @@ function createContainer()
 
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
-    var params = "project_id=" + project_id + "&image_name=" + image_name + "&repos_id=" + repos_id + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
+    var params = "project_id=" + project_id + "&image_name=" + image_name + "&repos=" + repos + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
     alert(params);
     var token = '{{ csrf_token }}'; 
     
