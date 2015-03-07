@@ -71,7 +71,7 @@ def create(request):
         container_environ = request.POST.get('container_env') 
         container_project = request.POST.get('project_id')
         container_image   = request.POST.get('image_name')
-        repos_id          = request.POST.get('container_hg')
+        repos_id          = request.POST.get('repos_id')
         container_code    = request.POST.get('container_code')
         app_type          = request.POST.get('app_type')
         user_name         = request.session.get('user_id')
