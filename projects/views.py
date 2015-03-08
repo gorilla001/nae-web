@@ -16,17 +16,22 @@ LOG=logging.getLogger('django')
 @require_auth
 def home(request):
     """get all project list  or projects that belong to specified user."""
-    if request.session.get('user_role',None) == 'admin':
-        url='{}/projects'.format(BASE_URL)
-        headers={'Content-Type':'application/json'}
-        rs = requests.get(url,headers=headers)
-        projects_list=rs.json()
-    else:
-        user_id = request.session.get('user_id')
-        url='%s/users/%s' % (BASE_URL,user_id)
-        headers={'Content-Type':'application/json'}
-        rs = requests.get(url,headers=headers)
-        projects_list=rs.json()['projects']
+    #if request.session.get('user_role',None) == 'admin':
+    #    url='{}/projects'.format(BASE_URL)
+    #    headers={'Content-Type':'application/json'}
+    #    rs = requests.get(url,headers=headers)
+    #    projects_list=rs.json()
+    #else:
+    #    user_id = request.session.get('user_id')
+    #    url='%s/users/%s' % (BASE_URL,user_id)
+    #    headers={'Content-Type':'application/json'}
+    #    rs = requests.get(url,headers=headers)
+    #    projects_list=rs.json()['projects']
+
+    url='{}/projects'.format(BASE_URL)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    projects_list=rs.json()
 
     auth_username=request.session.get('user_name')
     projects_list = sorted(projects_list,key = lambda x:x['name'])
