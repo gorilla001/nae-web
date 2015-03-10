@@ -1,13 +1,13 @@
 <table class="table table-striped table-bordered table-hover table-condensed">
        <thead style="border:1px solid #bebebe">
-            <th style="width:5%;display: none;">ID</th>
+            <th style="display: none;">ID</th>
             <th style="width:10%">镜像名称</th>
             <th style="width:10%">镜像tag</th>
-            <th style="width:25%">功能描述</th>
-            <th style="width:25%">创建时间</th>
+            <th style="width:20%">功能描述</th>
+            <th style="width:20%">创建时间</th>
             <th style="width:10%">状态</th>
             <th style="display:none">FLAG</th>
-            <th width=5% class="text-center">操作</th>
+            <th width=10% class="text-center">操作</th>
         </thead>
 
 	<tbody style="border:1px solid #bebebe">
@@ -69,6 +69,7 @@
 			    </button>-->
 	                    <!--<button class="btn btn-mini btn-success image-download">打包带走
 			    </button>-->
+                            <button class="btn btn-mini btn-primary run-container">启动容器</button>
                             {% if role == 0 %}
 	                    <button class="btn btn-mini btn-danger delete-image">删除
 			    </button>

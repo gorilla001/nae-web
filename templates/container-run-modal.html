@@ -1,0 +1,231 @@
+<div id="RunContainerModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">创建容器</h4>
+            </div>
+            <div class="modal-body">
+                <form id="container" class="form-horizontal" action="/containers/create/" method="POST" >
+                    {% csrf_token %}
+                    <div class="control-group zone">
+                        <label class="control-label" for="environ">所属区域</label>
+                        <div class="controls">
+                            <select  class="form-control" id="zone_list2" name="container_zone">
+                                <option value="-1">请选择</option>
+                                <option value="0">北京</option>
+                                <option value="1">成都(暂未开通)</option>
+                            </select>
+                            <span class="help-inline">(所属地理区域)</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group environ">
+                        <label class="control-label" for="environ">所属环境</label>
+                        <div class="controls">
+                            <select  class="form-control" id="environ_list2" name="container_environ">
+                                <option value="-1">请选择</option>
+                                <option value="DEV">开发环境</option>
+                                <option value="QA">测试环境</option>
+                                <option value="STAG">Staging环境</option>
+                                <!--<option value="PUB">Publish环境</option>
+                                <option value="PROD">生产环境</option>-->
+                            </select>
+                            <span class="help-inline">(容器的环境，比如开发、测试等)</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group project">
+                      <label class="control-label" for="image">所选镜像</label>
+                      <div class="controls">
+                          <select id='image_list2' class="form-control" name="image_name" style="width:300px">  
+                            <option value="-1">请选择</option>
+                          </select>  
+                        <span class="help-inline">(创建容器所使用的镜像)</span>
+                      </div>
+                      <!--<div class="controls">
+                        <input type="text" class="form-control" id="hg_list" name='container_hg' style="width:300px">
+                        <span class="help-inline">(创建容器所使用的镜像)</span>
+                      </div>-->
+                    </div>
+                    <div class="control-group version">
+                        <label class="control-label" for="version">版本库</label>
+                        <div class="controls">
+                            <input id="repos_id2" style="display:none">
+                            <input type="text" class="form-control" id="hg_list2" name='container_hg' style="width:300px">
+                            <span class="help-inline">(代码版本库)</span>
+                        </div>
+                    </div>
+                    <div class="control-group version">
+                        <label class="control-label" for="version">分支号</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="container_code2" name='container_code' style="width:152px">
+                            <span class="help-inline">(分支号)</span>
+                      </div>
+                    </div>
+
+                    <div class="control-group app_type">
+                        <label class="control-label" for="version">应用类型</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="app_type2" name='app_type' style="width:152px">
+                            <span class="help-inline">应用类型</span>
+                      </div>
+                    </div>
+
+                    <div class="control-group packaging">
+                        <label class="control-label" for="version">打包参数(代码路径)</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="maven_flags2" name='maven_flags' style="width:500px">
+                            <span class="help-inline">maven打包参数(代码路径)</span>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary btn-ok" data-dismiss="modal" onclick="runContainer()">确定</button>
+        </div>
+    </div>
+    </div> 
+</div>
+
+<div id="errorContainerModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="margin:0px;padding:0px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" style="text-align:center">出错了</h4>
+            </div>
+            <div class="modal-body" style="background:#fff;margin:0px;padding:0px;">
+		<label cass="control-label" style="margin-left:150px;margin-top:10px;margin-bottom:10px;" >
+		   不能再创建新容器了，每个项目最多能创建12个容器，请删除不用的容器后重试！ 
+		</label>
+            </div>
+            <div class="modal-footer" style="margin-top:0px;">
+                <button class="btn btn-primary btn-ok" data-dismiss="modal" style="color:#fff;background-color:#fff;border:none">好吧</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/*$('#createContainerModal').on('show.bs.modal', function() {
+        var project_id = '{{ project_info.id }}';
+        var url = "/containers?project_id=" + project_id;
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+		;
+        });
+});
+$('#createContainerModal').on('shown.bs.modal', function() {
+        var project_id = '{{ project_info.id }}';
+        var url = "/images?project_id=" + project_id;
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+              $("#image_list option[value !='-1']").remove();
+              for (var i in data){
+                $("#image_list").append("<option value=" + data[i].id + ">" + data[i].name + ":" + data[i].tag + "</option>");
+              }
+        });
+});*/
+$('#RunContainerModal').on('shown.bs.modal', function() {
+//$("#image_list2").change(function(){
+       var id=$("#image_list2").find("option:selected").val(); 
+       var url = "/images/show?id=" + id;
+       $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: url }).done(function( data ) {
+             $("#hg_list2").val(data.repo_path);
+             $("#repos_id2").val(data.repos_id);
+             //$("#container_code").val(data.branch);
+             $("#container_code2").val('default');
+             url = "/hgs/mavens?repos_id=" + data.repos_id;
+             $.ajax({
+               type: "GET",
+               dataType: "json",
+               url: url}).done(function(repo_info) { 
+                   if ( repo_info.java ){
+                       $("#app_type2").val("java")
+                   }
+                   else {
+                       $("#app_type2").val("php")
+                   }
+                   $("#maven_flags2").val(repo_info.path);
+             });
+   });
+});
+
+$("#hg_list").change(function(){
+    $("#repos_id").val("hello");
+});
+
+function runContainer()
+{
+    var project_id = "{{ project_info.id }}"; 
+    var repos = document.getElementById('hg_list2').value;
+    var image_name = document.getElementById('image_list2').value;
+
+    var zone = document.getElementById('zone_list2').value;
+    var container_env = document.getElementById('environ_list2').value;
+    if ( container_env == "DEV" ) {
+        if ( zone == 0 ) {
+            container_env = container_env + "BJ"
+        }
+        if ( zone == 1 ) {
+            container_env = container_env + "CD"
+        }
+    }
+    if ( container_env == "QA" ) {
+        if ( zone == 0 ) {
+            container_env = container_env + "BJ"
+        }
+        if ( zone == 1 ) {
+            container_env = container_env + "CD"
+        }
+    }
+  
+    
+    
+    var container_code = document.getElementById('container_code2').value;
+    var app_type = document.getElementById('app_type2').value;
+    var zone_id = document.getElementById('zone_list2').value;
+    var maven_flags =document.getElementById('maven_flags2').value; 
+
+
+    var http = new createXmlHttpRequest();
+    var url ="/containers/create/";
+    var params = "project_id=" + project_id + "&image_name=" + image_name + "&repos=" + repos + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
+    //alert(params);
+    var token = '{{ csrf_token }}'; 
+    
+    http.open("POST",url,true);
+    http.setRequestHeader('X-CSRFToken', token);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    http.setRequestHeader("Content-length",params.length);
+    http.setRequestHeader("Connection", "close");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var content = http.response;
+            var status = http.response.status; 
+            var url = '/containers/update?project_id=' + project_id;
+            if (status == 200){
+                $.ajax({
+                        type: "GET",
+		        dataType:"json",
+                        url: url }).done(function( data ) {
+                                $("#container-table-{{project_info.id}}").html(data);
+                });
+            }
+	    if ( status == 100 ){ $("#errorContainerModal").modal("show") };
+        }
+    }
+    http.responseType = 'json';
+    http.send(params);
+}
+</script>
+

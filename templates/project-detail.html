@@ -45,6 +45,9 @@
     </ul>
     
 <div class="tab-content">
+    <!-- Global Modal -->
+    {% include 'container-create-modal.html' %}
+    {% include 'container-run-modal.html' %}
     <div id ="projectinfoTab" class="tab-pane fade in active">
         <div class="panel panel-default">
             <div class="panel-heading heading-large">
@@ -125,7 +128,6 @@
                 </span>
             </div>
             <div class="panel-body">
-                {% include 'container-create-modal.html' %}
                 {% include 'image-save-modal.html' %}
                 <div id="container-table-{{project_info.id}}" class="panel panel-default">
                 </div>
@@ -288,6 +290,16 @@ $("#image-table-{{project_info.id}}").on("click",".edit-image",function() {
     		$('#editModal').modal('show');
     });
 
+});
+
+$("#image-table-{{project_info.id}}").on("click",".run-container",function() {
+    var row = $(this).closest("tr");    
+    var id = row.find(".fp").text();
+    var name = row.find(".name").text();
+    var tag = row.find(".tag").text();
+    $("#image_list2 option").remove();
+    $("#image_list2").append("<option selected value=" + id + ">" + name + ":" + tag + "</option>");
+    $('#RunContainerModal').modal('show');
 });
 
 $(".container-refresh").click(function(e) {
