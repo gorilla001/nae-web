@@ -25,6 +25,14 @@
                             <span class="help-inline">(版本库的分支号，必填项)</span>
                         </div>  
                     </div>
+                    <div class="control-group packaging">
+                        <label class="control-label" for="version">打包参数(代码路径)</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" id="flags" name='flags' style="width:500px">
+                            <span class="help-inline">maven打包参数(代码路径)</span>
+                      </div>
+                    </div>
+
                     <!--<div class="control-group branch">
                         <label class="control-label" for="root">应用根目录</label>
                         <div class="controls">
@@ -84,6 +92,15 @@ $("#repo_path").change(function(){
     var text = $("#repo_path").text();
     var text_array=text.split("/"); 
     $("#image_desc").val(text_array.pop());
+    var id=$("#repo_path").find("option:selected").val();
+    url = "/hgs/mavens?repos_id=" + id;
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: url}).done(function(repo_info) { 
+          $("#flags").val(repo_info.path);
+    });
+
 });
 
 function createXmlHttpRequest(){
