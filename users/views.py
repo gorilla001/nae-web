@@ -171,8 +171,10 @@ def refresh(request):
        role = 0
     else:
        role = project_role
-    print role 
-    print user_list
+
+    # Sorted user lists by role_id
+    user_list = sorted(user_list,key = lambda x:x['role_id'])
+
     return render_to_response('member-table-replace.html',{'user_list':user_list,'role':role})
 
 

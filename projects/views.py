@@ -16,22 +16,22 @@ LOG=logging.getLogger('django')
 @require_auth
 def home(request):
     """get all project list  or projects that belong to specified user."""
-    #if request.session.get('user_role',None) == 'admin':
-    #    url='{}/projects'.format(BASE_URL)
-    #    headers={'Content-Type':'application/json'}
-    #    rs = requests.get(url,headers=headers)
-    #    projects_list=rs.json()
-    #else:
-    #    user_id = request.session.get('user_id')
-    #    url='%s/users/%s' % (BASE_URL,user_id)
-    #    headers={'Content-Type':'application/json'}
-    #    rs = requests.get(url,headers=headers)
-    #    projects_list=rs.json()['projects']
+    if request.session.get('user_role',None) == 'admin':
+        url='{}/projects'.format(BASE_URL)
+        headers={'Content-Type':'application/json'}
+        rs = requests.get(url,headers=headers)
+        projects_list=rs.json()
+    else:
+        user_id = request.session.get('user_id')
+        url='%s/users/%s' % (BASE_URL,user_id)
+        headers={'Content-Type':'application/json'}
+        rs = requests.get(url,headers=headers)
+        projects_list=rs.json()['projects']
 
-    url='{}/projects'.format(BASE_URL)
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    projects_list=rs.json()
+    #url='{}/projects'.format(BASE_URL)
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #projects_list=rs.json()
 
     auth_username=request.session.get('user_name')
     projects_list = sorted(projects_list,key = lambda x:x['name'])
@@ -102,7 +102,7 @@ def show(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     project_info = rs.json()
-    print rs.json()
+    #print rs.json()
     #return  HttpResponse(json.dumps(rs.json()))
     user_id = request.session.get('user_id',None)
 
@@ -113,14 +113,18 @@ def show(request):
             if user['name'] == user_id:
                 project_role=user['role_id']
 
+    #if request.session.get('user_role',None) == 'admin':
+    #    role=0
+    #elif project_role == 0:
+    #    role=0
+    #else:
+    #    role=project_role
+
     if request.session.get('user_role',None) == 'admin':
-        role=0
-    elif project_role == 0:
-        role=0
+        role=-1
     else:
         role=project_role
 
-    print 'role',role
     auth_username=request.session.get('user_name')
     return render_to_response('project-detail.html',{"project_info": project_info,"user_id": user_id,"role": role,"auth_username":auth_username},context_instance=RequestContext(request))
 

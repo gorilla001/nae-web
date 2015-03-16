@@ -48,6 +48,7 @@
     <!-- Global Modal -->
     {% include 'container-create-modal.html' %}
     {% include 'container-run-modal.html' %}
+    {% include 'member-create-modal.html' %}
     <div id ="projectinfoTab" class="tab-pane fade in active">
         <div class="panel panel-default">
             <div class="panel-heading heading-large">
@@ -78,6 +79,9 @@
     <div id ="projectMembersTab" class="tab-pane fade">
         <div class="panel panel-default">
             <div class="panel-heading heading-large">
+                <span class="pull-right">
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createMemberModal">添加</button>
+	        </span>
             </div>
             <div class="panel-body">
                <div id="member-table-{{project_info.id}}" class="panel panel-default">
@@ -100,11 +104,11 @@
     <div id ="imagesTab" class="tab-pane fade">
         <div class="panel panel-default">
             <div class="panel-heading heading-large">
-                {% ifequal role 0 %}
+                {% if role ==  0  or role == -1 %}
                 <span class="pull-right">
                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#createImageModal">创建</button>
                 </span>
-                {% endifequal %}
+                {% endif %}
                 <span class="pull-right">
                     <button class="btn btn-primary btn-sm image-refresh">刷新</button>
                 </span>
