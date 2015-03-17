@@ -14,13 +14,33 @@
                 <td>{{ item.email }}</td>
 
                 {% if item.role_id == 0 %}
-                <td ><font size="2" color="#019858">运维</font></div></td>
+                    <td >
+                        <font size="2" color="#019858">运维</font>
+                        {% if item.swan == 0 %}
+                            <i style="padding-left:5px" class="fa fa-user"></i>
+                        {% endif %}
+                    </td>
                 {% elif item.role_id == 1 %}
-                <td ><font size="2" color="#66B3FF">开发</font></div></td>
+                    <td >
+                        <font size="2" color="#66B3FF">开发</font>
+                        {% if item.swan == 0 %}
+                            <i style="padding-left:5px" class="fa fa-user"></i>
+                        {% endif %}
+                    </td>
                 {% elif item.role_id == 2 %}
-                <td ><font size="2" color="#EA0000">测试</font></div></td>
+                    <td >
+                        <font size="2" color="#EA0000">测试</font>
+                        {% if item.swan == 0 %}
+                            <i style="padding-left:5px" class="fa fa-user"></i>
+                        {% endif %}
+                    </td>
                 {% elif item.role_id == 3 %}
-                <td ><font size="2" color="#2828FF">产品</font></div></td>
+                    <td >
+                        <font size="2" color="#2828FF">产品</font>
+                        {% if item.swan == 0 %}
+                            <i style="padding-left:5px" class="fa fa-user"></i>
+                        {% endif %}
+                    </td>
                 {% endif %}
 
                 <td width="30%">{{ item.created }}</td>

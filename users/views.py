@@ -126,13 +126,14 @@ def create(request):
         user_name=request.POST.get('name').strip()
         user_email=request.POST.get('email').strip()
         role_id = request.POST.get('role_id').strip()
+        swan = request.POST.get('swan').strip()
         data = {
                 'project_id' : project_id, 
                 'name' : user_name,
                 'email': user_email,
-                'role_id':role_id,
+                'role_id': role_id,
+                'swan': swan,
         }
-        print data
         url='{}/users'.format(BASE_URL)
         headers={'Content-Type':'application/json'}
         requests.post(url,headers=headers,data=json.dumps(data))

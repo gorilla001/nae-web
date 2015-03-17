@@ -55,7 +55,7 @@ function createMember()
 
     var http = new createXmlHttpRequest();
     var url ="/users/create/";
-    var params = "project_id=" + project_id + "&name=" + user_name + "&email=" + user_email + "&role_id=" + role_id;
+    var params = "project_id=" + project_id + "&name=" + user_name + "&email=" + user_email + "&role_id=" + role_id + "&swan=1";
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);
