@@ -108,6 +108,7 @@ def show(request):
 
     """get current user role in project"""
     project_role = None 
+    swan = None
     if project_info:
         for user in project_info['users']:
             if user['name'] == user_id:
@@ -127,7 +128,13 @@ def show(request):
         role=project_role
 
     auth_username=request.session.get('user_name')
-    return render_to_response('project-detail.html',{"project_info": project_info,"user_id": user_id,"role": role,"swan":swan,"auth_username":auth_username},context_instance=RequestContext(request))
+    return render_to_response('project-detail.html',
+                              {"project_info": project_info,
+                               "user_id": user_id,
+                               "role": role,
+                               "swan": swan,
+                               "auth_username":auth_username},
+                               context_instance=RequestContext(request))
 
 @require_auth
 def update(request):
