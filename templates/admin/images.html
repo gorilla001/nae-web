@@ -80,7 +80,7 @@
                                     <td>{{ item.RepoTags | join:"  " }}</td>
                                     <td>{{ item.Size | filesizeformat }}</td>
                                     <td>{{ item.VirtualSize | filesizeformat }}</td>
-                                    <td>{{ item.Created }}</td>
+                                    <td>{{ item.Created | time:"TIME_FORMAT" }}</td>
                                 </tr>
                             {% endfor %} 
                         </tbody>
