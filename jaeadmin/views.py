@@ -12,30 +12,30 @@ import os
 import requests
 import json
 
-@require_auth
+#@require_auth
 def index(request):
-    print 'index'
-    return render_to_response('admin/preview.html')
+    return render_to_response('admin/overview.html')
 
 @require_auth
 def projects(request):
-    url='http://localhost:8383/v1/projects'
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    projects_list=rs.json()
-    print projects_list
+    #url='http://localhost:8383/v1/projects'
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #projects_list=rs.json()
+    #print projects_list
 
-    url='http://localhost:8383/v1/images'
-    headers={'Content-Type':'application/json'}
-    rs = requests.get(url,headers=headers)
-    image_list = rs.json()
+    #url='http://localhost:8383/v1/images'
+    #headers={'Content-Type':'application/json'}
+    #rs = requests.get(url,headers=headers)
+    #image_list = rs.json()
 
-    url='http://localhost:8383/v1'
-    headers={'Content-Type':'application/json'}
-    r=requests.get("{}/users".format(url),headers=headers)
-    user_list=r.json()
+    #url='http://localhost:8383/v1'
+    #headers={'Content-Type':'application/json'}
+    #r=requests.get("{}/users".format(url),headers=headers)
+    #user_list=r.json()
 
-    return render_to_response('admin/projects.html',{'projects_list':projects_list,'image_list':image_list,'user_list':user_list},context_instance=RequestContext(request))
+    #return render_to_response('admin/projects.html',{'projects_list':projects_list,'image_list':image_list,'user_list':user_list},context_instance=RequestContext(request))
+    return render_to_response('admin/projects.html',context_instance=RequestContext(request))
 
 def createProject(request):
     if request.method == 'POST':
@@ -54,14 +54,11 @@ def createProject(request):
 
 @require_auth
 def images(request):
-    print 'images'
-    url='http://localhost:8383/v1/images'
+    url = "http://localhost:8833/v1/images/json"
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    print rs.json()
-    image_list=rs.json()
-    file_list = DockerFiles.objects.values('Name')
-    return render_to_response('admin/images.html',{'file_list':file_list,'image_list':image_list},context_instance=RequestContext(request))
+    images_list=rs.json()
+    return render_to_response('admin/images.html',{'images_list':images_list},context_instance=RequestContext(request))
 
 @require_auth
 def createImage(request):
@@ -84,6 +81,26 @@ def createImage(request):
         print rs.json()
     return HttpResponseRedirect('/admin/images')
 
+
+@require_auth
+def containers(request):
+    url = "http://localhost:8833/containers/json?all=1"
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    containers_list=rs.json()
+    return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
+
+@require_auth
+def registries(request):
+    return render_to_response('admin/registries.html',context_instance=RequestContext(request))
+
+@require_auth
+def hosts(request):
+    return render_to_response('admin/hosts.html',context_instance=RequestContext(request))
+
+@require_auth
+def regions(request):
+    return render_to_response('admin/regions.html',context_instance=RequestContext(request))
 
 @require_auth
 def files(request):
