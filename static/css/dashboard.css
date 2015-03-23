@@ -438,9 +438,7 @@ ul.alert-dropdown {
         left: 225px;
         width: 225px;
         margin-left: -225px;
-        #border-right: 2px solid #bebebe;
         border-radius: 0;
-        #background-color: #000;
     }
 
     .side-nav>li>a {
