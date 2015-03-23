@@ -11,6 +11,7 @@ from django.shortcuts import HttpResponseRedirect
 import os
 import requests
 import json
+from jaeweb.settings import DOCKER_ENDPOINT 
 
 #@require_auth
 def index(request):
@@ -54,7 +55,7 @@ def createProject(request):
 
 @require_auth
 def images(request):
-    url = "http://localhost:8833/v1/images/json"
+    url = "%s/images/json" % DOCKER_ENDPOINT
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     images_list=rs.json()
@@ -84,7 +85,7 @@ def createImage(request):
 
 @require_auth
 def containers(request):
-    url = "http://localhost:8833/containers/json?all=1"
+    url = "%s/containers/json?all=1" % DOCKER_ENDPOINT
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     containers_list=rs.json()
