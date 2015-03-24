@@ -1021,4 +1021,8 @@ table {
 .yellow {
     display: inline-block;
     background: #f8d347;
+    width: 40%;
+    padding: 25px 15px;
+    -webkit-border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
 }
