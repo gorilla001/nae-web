@@ -24,8 +24,16 @@ def index(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     containers_list=rs.json()
+   
+    running=0
+    for container in containers_list:
+        status = container['Status']
+        if 'Up' in status:
+            running += 1
 
-    return render_to_response('admin/overview.html',{'image':len(images_list),'container':len(containers_list)})
+    stopped = len(containers_list) - running
+
+    return render_to_response('admin/overview.html',{'image':len(images_list),'container':len(containers_list),'running':running,'stopped':stopped})
 
 @require_auth
 def projects(request):
