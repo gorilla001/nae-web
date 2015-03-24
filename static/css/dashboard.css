@@ -1018,6 +1018,7 @@ table {
 }
 
 
-.state-overview .yellow {
+.yellow {
+    display: inline-block;
     background: #f8d347;
 }
