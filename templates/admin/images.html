@@ -77,7 +77,10 @@
                             {% for item in images_list %}
                                 <tr>
                                     <td>{{ item.Id | slice:"12" }}</td>
-                                    <td>{{ item.RepoTags | join:"  " }}</td>
+                                    {% for repotag in item.RepoTags %}
+                                    <td>{{ repotag }}</td>
+                                    {% endfor %}
+                                    <!--<td>{{ item.RepoTags | join:"  " }}</td>-->
                                     <td>{{ item.Size | filesizeformat }}</td>
                                     <td>{{ item.VirtualSize | filesizeformat }}</td>
                                     <td>{{ item.Created | time:"TIME_FORMAT" }}</td>
