@@ -89,6 +89,8 @@ def containers(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     containers_list=rs.json()
+    for container in containers_list:
+        uuid = container['Id']
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
 
 @require_auth
