@@ -69,9 +69,9 @@
                         <thead style="border:1px solid #bebebe;">
                             <th style="width:10%">ID</th>
                             <th style="width:50%">RepoTags</th>
+                            <th style="width:10%">Project</th>
                             <th style="width:10%">Size</th>
                             <th style="width:10%">VirtualSize</th>
-                            <th style="width:10%">Project</th>
                             <th style="width:15%">Created</th>
                         </thead>
                         <tbody style="border:1px solid #bebebe">
@@ -81,9 +81,9 @@
                                     <td>{{ item.Id | slice:"12" }}</td>
                                     <td>{{ repotag }}</td>
                                     <!--<td>{{ item.RepoTags | join:"  " }}</td>-->
+                                    <td>{{ item.Project }}</td>
                                     <td>{{ item.Size | filesizeformat }}</td>
                                     <td>{{ item.VirtualSize | filesizeformat }}</td>
-                                    <td>{{ item.Project }}</td>
                                     <td>{{ item.Created }}</td>
                                 </tr>
                                     {% endfor %}
