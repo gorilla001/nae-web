@@ -15,7 +15,17 @@ from jaeweb.settings import DOCKER_ENDPOINT
 
 #@require_auth
 def index(request):
-    return render_to_response('admin/overview.html')
+    url = "%s/images/json" % DOCKER_ENDPOINT
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    images_list=rs.json()
+
+    url = "%s/containers/json?all=1" % DOCKER_ENDPOINT
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    containers_list=rs.json()
+
+    return render_to_response('admin/overview.html',{'image':len(images_list),'container':len(containers_list)})
 
 @require_auth
 def projects(request):
