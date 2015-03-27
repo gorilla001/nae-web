@@ -118,7 +118,7 @@ def containers(request):
         for _container in containers_list_db:
             if container['Id'] == _container['uuid']:
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
-                container_list.update(_)
+                containers_list.update(_)
 
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
 
