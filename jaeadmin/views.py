@@ -107,8 +107,18 @@ def containers(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     containers_list=rs.json()
+
+    url="{}/containers?project_id={}&user_id={}".format(BASE_URL,None,None)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    containers_list_db=rs.json()
+
     for container in containers_list:
-        uuid = container['Id']
+        for _container in containers_list_db:
+            if container['Id'] == _container['uuid']
+                _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
+                container_list.update(_)
+
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
 
 @require_auth
