@@ -12,6 +12,7 @@ import os
 import requests
 import json
 from jaeweb.settings import DOCKER_ENDPOINT 
+from jaeweb.settings import BASE_URL
 
 #@require_auth
 def index(request):
