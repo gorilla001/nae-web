@@ -116,12 +116,17 @@ def containers(request):
 
     
     containers_list = []
-    for container in containers_list_all:
-        for _container in containers_list_db:
-            if container['Id'] == _container['uuid']:
+    for container in containers_list_db:
+        for _container in containers_list_all:
+            if _container['uuid'] == container['Id']:
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
                 container.update(_)
-        containers_list.append(container)
+    #for container in containers_list_all:
+    #    for _container in containers_list_db:
+    #        if container['Id'] == _container['uuid']:
+    #            _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
+    #            container.update(_)
+    #    containers_list.append(container)
 
     print containers_list
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))

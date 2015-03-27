@@ -4,7 +4,7 @@
         <th>邮箱</th>
         <th>角色</th>
         <th>添加时间</th>
-        <!--<th width="5%" class="text-center">操作</th>-->
+        <th width="5%" class="text-center">操作</th>
     </thead>
     <tbody style="border:1px solid #bebebe">
         {% for item in user_list %}
@@ -44,6 +44,20 @@
                 {% endif %}
 
                 <td width="30%">{{ item.created }}</td>
+
+                {% if role == 0 or role == -1 %}
+                    {% if item.swan == 1 %}
+                        <td>
+                            <button class="btn btn-sm btn-danger delete-user">删除
+                            </button>
+                        </td> 
+                    {% elif item.swan == 0 %}
+                        <td>
+                            <button class="btn btn-sm btn-danger delete-user disabled">删除
+                            </button>
+                        </td>
+                    {% endif %}
+                {% endif %}
            </tr>
         {% endfor %} 
     </tbody>
