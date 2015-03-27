@@ -113,7 +113,7 @@ def containers(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     containers_list_db=rs.json()
-
+    print containers_list_db
     
     containers_list = []
     for container in containers_list_db:
