@@ -107,18 +107,21 @@ def containers(request):
     url = "%s/containers/json?all=1" % DOCKER_ENDPOINT
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    containers_list=rs.json()
+    containers_list_all=rs.json()
 
     url="{}/containers?project_id={}&user_id={}".format(BASE_URL,None,None)
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     containers_list_db=rs.json()
 
+    
+    containers_list = []
     for container in containers_list:
         for _container in containers_list_db:
             if container['Id'] == _container['uuid']:
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
-                containers_list.update(_)
+                container.update(_)
+        containers_list.append(container)
 
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
 
