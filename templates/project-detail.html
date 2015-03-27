@@ -509,6 +509,33 @@ $('#container-table-{{project_info.id}}').on("click",".web-refresh",function() {
         jQuery.get(href);
     });
 
+$('#member-table-{{project_info.id}}').on("click",".delete-user",function() {
+        var row = $(this).closest("tr");
+        var text = row.find(".fp").text();
+        var href= "/users/delete";
+        var url = href + "?id=" + text;
+        $.ajax({
+              type     : "GET",
+              dataType : "html",
+              url      : url ,
+              cache    : false,
+              success  : function(response)
+              {
+                var project_id = '{{ project_info.id }}';
+                var _url = "/users/refresh?project_id=" + project_id;
+                $.ajax({
+                    type: "GET",
+                    url: _url }).done(function( data ) {
+                        $("#member-table-{{project_info.id}}").html(data);
+                });
+              },
+              error    : function(response)
+              {
+                  alert("删除用户出错");
+              }
+
+        });
+   });
 
 </script>
 </html>
