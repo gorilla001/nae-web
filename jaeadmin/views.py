@@ -116,7 +116,7 @@ def containers(request):
 
     
     containers_list = []
-    for container in containers_list:
+    for container in containers_list_all:
         for _container in containers_list_db:
             if container['Id'] == _container['uuid']:
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
