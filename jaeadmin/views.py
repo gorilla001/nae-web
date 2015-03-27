@@ -123,6 +123,7 @@ def containers(request):
                 container.update(_)
         containers_list.append(container)
 
+    print containers_list
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
 
 @require_auth
