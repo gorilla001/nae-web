@@ -115,7 +115,7 @@ def containers(request):
 
     for container in containers_list:
         for _container in containers_list_db:
-            if container['Id'] == _container['uuid']
+            if container['Id'] == _container['uuid']:
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
                 container_list.update(_)
 
