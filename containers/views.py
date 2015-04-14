@@ -190,8 +190,9 @@ def destroy(request):
 
 @require_auth
 def refresh(request):
-    id = request.GET['id']
-    url = '%s/containers/%s/refresh' % ( BASE_URL,id)
+    id = request.GET.get('id')
+    branch = request.GET.get('branch')
+    url = '%s/containers/%s/refresh?branch=%s' % ( BASE_URL,id,branch)
     headers = {'Content-Type':'application/json'}
-    requests.post(url,headers=headers)
+    requests.get(url,headers=headers)
     return HttpResponse("succeed") 

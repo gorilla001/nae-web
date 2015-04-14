@@ -1,0 +1,61 @@
+<div id="dataSyncModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="margin:0px;padding:0px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" style="text-align:center">同步代码</h4>
+            </div>
+            <div id="editWindow" class="modal-body" style="background:#fff;margin:0px;padding:0px;">
+		<label cass="control-label" style="margin-left:350px;margin-top:10px;margin-bottom:10px;">
+                     请输入要同步的分支名
+		</label>
+                <div class="controls">
+                    <input type="text" value="" id="ctn_id" style="display:none;">
+                    <input type="text" value="" class="form-control" id="branch_name" name='branch_name' style="width:300px;margin-left:300px;margin-bottom:10px;">
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top:0px;">
+                <button id="img_name_2" value="" type="button" class="btn btn-default destroy_temp_ctn_2" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary btn-ok data-sync" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function createXmlHttpRequest(){
+            if(window.ActiveXObject){ //如果是IE浏览器
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else if(window.XMLHttpRequest){ //非IE浏览器
+                return new XMLHttpRequest();
+            }
+}
+
+$(".data-sync").on("click",function(){
+    var id = $("#ctn_id").val();
+    var branch = $("#branch_name").val();
+    var url= "/containers/refresh/?id=" + id + "&branch=" + branch;
+    jQuery.get(url);
+    //var http = new createXmlHttpRequest();
+    //var params = "id=" + id + "&branch=" + branch;
+    //alert(params);
+    //var token = '{{ csrf_token }}';
+    //http.open("GET",url,true);
+    //http.setRequestHeader('X-CSRFToken', token);
+    //http.send(params);
+});
+	
+$('.destroy_temp_ctn_2').on("click",function() {
+	var name = $("#img_name_2").val();
+	url = "/containers/destroy?name=" + name;
+	$.ajax({
+            type: "GET",
+	    dataType: "json",
+            url: url }).done(function( data ) {
+		;
+    	});
+});
+
+</script>
+
