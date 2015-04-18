@@ -1,0 +1,64 @@
+<div id="ShareModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="margin:0px;padding:0px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" style="text-align:center">共享给谁</h4>
+            </div>
+            <div id="selectWindow" class="modal-body" style="background:#fff;margin:0px;padding:0px;">
+                <input type="text" value="" id="current_id" style="display:none;"> 
+                <div class="controls">
+                    <select  class="form-control" id="user_list" name="project_users" style="width:150px;margin-left:370px;margin-bottom:10px;">
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top:0px;">
+                <button id="img_name_2" value="" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary btn-ok ctn-share" data-dismiss="modal">共享</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$('#ShareModal').on('shown.bs.modal', function() {
+        var project_id = '{{ project_info.id }}';
+        var url = "/users/list?project_id=" + project_id;
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url }).done(function( data ) {
+              //$("#image_list option[value !='-1']").remove();
+              for (var i in data){
+                $("#user_list").append("<option value=" + data[i].id + ">" + data[i].name + "</option>");
+              }
+        });
+});
+
+function createXmlHttpRequest(){
+            if(window.ActiveXObject){ //如果是IE浏览器
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else if(window.XMLHttpRequest){ //非IE浏览器
+                return new XMLHttpRequest();
+            }
+}
+
+$(".ctn-share").on("click",function(){
+    var id = $("#current_id").val();
+    var user_id = $("#user_list").val();
+    var user_name = $("#user_list").find("option:selected").text();
+    var url = "/containers/share/?id=" + id + "&user_id=" + user_id + "&user_name=" + user_name; 
+    jQuery.get(url);
+    //var url= "/containers/refresh/?id=" + id + "&branch=" + branch;
+    //var http = new createXmlHttpRequest();
+    //var params = "id=" + id + "&branch=" + branch;
+    //alert(params);
+    //var token = '{{ csrf_token }}';
+    //http.open("GET",url,true);
+    //http.setRequestHeader('X-CSRFToken', token);
+    //http.send(params);
+});
+	
+</script>
+

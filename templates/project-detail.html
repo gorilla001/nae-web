@@ -6,7 +6,7 @@
    <link href="/static/css/dashboard.css" rel="stylesheet">
    <link href="/static/css/new.css" rel="stylesheet">
    <link href="/static/css/font-awesome.css" rel="stylesheet">
-   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+   <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
 
    <script src="/static/js/jquery.min.js"></script>
    <script src="/static/js/bootstrap.min.js"></script>
@@ -48,6 +48,7 @@
     <!-- Global Modal -->
     {% include 'container-create-modal.html' %}
     {% include 'container-run-modal.html' %}
+    {% include 'container-share-modal.html' %}
     {% include 'member-create-modal.html' %}
     <div id ="projectinfoTab" class="tab-pane fade in active">
         <div class="panel panel-default">
@@ -514,6 +515,15 @@ $('#container-table-{{project_info.id}}').on("click",".web-refresh",function() {
 
     });
 
+$('#container-table-{{project_info.id}}').on("click",".share-container",function() {
+    var row = $(this).closest("tr");    
+    var text = row.find(".fp").text();
+    $("#current_id").attr("value", text);
+    $("#ShareModal").modal("show");
+});
+$('#container-table-{{project_info.id}}').on("click",".terminal-container",function() {
+    new ActiveXObject('WScript.Shell');
+});
 $('#member-table-{{project_info.id}}').on("click",".delete-user",function() {
         var row = $(this).closest("tr");
         var text = row.find(".fp").text();

@@ -184,3 +184,13 @@ def refresh(request):
 def admin(request):
     return render_to_response('projects/admin.html')
 
+@require_auth
+def list(request):
+    print 'get users'
+    project_id = request.GET.get("project_id")
+    url='%s/users?project_id=%s' % (BASE_URL,project_id)
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    user_list = rs.json() 
+
+    return HttpResponse(json.dumps(user_list))

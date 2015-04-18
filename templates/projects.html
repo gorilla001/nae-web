@@ -5,7 +5,7 @@
    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
    <link href="/static/css/dashboard.css" rel="stylesheet">
    <link href="/static/css/font-awesome.css" rel="stylesheet">
-   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+   <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
 
    <script src="/static/js/jquery.min.js"></script>
    <script src="/static/js/bootstrap.min.js"></script>
@@ -29,7 +29,17 @@
             </li>
        </ul>
     </nav>
-    <div style="margin-top:80px;margin-bottom:80px">
+    <div style="margin-top:80px;margin-bottom:100px">
+        <!--{% for item in projects_list %}
+        <a class="icon-view" href="/projects/{{item.id}}" style="text-decoration:none;">
+            <div class="icon-wrapper">
+                <div class="icon-img" style="text-align:center;padding-top:20px">
+                    <img width="80px" height="80px" src="/static/img/docker.png">
+                </div>
+            </div>
+            <div class="icon-name">{{ item.name }}</div>
+        </a>
+        {% endfor %}-->
         <table id="projects-table" style="float:left" class="table table-striped table-bordered table-hover table-condensed">
             <tbody>
                 {% for item in projects_list %}

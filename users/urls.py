@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'admin/$',views.admin,name='admin'),
     url(r'info/$',views.info,name='info'),
     url(r'index/$',views.index,name='index'),
+    url(r'list/$',views.list,name='list'),
+    
 )

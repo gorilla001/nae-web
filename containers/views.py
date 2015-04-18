@@ -121,6 +121,8 @@ def update(request):
             repos = repos.split("/")[-1] 
         container.update({"repos":repos})
         container_list.append(container)
+
+    print container_list
     """get current user role in current project."""
     url='%s/projects/%s' % (BASE_URL,project_id)
     headers={'Content-Type':'application/json'}
@@ -195,4 +197,15 @@ def refresh(request):
     url = '%s/containers/%s/refresh?branch=%s' % ( BASE_URL,id,branch)
     headers = {'Content-Type':'application/json'}
     requests.get(url,headers=headers)
+    return HttpResponse("succeed") 
+
+@require_auth
+def share(request):
+    id = request.GET.get('id')
+    user_id = request.GET.get('user_id')
+    user_name = request.GET.get('user_name')
+    user_key = request.session.get('user_key')
+    url = "%s/containers/%s/share?user_id=%s&user_key=%s" % (BASE_URL, id, user_name, user_key)
+    headers = {'Content-Type':'application/json'}
+    requests.post(url,headers=headers)
     return HttpResponse("succeed") 
