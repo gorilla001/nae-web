@@ -77,9 +77,24 @@ def images(request):
     url = "%s/images/json" % DOCKER_ENDPOINT
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
-    images_list=rs.json()
-    for image in images_list:
-        print image
+    images_list_all=rs.json()
+
+    url="%s/images" % BASE_URL
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    images_list_db=rs.json()
+
+    images_list = []
+    for image in images_list_all:
+        for _image in images_list_db:
+            if _image['uuid'] == image['Id']:
+                project_id = _image['project_id']
+                url = "%s/projects/%s" % (BASE_URL,project_id)
+                resp = requests.get(url)
+                project_name = resp.json().get('name')
+                _ = {'ProjectName': project_name}
+                image.update(_)
+        images_list.append(image)
     return render_to_response('admin/images.html',{'images_list':images_list},context_instance=RequestContext(request))
 
 @require_auth
