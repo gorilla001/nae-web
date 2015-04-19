@@ -124,7 +124,7 @@ def containers(request):
                 url = "%s/projects/%s" % (BASE_URL,project_id)
                 resp = requests.get(url)
                 project_name = resp.json().get('name')
-                _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
+                _ = {'ProjectName': project_name,'UserId':_container['user_id']}
                 container.update(_)
         containers_list.append(container)
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
