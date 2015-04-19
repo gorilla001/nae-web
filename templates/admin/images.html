@@ -84,11 +84,11 @@
                                     <td>{{ item.Size | filesizeformat }}</td>
                                     <td>{{ item.VirtualSize | filesizeformat }}</td>
                                 </tr>
-                            {% paginate %}
                             {% endfor %} 
                         </tbody>
                     </table>
              </div>
+             {% paginate %}
         </div>
     </div>
 </body>
