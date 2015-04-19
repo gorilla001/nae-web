@@ -53,7 +53,7 @@
                             {% for item in images_list %}
                                 <tr>
                                     <td>{{ item.Id | slice:"12" }}</td>
-                                    <td>{{ item.RepoTags | join:"  " }}</td>
+                                    <td>{{ item.RepoTags | join:"\n" }}</td>
                                     <td>{{ item.ProjectName }}</td>
                                     <td>{{ item.ContainerCount }}</td>
                                     <td>{{ item.Size | filesizeformat }}</td>
