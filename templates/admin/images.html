@@ -73,7 +73,7 @@
                             <th style="width:10%">ContainerCount</th>
                             <th style="width:10%">Size</th>
                             <th style="width:10%">VirtualSize</th>
-                            <th style="width:15%">Created</th>
+                            <!--<th style="width:15%">Created</th>-->
                         </thead>
                         <tbody style="border:1px solid #bebebe">
                             {% for item in images_list %}
@@ -86,7 +86,7 @@
                                     <td>{{ item.ContainerCount }}</td>
                                     <td>{{ item.Size | filesizeformat }}</td>
                                     <td>{{ item.VirtualSize | filesizeformat }}</td>
-                                    <td>{{ item.Created }}</td>
+                                    <!--<td>{{ item.Created }}</td>-->
                                 </tr>
                                     {% endfor %}
                             {% endfor %} 
