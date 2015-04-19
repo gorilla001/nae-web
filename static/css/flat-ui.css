@@ -6202,6 +6202,11 @@ footer p {
   }
 /*# sourceMappingURL=flat-ui.css.map */
 
+#wrapper {
+        padding-left: 225px;
+        padding-right: 225px;
+}
+
 #page-wrapper {
     width: 100%;
     height:100%;
