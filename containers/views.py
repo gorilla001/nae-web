@@ -199,12 +199,21 @@ def refresh(request):
     requests.get(url,headers=headers)
     return HttpResponse("succeed") 
 
+from jaeweb.settings import app_key, app_name, auth_key, auth_url
+
 @require_auth
 def share(request):
     id = request.GET.get('id')
     user_id = request.GET.get('user_id')
     user_name = request.GET.get('user_name')
-    user_key = request.session.get('user_key')
+
+    url = "%s%s%s%s%s" % (auth_url, "/api/allkey/?",app_key, auth_key, app_name)
+    headers = {'content-type': 'application/json'}
+    auth_result = requests.get(url, headers=headers,)
+    for item in auth_result.json():
+        if item['uid'] == user_name: 
+            user_key = item['key']
+
     url = "%s/containers/%s/share?user_id=%s&user_key=%s" % (BASE_URL, id, user_name, user_key)
     headers = {'Content-Type':'application/json'}
     requests.post(url,headers=headers)
