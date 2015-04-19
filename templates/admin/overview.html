@@ -24,7 +24,32 @@
 
 <body style="background-color:#000"> 
     <div id="wrapper" style="padding-left:225px;padding-right:0px">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">		
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+           <div class="navbar-header">
+               <span class="navbar-brand"><font style="color:white">JAE</font></span>
+           </div>
+           <div class="collapse navbar-collapse navbar-ex1-collapse">
+               <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="/sales"><i class="fa fa-fw fa-dashboard"></i> 总体概览</a>
+                    </li>
+                    <li>
+                        <a href="/profit"><i class="fa fa-fw fa-bar-chart-o"></i> 镜像管理</a>
+                    </li>
+                    <li class="active">
+                        <a href="/settle"><i class="fa fa-fw fa-table"></i> 容器管理</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="搜索">
+                    </div>
+                </form>
+
+           </div>
+        </nav>
+
+        <!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation">		
             <div class="navbar-header" style="margin-left:20px">
                 <span class="navbar-brand"><font style="color:white">聚美优品JAE平台</font></span>
             </div>
@@ -40,18 +65,18 @@
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="/admin"><i class="fa fa-fw fa-dashboard"></i> 总体概览</a>
-                    </li>
+                    </li>-->
                     <!--<li>
                         <a href="/admin/projects"><i class="fa fa-fw fa-dashboard"></i> 项目管理</a>
                     </li>-->
-                    <li >
+                    <!--<li >
                         <a href="/admin/images"><i class="fa fa-fw fa-bar-chart-o"></i> 镜像管理</a>
                     </li>
                     <li >
                         <a href="/admin/containers"><i class="fa fa-fw fa-bar-chart-o"></i> 容器管理</a>
                     </li>
                     <!--<li>
-                        <a href="/admin/registries"><i class="fa fa-fw fa-table"></i>仓库管理</a>
+                        <!--<a href="/admin/registries"><i class="fa fa-fw fa-table"></i>仓库管理</a>
                     </li>
                     <li>
                         <a href="/admin/hosts"><i class="fa fa-fw fa-edit"></i>主机管理</a>
@@ -59,9 +84,9 @@
                     <li>
                         <a href="/admin/regions"><i class="fa fa-fw fa-edit"></i>区域管理</a>
                     </li>-->
-                </ul>
+                <!--</ul>
             </div>
-        </nav>
+        </nav>-->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
