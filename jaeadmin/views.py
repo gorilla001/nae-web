@@ -120,6 +120,10 @@ def containers(request):
     for container in containers_list_all:
         for _container in containers_list_db:
             if _container['uuid'] == container['Id']:
+                project_id = _container['project_id']
+                url = "%s/projects/%s" % (BASE_URL,project_id)
+                resp = reqests.get(url)
+                project_name = resp.json().get('name')
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
                 container.update(_)
         containers_list.append(container)
