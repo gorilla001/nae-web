@@ -122,7 +122,7 @@ def containers(request):
             if _container['uuid'] == container['Id']:
                 project_id = _container['project_id']
                 url = "%s/projects/%s" % (BASE_URL,project_id)
-                resp = reqests.get(url)
+                resp = requests.get(url)
                 project_name = resp.json().get('name')
                 _ = {'ProjectId': _container['project_id'],'UserId':_container['user_id']}
                 container.update(_)
