@@ -78,6 +78,8 @@ def images(request):
     headers={'Content-Type':'application/json'}
     rs = requests.get(url,headers=headers)
     images_list=rs.json()
+    for image in images_list:
+        print image
     return render_to_response('admin/images.html',{'images_list':images_list},context_instance=RequestContext(request))
 
 @require_auth

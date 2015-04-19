@@ -214,7 +214,9 @@ def share(request):
         if item['uid'] == user_name: 
             user_key = item['key']
 
-    url = "%s/containers/%s/share?user_id=%s&user_key=%s" % (BASE_URL, id, user_name, user_key)
+    data = {'user_id': user_name, 'user_key': user_key}
+    #url = "%s/containers/%s/share?user_id=%s&user_key=%s" % (BASE_URL, id, user_name, user_key)
+    url = "%s/containers/%s/share" % (BASE_URL, id)
     headers = {'Content-Type':'application/json'}
-    requests.post(url,headers=headers)
+    requests.post(url,headers=headers,data=json.dumps(data))
     return HttpResponse("succeed") 
