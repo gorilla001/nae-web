@@ -73,26 +73,21 @@
                             <th style="width:10%">ContainerCount</th>
                             <th style="width:10%">Size</th>
                             <th style="width:10%">VirtualSize</th>
-                            <!--<th style="width:15%">Created</th>-->
                         </thead>
                         <tbody style="border:1px solid #bebebe">
                             {% for item in images_list %}
-                                    <!--{% for repotag in item.RepoTags %}-->
                                 <tr>
                                     <td>{{ item.Id | slice:"12" }}</td>
-                                    <td>{{ repotag }}</td>
                                     <td>{{ item.RepoTags | join:"  " }}</td>
                                     <td>{{ item.ProjectName }}</td>
                                     <td>{{ item.ContainerCount }}</td>
                                     <td>{{ item.Size | filesizeformat }}</td>
                                     <td>{{ item.VirtualSize | filesizeformat }}</td>
-                                    <!--<td>{{ item.Created }}</td>-->
                                 </tr>
-                                    <!--{% endfor %}-->
                             {% endfor %} 
+                            {% paginate %}
                         </tbody>
                     </table>
-                    {% paginate %}
              </div>
         </div>
     </div>
