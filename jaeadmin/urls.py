@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'containers/$',views.containers,name='containers'),
     url(r'registries/$',views.registries,name='registries'),
     url(r'hosts/$',views.hosts,name='hosts'),
+    url(r'events/$',views.events,name='events'),
     url(r'regions/$',views.regions,name='regions'),
 
     url(r'projects/create/$',views.createProject,name='create'),

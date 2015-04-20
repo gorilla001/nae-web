@@ -48,24 +48,14 @@ def index(request):
 
 @require_auth
 def projects(request):
-    #url='http://localhost:8383/v1/projects'
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #projects_list=rs.json()
-    #print projects_list
+    url='%s/projects' % BASE_URL
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    projects_list=rs.json()
 
-    #url='http://localhost:8383/v1/images'
-    #headers={'Content-Type':'application/json'}
-    #rs = requests.get(url,headers=headers)
-    #image_list = rs.json()
-
-    #url='http://localhost:8383/v1'
-    #headers={'Content-Type':'application/json'}
-    #r=requests.get("{}/users".format(url),headers=headers)
-    #user_list=r.json()
-
-    #return render_to_response('admin/projects.html',{'projects_list':projects_list,'image_list':image_list,'user_list':user_list},context_instance=RequestContext(request))
-    return render_to_response('admin/projects.html',context_instance=RequestContext(request))
+    return render_to_response('admin/projects.html',
+                             {'projects_list': projects_list},
+                             context_instance=RequestContext(request))
 
 def createProject(request):
     if request.method == 'POST':
@@ -268,3 +258,7 @@ def createUser(request):
         r=requests.post("{}".format(url),headers=headers,data=json.dumps(data))
         print 'create user:',r.json()
     return HttpResponseRedirect('/admin/users')
+
+@require_auth
+def events(request):
+    return render_to_response('admin/events.html')
