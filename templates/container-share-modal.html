@@ -28,7 +28,8 @@ $('#ShareModal').on('shown.bs.modal', function() {
               type: "GET",
               dataType: "json",
               url: url }).done(function( data ) {
-              //$("#image_list option[value !='-1']").remove();
+              //$("#user_list option[value !='-1']").remove();
+              $("#user_list").remove();
               for (var i in data){
                 $("#user_list").append("<option value=" + data[i].id + ">" + data[i].name + "</option>");
               }
