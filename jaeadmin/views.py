@@ -34,7 +34,17 @@ def index(request):
 
     stopped = len(containers_list) - running
 
-    return render_to_response('admin/overview.html',{'image':len(images_list),'container':len(containers_list),'running':running,'stopped':stopped})
+
+    url = "%s/projects" % BASE_URL
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    projects_list = rs.json() 
+    return render_to_response('admin/overview.html',
+                             {'image':len(images_list),
+                              'container':len(containers_list),
+                              'project': len(projects_list),
+                              'running':running,
+                              'stopped':stopped})
 
 @require_auth
 def projects(request):
@@ -141,6 +151,15 @@ def containers(request):
                 project_name = resp.json().get('name')
                 _ = {'ProjectName': project_name,'UserId':_container['user_id']}
                 container.update(_)
+               
+                host_id = _container['host_id'] 
+                url = "%s/hosts/%s" % (BASE_URL,host_id) 
+                resp = requests.get(url)
+                host_ip = resp.json().get('host')
+                zone = resp.json().get('zone')
+                _ = {'Host': host_ip,'Zone': zone} 
+                container.update(_)
+
         containers_list.append(container)
     return render_to_response('admin/containers.html',{'containers_list': containers_list},context_instance=RequestContext(request))
 
@@ -150,7 +169,12 @@ def registries(request):
 
 @require_auth
 def hosts(request):
-    return render_to_response('admin/hosts.html',context_instance=RequestContext(request))
+    url = "%s/hosts" % BASE_URL
+    headers={'Content-Type':'application/json'}
+    rs = requests.get(url,headers=headers)
+    hosts_list=rs.json()
+   
+    return render_to_response('admin/hosts.html',{'hosts_list': hosts_list}, context_instance=RequestContext(request))
 
 @require_auth
 def regions(request):

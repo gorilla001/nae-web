@@ -4,87 +4,78 @@
         padding-right: 225px;
     }
 
-.center { 
-    float: none;
-    margin-left: auto; 
-    margin-right: auto; 
+#page-wrapper {
+    padding-top: 80px;
+    padding-left: 10px;
 }
 
-.table > thead > tr > th {
-  border: 0;
+.panel {
+    background-color: #f1f2f7;
 }
 
-.table {
-    border: none;
+h1, .h1 {
+    font-size: 30px;
 }
 
-.round-span {
-    border-radius: 50px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    background: none repeat scroll 0 0 #8dd7d6;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 15px;
-    height: 50px;
-    line-height: 45px;
-    text-align: center;
-    width: 50px;
-    margin-left:10px;
-    margin-right:10px;
+.navbar-collapse {
+  box-shadow: none;
 }
+/*state overview*/
 
-.input-group {
-    border-collapse: separate;
-    display: inline;
-    position: relative;
-}
-
-/* centered columns styles */
-.row-centered {
-    text-align:center;
-}
-.col-centered {
-    display:inline-block;
-    float:none;
-    /* reset the text-align */
-    text-align:left;
-    /* inline-block space fix */
-    margin-right:-4px;
-}
-.col-fixed {
-    /* custom width */
-    width:320px;
-}
-.col-min {
-    /* custom min width */
-    min-width:320px;
-}
-.col-max {
-    /* custom max width */
-    max-width:320px;
-}
-
-
-.profit-bg {
-    background: none repeat scroll 0 0 #6ccac9;
-    border-radius: 4px 4px 0 0;
-    border: none;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 300;
+.state-overview .symbol, .state-overview .value {
+    display: inline-block;
     text-align: center;
 }
 
-.profit-footer {
-    background: none repeat scroll 0 0 #fff;
-    border-radius: 0 0 4px 4px;
+.state-overview .value  {
+    float: right;
+
+}
+
+.state-overview .value h1, .state-overview .value p  {
+    margin: 0;
+    padding: 0;
     color: #c6cad6;
-    font-size: 36px;
-    font-weight: 300;
-    padding: 18px 15px;
-    text-align: center;
 }
-.nav > li {
-    padding: 5px 5px;
+
+.state-overview .value p {
+    font-size: 15px;
+}
+
+.state-overview .value h1 {
+    font-weight: 300;
+}
+
+.state-overview .symbol i {
+    color: #fff;
+    font-size: 50px;
+}
+
+.state-overview .symbol {
+    width: 40%;
+    padding: 25px 15px;
+    -webkit-border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.state-overview .value {
+    width: 58%;
+    padding-top: 20px;
+    background-color: #f1f2f7;
+}
+
+.state-overview .terques {
+    background: #6ccac9;
+}
+
+.state-overview .red {
+    background: #ff6c60;
+}
+
+.state-overview .yellow {
+    background: #f8d347;
+}
+
+.state-overview .blue {
+    background: #57c8f2;
 }
