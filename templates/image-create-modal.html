@@ -73,7 +73,7 @@ $('#createImageModal').on('shown.bs.modal', function() {
         $("#image_desc").val("");
 
         var project_id = '{{ project_info.id }}';
-        var url = "/hgs?project_id=" + project_id;
+        var url = "/hgs/?project_id=" + project_id;
         $.ajax({
               type: "GET",
               dataType: "json",
@@ -93,7 +93,7 @@ $("#repo_path").change(function(){
     var text_array=text.split("/"); 
     $("#image_desc").val(text_array.pop());
     var id=$("#repo_path").find("option:selected").val();
-    url = "/hgs/mavens?repos_id=" + id;
+    url = "/hgs/mavens/?repos_id=" + id;
     $.ajax({
       type: "GET",
       dataType: "json",
@@ -134,7 +134,7 @@ function createImage()
         if(http.readyState == 4 && http.status == 200) {
             var content = http.response;
             var status = http.response.status; 
-            var url = '/images/update?project_id=' + project_id;
+            var url = '/images/update/?project_id=' + project_id;
             if (status == 200){
                 $.ajax({
                         type: "GET",

@@ -107,7 +107,7 @@
 <script>
 $('#createContainerModal').on('show.bs.modal', function() {
         var project_id = '{{ project_info.id }}';
-        var url = "/containers?project_id=" + project_id;
+        var url = "/containers/?project_id=" + project_id;
         $.ajax({
               type: "GET",
               dataType: "json",
@@ -117,7 +117,7 @@ $('#createContainerModal').on('show.bs.modal', function() {
 });
 $('#createContainerModal').on('shown.bs.modal', function() {
         var project_id = '{{ project_info.id }}';
-        var url = "/images?project_id=" + project_id;
+        var url = "/images/?project_id=" + project_id;
         $.ajax({
               type: "GET",
               dataType: "json",
@@ -130,7 +130,7 @@ $('#createContainerModal').on('shown.bs.modal', function() {
 });
 $("#image_list").change(function(){
        var id=$("#image_list").find("option:selected").val(); 
-       var url = "/images/show?id=" + id;
+       var url = "/images/show/?id=" + id;
        $.ajax({
          type: "GET",
          dataType: "json",
@@ -139,7 +139,7 @@ $("#image_list").change(function(){
              $("#repos_id").val(data.repos_id);
              //$("#container_code").val(data.branch);
              $("#container_code").val('default');
-             url = "/hgs/mavens?repos_id=" + data.repos_id;
+             url = "/hgs/mavens/?repos_id=" + data.repos_id;
              $.ajax({
                type: "GET",
                dataType: "json",
@@ -207,7 +207,7 @@ function createContainer()
         if(http.readyState == 4 && http.status == 200) {
             var content = http.response;
             var status = http.response.status; 
-            var url = '/containers/update?project_id=' + project_id;
+            var url = '/containers/update/?project_id=' + project_id;
             if (status == 200){
                 $.ajax({
                         type: "GET",

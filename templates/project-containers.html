@@ -24,7 +24,7 @@
 $(".container-refresh").click(function(e) {
         var project_id = "{{ project_info.id }}";
         var user_id = "{{ user_id }}";
-        var url = '/containers/update?project_id=' + project_id + "&user_id=" + user_id;
+        var url = '/containers/update/?project_id=' + project_id + "&user_id=" + user_id;
         $.ajax({
             type: "GET",
             url: url }).done(function( data ) {
@@ -34,7 +34,7 @@ $(".container-refresh").click(function(e) {
 $('#container-table-{{project_info.id}}').on("click",".delete-container",function() {
         var $row = $(this).closest("tr");    
         var $text = $row.find(".fp").text();
-        var $href= "/containers/delete";
+        var $href= "/containers/delete/";
         var xmlHttpRequest;
         xmlHttpRequest = createXmlHttpRequest();
         xmlHttpRequest.onreadystatechange = getResult;
@@ -56,7 +56,7 @@ $('#container-table-{{project_info.id}}').on("click",".delete-container",functio
             if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
                 var $content = xmlHttpRequest.responseText;
                 if ($content == 'succeed'){
-                    var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+                    var url='/containers/update/?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
                     $.ajax({
                         type: "GET",
                         url: url }).done(function( data ) {
@@ -71,7 +71,7 @@ $('#container-table-{{project_info.id}}').on("click",".start-container",function
         var status = $row.find(".flag").text();
 	if ( status !== "running" ){ 
         	var $text = $row.find(".fp").text();
-        	var $href= "/containers/start";
+        	var $href= "/containers/start/";
         	var xmlHttpRequest;
         	xmlHttpRequest = createXmlHttpRequest();
         	xmlHttpRequest.onreadystatechange = getResult;
@@ -93,7 +93,7 @@ $('#container-table-{{project_info.id}}').on("click",".start-container",function
         	    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
         	        var $content = xmlHttpRequest.responseText;
         	        if ($content == 'succeed'){
-        	            var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+        	            var url='/containers/update/?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
         	            $.ajax({
         	                type: "GET",
         	                url: url }).done(function( data ) {
@@ -109,7 +109,7 @@ $('#container-table-{{project_info.id}}').on("click",".stop-container",function(
         var status = $row.find(".flag").text();
 	if ( status !== "stoped" ){ 
         	var $text = $row.find(".fp").text();
-        	var $href= "/containers/stop";
+        	var $href= "/containers/stop/";
         	var xmlHttpRequest;
         	xmlHttpRequest = createXmlHttpRequest();
         	xmlHttpRequest.onreadystatechange = getResult;
@@ -131,7 +131,7 @@ $('#container-table-{{project_info.id}}').on("click",".stop-container",function(
         	    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
         	        var $content = xmlHttpRequest.responseText;
         	        if ($content == 'succeed'){
-        	            var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+        	            var url='/containers/update/?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
         	            $.ajax({
         	                type: "GET",
         	                url: url }).done(function( data ) {
@@ -146,7 +146,7 @@ $('#container-table-{{project_info.id}}').on("click",".reboot-container",functio
         var $row = $(this).closest("tr");    
         var status = $row.find(".status").text();
         var $text = $row.find(".fp").text();
-        var $href= "/containers/reboot";
+        var $href= "/containers/reboot/";
         var xmlHttpRequest;
         xmlHttpRequest = createXmlHttpRequest();
         xmlHttpRequest.onreadystatechange = getResult;
@@ -168,7 +168,7 @@ $('#container-table-{{project_info.id}}').on("click",".reboot-container",functio
        	    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
        	        var $content = xmlHttpRequest.responseText;
        	        if ($content == 'succeed'){
-       	            var url='/containers/update?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
+       	            var url='/containers/update/?project_id=' + '{{ project_info.id }}' + "&user_id=" + '{{user_id}}';
        	            $.ajax({
        	                type: "GET",
        	                url: url }).done(function( data ) {

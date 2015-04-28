@@ -68,7 +68,7 @@ function createMember()
             var content = http.response;
             //var status = http.response.status;
             var status = 200;
-            var url = '/users/refresh?project_id=' + project_id;
+            var url = '/users/refresh/?project_id=' + project_id;
             if (status == 200){
                 $.ajax({
                         type: "GET",

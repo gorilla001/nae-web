@@ -52,7 +52,7 @@
 <script>
 $("#user-refresh").click(function(e) {
         var project_id = "{{ project_info.id }}";
-        var url = '/users/refresh?project_id=' + project_id;
+        var url = '/users/refresh/?project_id=' + project_id;
         $.ajax({
             type: "GET",
             url: url }).done(function( data ) {
@@ -83,7 +83,7 @@ function createMember()
             var content = http.response;
             //var status = http.response.status;
             var status = 200;
-            var url = '/users/refresh?project_id=' + project_id;
+            var url = '/users/refresh/?project_id=' + project_id;
             if (status == 200){
                 $.ajax({
                         type: "GET",
@@ -100,7 +100,7 @@ function createMember()
 $('#member-table-{{project_info.id}}').on("click",".delete-user",function() {
         var row = $(this).closest("tr");
         var text = row.find(".fp").text();
-        var href= "/users/delete";
+        var href= "/users/delete/";
         var url = href + "?id=" + text;
         $.ajax({
               type     : "GET",
@@ -110,7 +110,7 @@ $('#member-table-{{project_info.id}}').on("click",".delete-user",function() {
               success  : function(response)
               {
                 var project_id = '{{ project_info.id }}';
-                var _url = "/users/refresh?project_id=" + project_id;
+                var _url = "/users/refresh/?project_id=" + project_id;
                 $.ajax({
                     type: "GET",
                     url: _url }).done(function( data ) {
