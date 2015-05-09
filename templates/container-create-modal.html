@@ -14,7 +14,7 @@
                             <select  class="form-control" id="zone_list" name="container_zone">
                                 <option value="-1">请选择</option>
                                 <option value="0">北京</option>
-                                <option value="1">成都(暂未开通)</option>
+                                <option value="1">成都</option>
                             </select>
                             <span class="help-inline">(所属地理区域)</span>
                         </div>
@@ -195,7 +195,7 @@ function createContainer()
     var http = new createXmlHttpRequest();
     var url ="/containers/create/";
     var params = "project_id=" + project_id + "&image_name=" + image_name + "&repos=" + repos + "&container_code=" + container_code + "&app_type=" + app_type + "&container_env=" + container_env + "&zone_id=" + zone_id + "&maven_flags=" + maven_flags;
-    //alert(params);
+    alert(params);
     var token = '{{ csrf_token }}'; 
     
     http.open("POST",url,true);
